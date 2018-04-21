@@ -1,0 +1,13 @@
+	• AHKManager
+		○ docs - package reference documentation
+		○ releases - stores all stable releases
+			§ setup.py - package and distribution management
+			§ unit_test_generator.py - the entery point of the program
+		○ source - the source code
+			§ tests - package integratrion and unit test
+				□ unit_tests - unit test, should be run before commit. If possible, auto generate this will be fun
+				□ functional_tests - high level test
+		○ LICENSE
+		○ README.md
+		○ requirements.txt - development dependencies
+		○ rules_to_follow.md - the naming and style you should follow if possible
