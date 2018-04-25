@@ -1,4 +1,3 @@
-from ui.window import *
+from source.ui.main_window import MainWindow
 
-window = Window()
-print("right")
+window = MainWindow()
