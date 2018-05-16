@@ -1,9 +1,9 @@
-class WindowConfig:
-    default_width = 500
-    default_height = 300
-    width = 500
-    height = 300
+class Configuration:
+    file_types = [".ahk"]
 
 
-class DevelopmentConfig:
-    window = WindowConfig()
+class DevelopmentConfig(Configuration):
+    pass
+
+class TestConfig(Configuration):
+    file_types = [".ahk"]

@@ -1,33 +1,36 @@
-from tkinter import ttk
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QStyle
 
-from source.ui.window import create_window
 from ..configure import configs
 
+import sys
 import logging
-import tkinter
 
 
-class MainWindow:
-
+class Application(QApplication):
     def __init__(self):
-        logging.info("Creating main window")
-        main_window = create_window(configs.window.width,
-                                    configs.window.height)
-        main_window.title("AHK Manager")
+        # Initialize new application
+        app = QApplication(sys.argv)
 
-        rows = 0
-        while rows < 50:
-            main_window.rowconfigure(rows, weight=1)
-            main_window.columnconfigure(rows, weight=1)
-            rows += 1
+        # Create main window
+        window = MainWindow()
 
-        notebook = ttk.Notebook(main_window)
-        notebook.grid(row=1, column=0, columnspan=50, rowspan=49, sticky='NESW')
+        # Exit Python when application ends
+        sys.exit(app.exec())
 
-        page1 = ttk.Frame(notebook)
-        notebook.add(page1, text="tab1")
 
-        page2 = ttk.Frame(notebook)
-        notebook.add(page2, text="tab2")
+class MainWindow(QtWidgets.QMainWindow):
+    def __init__(self):
+        if __debug__:
+            logging.info("Initialize main window")
 
-        main_window.mainloop()
+        super(MainWindow, self).__init__()
+
+        self.setWindowTitle("AHK Manager")
+
+        # Add system tray icon
+        self.tray_icon = QSystemTrayIcon(self)
+        self.tray_icon.setIcon(
+        self.style().standardIcon(QStyle.SP_ComputerIcon))
+
+        self.show()

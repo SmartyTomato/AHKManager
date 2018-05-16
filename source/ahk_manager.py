@@ -1,3 +1,1 @@
-from source.ui.main_window import MainWindow
-
-window = MainWindow()
+from source.ui.console import *
