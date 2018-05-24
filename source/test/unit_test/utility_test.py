@@ -2,8 +2,8 @@ import os
 from unittest import TestCase, mock
 from unittest.mock import MagicMock, Mock, mock_open, patch
 
-from source.configs.configure import configs
-from source.core.common import get_file_name, scan_directory, get_directories, get_files_in_directory
+from source.global_variables import configs
+from source.core.utility import get_file_name, scan_directory, get_directories, get_files_in_directory
 
 listdir = {'Z:\OneDrive\Sync\Scripts\AutoHotKey': ['A', 'B', 'C.txt'], 'Z:\OneDrive\Sync\Scripts\AutoHotKey\A': [],
            'Z:\OneDrive\Sync\Scripts\AutoHotKey\B': []}
@@ -27,7 +27,7 @@ def os_isfile(arg):
     return isfile[arg]
 
 
-class CommonTest(TestCase):
+class UtilityTest(TestCase):
     def test_get_file_name(self):
         file_path = 'C:/Windows/Prefetch/SEARCHFILTERHOST.EXE-77482212.pf'
         file_name = get_file_name(file_path)
@@ -36,8 +36,8 @@ class CommonTest(TestCase):
 
     """"""
 
-    @mock.patch('source.core.common.os.listdir', side_effect=os_listdir)
-    @mock.patch('source.core.common.os.path.isdir', side_effect=os_isdir)
+    @mock.patch('source.core.utility.os.listdir', side_effect=os_listdir)
+    @mock.patch('source.core.utility.os.path.isdir', side_effect=os_isdir)
     def test_scan_directory(self, listdir, isdir):
         # setup
         configs.file_types = ['.txt']
@@ -48,15 +48,15 @@ class CommonTest(TestCase):
         self.assertEqual(len(list1), 1)
         self.assertEqual(len(list2), 2)
 
-    @mock.patch('source.core.common.os.listdir', side_effect=os_listdir)
-    @mock.patch('source.core.common.os.path.isdir', side_effect=os_isdir)
+    @mock.patch('source.core.utility.os.listdir', side_effect=os_listdir)
+    @mock.patch('source.core.utility.os.path.isdir', side_effect=os_isdir)
     def test_get_directories(self, listdir, isdir):
         list1 = get_directories("Z:\OneDrive\Sync\Scripts\AutoHotKey")
 
         self.assertEqual(len(list1), 2)
 
-    @mock.patch('source.core.common.os.listdir', side_effect=os_listdir)
-    @mock.patch('source.core.common.os.path.isfile', side_effect=os_isfile)
+    @mock.patch('source.core.utility.os.listdir', side_effect=os_listdir)
+    @mock.patch('source.core.utility.os.path.isfile', side_effect=os_isfile)
     def test_get_files_in_dir(self, listdir, isfile):
         list1 = get_files_in_directory("Z:\OneDrive\Sync\Scripts\AutoHotKey")
 

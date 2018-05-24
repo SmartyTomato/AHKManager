@@ -7,5 +7,18 @@
         "-p",
         "test*.py"
     ],
-    "python.unitTest.unittestEnabled": true
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}\\venv\\lib\\site-p5ackages",
+    ],
+    "python.venvPath": "${workspaceFolder}\\venv",
+    "python.linting.pylintArgs": [
+        "--disable=E0611",
+        "--disable=W0702",
+        "--disable=C0111",
+        "--disable=C0301"
+    ],
+    "python.pydev.pythonPath": [
+        "${workspaceFolder}"
+    ],
+    "python.pydev.pythonExecutable": "${workspaceFolder}\\venv\\Scripts\\python.exe",
 }
