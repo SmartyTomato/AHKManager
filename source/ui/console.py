@@ -1,8 +1,7 @@
-from global_variables import repo_manager
-from core.manager.repo_manager import RepoManager
+from core.model.global_variable import GlobalVariable
 from core.utility.configuration import Configuration
 
-path = 'Z:\OneDrive\Sync\Scripts\AutoHotKey'
+path = 'Z:\OneDrive\Scripts\AutoHotKey'
 
 
 def get_action():
@@ -18,9 +17,9 @@ def get_action():
 #     repo_manager.add_library(path)
 #     print(configs.save_repository(repo_manager.repository))
 #     script = repo_manager.find_script(
-#         'Z:\OneDrive\Sync\Scripts\AutoHotKey\Startup\Duplicate Line.ahk')
+#         'Z:\OneDrive\Scripts\AutoHotKey\Startup\Duplicate Line.ahk')
 #     script2 = repo_manager.find_script(
-#         'Z:\OneDrive\Sync\Scripts\AutoHotKey\Common\Select Line.ahk')
+#         'Z:\OneDrive\Scripts\AutoHotKey\Common\Select Line.ahk')
 
 #     script.start()
 #     script2.start()
@@ -44,15 +43,15 @@ def get_action():
 
 #     input()
 
-
+repo_manager = GlobalVariable.get_repo_manager()
 repo_manager.add_library(path)
 repo_manager.add_profile('programming')
 repo_manager.add_profile('gaming')
 # repo_manager = RepoManager.from_json(configs.load_repository())
 repo_manager.refresh()
-script = repo_manager.find_script('Z:\OneDrive\Sync\Scripts\AutoHotKey\Startup\Duplicate Line.ahk')
+script = repo_manager.find_script('Z:\OneDrive\Scripts\AutoHotKey\Startup\Duplicate Line.ahk')
 script2 = repo_manager.find_script(
-    'Z:\OneDrive\Sync\Scripts\AutoHotKey\Common\Select Line.ahk')
+    'Z:\OneDrive\Scripts\AutoHotKey\Common\Select Line.ahk')
 repo_manager.add_script_to_profile('programming', script)
 repo_manager.add_script_to_profile('gaming', script2)
 gaming = repo_manager.find_profile('gaming')

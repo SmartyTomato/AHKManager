@@ -2,9 +2,9 @@ import os
 import sys
 
 from core.utility.logger import Logger
-from core.status import Status
 from core.utility.utility import get_file_name_no_extension, is_script_file
-from global_variables import error_messages, process_manager, warning_messages
+from core.model.global_variable import GlobalVariable
+from core.model.state import State
 
 
 class Script(object):
@@ -12,7 +12,7 @@ class Script(object):
     def __init__(self):
         self.title = ''
         self.script_path = ''
-        self.status = Status()
+        self.status = State()
         self.process = None
 
     def init(self):
@@ -22,7 +22,7 @@ class Script(object):
         """
         self.title = ''
         self.script_path = ''
-        self.status = Status()
+        self.status = State()
         self.process = None
 
     def init_script(self, path):
@@ -33,19 +33,19 @@ class Script(object):
         """
         # check if path is a file
         if not os.path.isfile(path):
-            error_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Path is not a valid file path: {path}'.format(path=path))
             return False
 
         # check if path exists
         if not os.path.exists(path):
-            error_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Path does not exists: {path}'.format(path=path))
             return False
 
         # check if path not the file type we want
         if not is_script_file(path):
-            error_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Path not a script file: {path}'.format(path=path))
             return False
 
@@ -62,11 +62,11 @@ class Script(object):
     # ------------------------------------------------------------------ #
 
     def start(self):
-        if not self.allow_status_change():
+        if not self.allow_state_change():
             if self.is_running():
                 return True
-            else:
-                return False
+
+            return False
 
         if self.process is not None:
             return self.restart()
@@ -80,17 +80,23 @@ class Script(object):
             Logger.log_info('Force start script: {path}'.format(
                 path=self.script_path))
             self.lock()
+            return True
         else:
             return False
 
     def stop(self):
-        if self.allow_status_change() == False:
+        if not self.allow_state_change():
             if self.is_running():
+                GlobalVariable.warning_messages.append(
+                    'Unable to stop script, script locked: {path}'.format(path=self.script_path))
                 return False
             else:
+                Logger.log_info('Trying to stop script when script locked: {path}'.format(
+                    path=self.script_path))
                 return True
 
         if self.process is None:
+            Logger.log_info('Trying to stop script when it not running')
             return True
 
         try:
@@ -101,34 +107,40 @@ class Script(object):
                 path=self.script_path))
             return True
         except OSError as error:
-            error_messages.append('Unable to stop script: {path}. {msg}'.format(
-                title=self.script_path, msg=error))
+            GlobalVariable.warning_messages.append('Unable to stop script: {path}. {msg}'.format(
+                path=self.script_path, msg=error))
             return False
 
     def restart(self):
-        if self.allow_status_change() == False:
-            if self.is_running():
-                return True
-        else:
+        if not self.allow_state_change():
+            GlobalVariable.warning_messages.append(
+                'Unable to restart script: {path}'.format(path=self.script_path))
             return False
 
-        if self.stop() == False:
+        if not self.stop():
+            return False
+
+        success = self.start_script()
+
+        if not success:
+            GlobalVariable.warning_messages.append(
+                'Unable to restart script: {path}'.format(path=self.script_path))
             return False
 
         Logger.log_info('Script restarted: {path}'.format(
             path=self.script_path))
-        return self.start_script()
+        return True
 
     def start_script(self):
         try:
-            process = process_manager.start(self.script_path)
+            process = GlobalVariable.get_process_manager().start(self.script_path)
         except OSError as error:
-            error_messages.append('Unable to start script: {path}. {msg}'.format(
+            GlobalVariable.warning_messages.append('Unable to start script: {path}. {msg}'.format(
                 path=self.script_path, msg=error))
             return False
 
         if process is None:
-            error_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Unable to start: {path}'.format(path=self.script_path))
             return False
 
@@ -162,7 +174,7 @@ class Script(object):
         """
         # if file not exists, it success anyway
         if not self.exists():
-            warning_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Script does not exists: {path}'.format(path=self.script_path))
             return True
 
@@ -174,13 +186,13 @@ class Script(object):
         try:
             os.remove(self.script_path)
         except OSError as error:
-            error_messages.append('Unable to delete file: {path}. {msg}'
-                                  .format(path=self.script_path, msg=error))
+            GlobalVariable.warning_messages.append('Unable to delete file: {path}. {msg}'
+                                                   .format(path=self.script_path, msg=error))
             return False
         except:
             # unknown error
-            error_messages.append('Unknown error when delete file {path}. {msg}'
-                                  .format(path=self.script_path, msg=sys.exc_info()[0].value))
+            GlobalVariable.warning_messages.append('Unknown error when delete file {path}. {msg}'
+                                                   .format(path=self.script_path, msg=sys.exc_info()[0].value))
             return False
 
         Logger.log_info('Script deleted: {path}'.format(path=self.script_path))
@@ -196,7 +208,7 @@ class Script(object):
         :return: bool, whether success
         """
         if not self.exists():
-            error_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Script does not exists: {path}'.format(path=self.script_path))
             return False
 
@@ -227,7 +239,7 @@ class Script(object):
     def exists(self):
         return os.path.exists(self.script_path)
 
-    def allow_status_change(self):
+    def allow_state_change(self):
         return self.show() and not self.is_locked()
 
     def lock(self):
@@ -273,6 +285,6 @@ class Script(object):
         script = Script()
         script.title = jstr['title']
         script.script_path = jstr['script_path']
-        script.status = Status.from_json(jstr['status'])
+        script.status = State.from_json(jstr['status'])
 
         return script

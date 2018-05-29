@@ -1,9 +1,9 @@
 import os
 
-from core.library import Library
 from core.utility.logger import Logger
 from core.utility.utility import get_directories
-from global_variables import error_messages, warning_messages
+from core.model.global_variable import GlobalVariable
+from core.model.library import Library
 
 
 class Repository(object):
@@ -20,13 +20,13 @@ class Repository(object):
     def add_library(self, path):
         # check if path is a directory
         if not os.path.isdir(path):
-            error_messages .append(
+            GlobalVariable.error_messages .append(
                 'Path is not a valid directory path: {path}'.format(path=path))
             return False
 
         # check if path is
         if not os.path.exists(path):
-            error_messages.append(
+            GlobalVariable.error_messages.append(
                 'Path does not exists: {path}'.format(path=path))
             return False
 
@@ -56,7 +56,7 @@ class Repository(object):
         if library is not None:
             return library.add_script(script_path)
         else:
-            error_messages.append(
+            GlobalVariable.error_messages.append(
                 'Unable to find library'.format(path=library_path))
             return False
 
@@ -112,7 +112,7 @@ class Repository(object):
         library = self.find_library(path)
         if library is None:
             # can not find library
-            warning_messages.append(
+            GlobalVariable.warning_messages.append(
                 'Library does not exists: {path}'.format(path=path))
             return True
 
@@ -132,7 +132,7 @@ class Repository(object):
             if library.may_contains_script(path):
                 return library.delete_script(path)
 
-        warning_messages.append(
+        GlobalVariable.warning_messages.append(
             'Script does not exists: {path}'.format(path=path))
         return True
 

@@ -1,4 +1,4 @@
-from ui.application import Application
-# from ui.other.console import *
-
-Application()
+from core.model.global_variable import GlobalVariable
+from ui.console import *
+# from ui.application import Application
+# Application()

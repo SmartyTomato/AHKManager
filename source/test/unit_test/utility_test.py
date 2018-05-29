@@ -2,8 +2,9 @@ import os
 from unittest import TestCase, mock
 from unittest.mock import MagicMock, Mock, mock_open, patch
 
-from source.global_variables import configs
-from source.core.utility import get_file_name, scan_directory, get_directories, get_files_in_directory
+from core.utility.configuration import Configuration
+from core.utility.utility import (get_directories, get_file_name,
+                                  get_files_in_directory, scan_directory)
 
 listdir = {'Z:\OneDrive\Sync\Scripts\AutoHotKey': ['A', 'B', 'C.txt'], 'Z:\OneDrive\Sync\Scripts\AutoHotKey\A': [],
            'Z:\OneDrive\Sync\Scripts\AutoHotKey\B': []}
@@ -28,6 +29,7 @@ def os_isfile(arg):
 
 
 class UtilityTest(TestCase):
+
     def test_get_file_name(self):
         file_path = 'C:/Windows/Prefetch/SEARCHFILTERHOST.EXE-77482212.pf'
         file_name = get_file_name(file_path)
@@ -40,7 +42,7 @@ class UtilityTest(TestCase):
     @mock.patch('source.core.utility.os.path.isdir', side_effect=os_isdir)
     def test_scan_directory(self, listdir, isdir):
         # setup
-        configs.file_types = ['.txt']
+        Configuration.get_instance().file_types = ['.txt']
 
         path = "Z:\OneDrive\Sync\Scripts\AutoHotKey"
         list1, list2 = scan_directory(path)

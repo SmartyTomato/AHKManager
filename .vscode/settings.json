@@ -8,17 +8,18 @@
         "test*.py"
     ],
     "python.autoComplete.extraPaths": [
-        "${workspaceFolder}\\venv\\lib\\site-p5ackages",
+        "${workspaceFolder}\\venv\\lib\\site-packages",
     ],
-    "python.venvPath": "${workspaceFolder}\\venv",
     "python.linting.pylintArgs": [
         "--disable=E0611",
-        "--disable=W0702",
-        "--disable=C0111",
-        "--disable=C0301"
+        "--disable=C0301",
+        "--disable=C0111"
     ],
-    "python.pydev.pythonPath": [
-        "${workspaceFolder}"
+    "python.venvFolders": [
+        "${workspaceFolder}\\venv",
     ],
-    "python.pydev.pythonExecutable": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "code-runner.cwd": "${workspaceFolder}\\source",
+    "python.formatting.autopep8Args": [
+        "--max-line-length=120",
+    ],
 }

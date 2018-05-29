@@ -2,6 +2,7 @@ import os
 
 from core.utility.configuration import Configuration
 
+
 def get_file_name(path):
     """
     extract file name from path

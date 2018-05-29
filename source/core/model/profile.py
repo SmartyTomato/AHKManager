@@ -1,13 +1,13 @@
 from core.utility.logger import Logger
-from core.script import Script
-from core.status import Status
-from global_variables import warning_messages
+from core.model.global_variable import GlobalVariable
+from core.model.script import Script
+from core.model.state import State
 
 
 class Profile(object):
 
     def __init__(self, name):
-        self.status = Status()
+        self.status = State()
         self.script_list = []
         self.name = name
 
@@ -71,12 +71,15 @@ class Profile(object):
     # delete
     # ------------------------------------------------------------------ #
 
+    def remove(self):
+        raise NotImplementedError()
+
     def remove_script(self, script):
         if script is not None:
             if script in self.script_list:
                 self.script_list.remove(script)
             else:
-                warning_messages.append('Script not in profile: Script: {script_path}. Profile: {profile_name}'.format(
+                GlobalVariable.warning_messages.append('Script not in profile: Script: {script_path}. Profile: {profile_name}'.format(
                     script_path=script.script_path, profile_name=self.name))
                 return True
 
@@ -115,6 +118,14 @@ class Profile(object):
     # to string
     # ------------------------------------------------------------------ #
 
+    def __str__(self):
+        out = ['Profile:\n\tName: {name}'.format(name=self.name)]
+
+        for script in self.script_list:
+            out.append(script.__str__())
+
+        return '\n'.join(out)
+
     def to_json(self):
         out = {}
 
@@ -130,7 +141,7 @@ class Profile(object):
     @staticmethod
     def from_json(jstr):
         profile = Profile(jstr['name'])
-        profile.status = Status.from_json(jstr['status'])
+        profile.status = State.from_json(jstr['status'])
 
         for script in jstr['scripts']:
             profile.script_list.append(Script.from_json(script))

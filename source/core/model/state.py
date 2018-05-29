@@ -1,4 +1,4 @@
-class Status:
+class State:
 
     def __init__(self):
         self.lock = False
@@ -19,7 +19,7 @@ class Status:
 
     @staticmethod
     def from_json(jstr):
-        status = Status()
+        status = State()
 
         status.lock = jstr['lock']
         status.hide = jstr['hide']

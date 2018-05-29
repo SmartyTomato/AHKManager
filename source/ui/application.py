@@ -13,7 +13,7 @@ class Application(QApplication):
         Logger.log_info('initialize application')
         super(Application, self).__init__([])
 
-        Configuration.get().load()
+        Configuration.get_instance().load()
 
         self.windows = []
         # create main window
