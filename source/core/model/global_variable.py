@@ -1,6 +1,3 @@
-from core.utility.logger import Logger
-
-
 class GlobalVariable(object):
     # error and warning message that used in any component and return to the screen.
     # clear this in the manager before calling the functions
@@ -27,11 +24,6 @@ class GlobalVariable(object):
         return GlobalVariable.process_manager
 
     @staticmethod
-    def add_error_message(msg):
-        GlobalVariable.error_messages.append(msg)
-        Logger.log_error(msg)
-
-    @staticmethod
-    def add_warning_message(msg):
-        GlobalVariable.error_messages.append(msg)
-        Logger.log_warning(msg)
+    def clear_messages():
+        GlobalVariable.error_messages = []
+        GlobalVariable.warning_messages = []

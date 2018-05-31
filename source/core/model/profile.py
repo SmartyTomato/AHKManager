@@ -1,13 +1,14 @@
-from core.utility.logger import Logger
+from core.utility.logger import Logger, MethodBoundaryLogger
 from core.model.global_variable import GlobalVariable
 from core.model.script import Script
 from core.model.state import State
 
 
 class Profile(object):
+    _logger = Logger('Profile')
 
     def __init__(self, name):
-        self.status = State()
+        self.state = State()
         self.script_list = []
         self.name = name
 
@@ -15,72 +16,98 @@ class Profile(object):
     # command
     # ------------------------------------------------------------------ #
 
+    @MethodBoundaryLogger(_logger)
     def start(self):
         for script in self.script_list:
             script.start()
 
-        self.status.running = True
-        Logger.log_info('Profile started: {name}'.format(name=self.name))
+        self.state.running = True
 
+    @MethodBoundaryLogger(_logger)
     def stop(self):
         for script in self.script_list:
             script.stop()
 
-        self.status.running = False
-        Logger.log_info('Profile stopped: {name}'.format(name=self.name))
+        self.state.running = False
 
+    @MethodBoundaryLogger(_logger)
     def restart(self):
         for script in self.script_list:
             script.restart()
-
-        Logger.log_info('Profile restarted: {name}'.format(name=self.name))
 
     # ------------------------------------------------------------------ #
     # add
     # ------------------------------------------------------------------ #
 
+    @MethodBoundaryLogger(_logger)
     def add_script(self, script):
         """
         add script into the profile
         :param script:
         :return:
         """
-        if script is not None:
-            self.script_list.append(script)
+        if script is None:
+            GlobalVariable.error_messages.append('Could not add None to profile: {name}'.format(name=self.name))
+            self._logger.error('Could not add None to profile >>> {name}'.format(name=self.name))
+            return False
+
+        self.script_list.append(script)
 
         # start script right away
-        if self.status.running:
+        if self.state.running:
             script.start()
 
-        Logger.log_info('Script added into profile: Script: {script_path}. Profile: {profile_name}'.format(
-            script_path=script.script_path, profile_name=self.name))
+        return True
 
     # ------------------------------------------------------------------ #
     # find
     # ------------------------------------------------------------------ #
 
+    @MethodBoundaryLogger(_logger)
     def find_script(self, path):
         for script in self.script_list:
             if script.has_path(path):
-                Logger.log_info('Script found: {path}'.format(path=path))
                 return script
 
+        self._logger.error('Could not find script >>> {path}'.format(name=self.path))
         return None
 
     # ------------------------------------------------------------------ #
     # delete
     # ------------------------------------------------------------------ #
 
+    @MethodBoundaryLogger(_logger)
     def remove(self):
-        raise NotImplementedError()
+        if not self.is_running():
+            return True
 
+        has_error = False
+        for script in self.script_list:
+            success = script.stop()
+            if success:
+                self.script_list.remove(script)
+            else:
+                has_error = True
+                GlobalVariable.error_messages.append('Could not remove script: {path}'.format(path=script.script_path))
+                self._logger.error('Could not remove script >>> {path}'.format(path=script.script_path))
+
+        if has_error:
+            GlobalVariable.error_messages.append(
+                'Could not remove profile, some script can not be removed: {name}'.format(name=self.name))
+            self._logger.error(
+                'Could not remove profile, some script can not be removed >>> {name}'.format(name=self.name))
+
+        return has_error
+
+    @MethodBoundaryLogger(_logger)
     def remove_script(self, script):
         if script is not None:
             if script in self.script_list:
                 self.script_list.remove(script)
             else:
-                GlobalVariable.warning_messages.append('Script not in profile: Script: {script_path}. Profile: {profile_name}'.format(
-                    script_path=script.script_path, profile_name=self.name))
+                GlobalVariable.warning_messages.append(
+                    'Script not in profile: Script: {script_path}. Profile: {profile_name}'.format(
+                        script_path=script.script_path, profile_name=self.name))
                 return True
 
         # trying to stop the script
@@ -114,6 +141,9 @@ class Profile(object):
     def has_name(self, name):
         return self.name == name
 
+    def is_running(self):
+        return self.state.running
+
     # ------------------------------------------------------------------ #
     # to string
     # ------------------------------------------------------------------ #
@@ -130,7 +160,7 @@ class Profile(object):
         out = {}
 
         out['name'] = self.name
-        out['status'] = self.status.to_json()
+        out['state'] = self.state.to_json()
 
         out['scripts'] = []
         for script in self.script_list:
@@ -139,11 +169,11 @@ class Profile(object):
         return out
 
     @staticmethod
-    def from_json(jstr):
-        profile = Profile(jstr['name'])
-        profile.status = State.from_json(jstr['status'])
+    def from_json(json_str):
+        profile = Profile(json_str['name'])
+        profile.state = State.from_json(json_str['state'])
 
-        for script in jstr['scripts']:
+        for script in json_str['scripts']:
             profile.script_list.append(Script.from_json(script))
 
         return profile

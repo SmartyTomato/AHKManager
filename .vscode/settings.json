@@ -13,7 +13,9 @@
     "python.linting.pylintArgs": [
         "--disable=E0611",
         "--disable=C0301",
-        "--disable=C0111"
+        "--disable=C0111",
+        "--disable=W0703",
+        "--disable=R0903",
     ],
     "python.venvFolders": [
         "${workspaceFolder}\\venv",

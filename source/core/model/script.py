@@ -2,12 +2,13 @@ import os
 import sys
 
 from core.utility.logger import Logger
-from core.utility.utility import get_file_name_no_extension, is_script_file
+from core.utility.utility import Utility
 from core.model.global_variable import GlobalVariable
 from core.model.state import State
 
 
 class Script(object):
+    _logger = Logger('Script')
 
     def __init__(self):
         self.title = ''
@@ -44,17 +45,15 @@ class Script(object):
             return False
 
         # check if path not the file type we want
-        if not is_script_file(path):
+        if not Utility.is_script_file(path):
             GlobalVariable.warning_messages.append(
                 'Path not a script file: {path}'.format(path=path))
             return False
 
         self.init()
-        self.title = get_file_name_no_extension(path)
+        self.title = Utility.get_file_name_no_extension(path)
         self.script_path = os.path.normpath(path)
 
-        Logger.log_info('Script initialized: {path}'.format(
-            path=self.script_path))
         return True
 
     # ------------------------------------------------------------------ #
@@ -276,7 +275,7 @@ class Script(object):
 
         out['title'] = self.title
         out['script_path'] = self.script_path
-        out['status'] = self.status.to_json()
+        out['state'] = self.status.to_json()
 
         return out
 
@@ -285,6 +284,6 @@ class Script(object):
         script = Script()
         script.title = jstr['title']
         script.script_path = jstr['script_path']
-        script.status = State.from_json(jstr['status'])
+        script.status = State.from_json(jstr['state'])
 
         return script
