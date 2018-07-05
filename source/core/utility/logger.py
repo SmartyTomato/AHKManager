@@ -1,8 +1,7 @@
-import logging
 import datetime
 import functools
 import inspect
-
+import logging
 
 
 class Logger(object):
@@ -16,75 +15,71 @@ class Logger(object):
 
     def __init__(self, module):
         self.module = module
-        self._logger = logging.getLogger(module)
+        self.logger = logging.getLogger(module)
 
     def log(self, msg):
         from core.utility.configuration import Configuration
-        if Configuration.get().log_level <= self._log_level['log']:
+        configuration = Configuration()
+        if int(configuration.utility['log_level']) > int(self._log_level['log']):
             return
 
-        self._format_message('', msg)
-        if Configuration.get().enable_logging:
-            self._logger.debug(msg)
+        msg = self._format_message('', msg)
+        if configuration.utility['enable_logging']:
+            self.logger.debug(msg)
 
-        if Configuration.get().enable_debugging:
+        if configuration.utility['enable_debugging']:
             print(msg)
 
     def info(self, msg):
         from core.utility.configuration import Configuration
-        if Configuration.get().log_level <= self._log_level['info']:
+        configuration = Configuration()
+        if configuration.utility['log_level'] > self._log_level['debug']:
             return
 
-        if Configuration.get().log_level <= 1:
-            return
+        msg = self._format_message('Info', msg)
+        if configuration.utility['enable_logging']:
+            self.logger.info(msg)
 
-        self._format_message('Info', msg)
-        if Configuration.get().enable_logging:
-            self._logger.info(msg)
-
-        if Configuration.get().enable_debugging:
+        if configuration.utility['enable_debugging']:
             print(msg)
 
     def warning(self, msg):
         from core.utility.configuration import Configuration
-        if Configuration.get().log_level <= self._log_level['warning']:
+        configuration = Configuration()
+        if configuration.utility['log_level'] > self._log_level['warning']:
             return
 
-        if Configuration.get().log_level <= 2:
-            return
+        msg = self._format_message('Warning', msg)
+        if configuration.utility['enable_logging']:
+            self.logger.warning(msg)
 
-        self._format_message('Warning', msg)
-        if Configuration.get().enable_logging:
-            self._logger.warning(msg)
-
-        if Configuration.get().enable_debugging:
+        if configuration.utility['enable_debugging']:
             print(msg)
 
     def error(self, msg):
         from core.utility.configuration import Configuration
-        if Configuration.get().log_level <= self._log_level['error']:
+        configuration = Configuration()
+        if configuration.utility['log_level'] > self._log_level['error']:
             return
 
-        if Configuration.get().log_level <= 3:
-            return
+        msg = self._format_message('ERROR', msg)
+        if configuration.utility['enable_logging']:
+            self.logger.error(msg)
 
-        self._format_message('ERROR', msg)
-        if Configuration.get().enable_logging:
-            self._logger.error(msg)
-
-        if Configuration.get().enable_debugging:
+        if configuration.utility['enable_debugging']:
             print(msg)
 
     def critical(self, msg):
         from core.utility.configuration import Configuration
-        if Configuration.get().log_level <= self._log_level['critical']:
+        configuration = Configuration()
+        if configuration.utility['log_level'] > self._log_level['critical']:
             return
 
-        self._format_message('CRITICAL', msg)
-        if Configuration.get().enable_logging:
-            self._logger.critical(msg)
+        msg = self._format_message('CRITICAL', msg)
+        if configuration.utility['enable_logging']:
+            self.logger.critical(msg)
 
-        if Configuration.get().enable_debugging:
+        if configuration.utility['enable_debugging']:
             print(msg)
 
     def _format_message(self, level, msg):
@@ -111,7 +106,7 @@ class MethodBoundaryLogger(object):
         def wrapper(*args, **kwds):
 
             # start logging
-            method_name = func.__name__.replace('_', ' ')
+            method_name = func.__name__
             msg = ''
             i = 0
 
@@ -121,23 +116,30 @@ class MethodBoundaryLogger(object):
             # build arguments
             for arg in args:
                 arg_name = arg_names[i].capitalize()
+                # if arg_name == 'Self':
+                #     i += 1
+                #     continue
 
                 msg += '{arg_name}: {value} | '.format(arg_name=arg_name, value=repr(arg))
                 i += 1
 
-            # remove the last letter "|"
-            msg = msg[:-1]
-
-            self.logger.log('{method_name} >>> {msg}'.format(method_name=method_name, msg=msg))
+            # remove the last two letter "| "
+            msg = msg[:-2]
 
             result = func(*args, **kwds)
+
+            out = '{method_name} \n'.format(method_name=method_name)
+
+            if msg:
+                out += '>>> {msg} \n'.format(msg=msg)
+
+            if result:
+                out += '>>> {return_value}'.format(return_value=repr(result))
+
+            out += '\n'
+
+            self.logger.log(out)
 
             return result
 
         return wrapper
-
-# @MethodBoundaryLogger()
-# def test(name, age):
-#     pass
-#
-# test('tommy',1)

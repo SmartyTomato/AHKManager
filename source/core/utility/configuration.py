@@ -1,97 +1,72 @@
-import os
 import json
-from configparser import ConfigParser
-from core.utility.logger import Logger, MethodBoundaryLogger
-from core.model.global_variable import GlobalVariable
+import os
+from configparser import ConfigParser, NoSectionError
+
+from core.model.singleton import Singleton
+from core.service.message_service import MessageService
+from core.utility.logger import Logger
+from core.utility.message import Message, MessageType
 
 
-class Configuration(object):
-    # private variables
-    _instance = None
-    _logger = Logger('Configuration')
+class Configuration(Singleton):
+    logger = Logger('Configuration')
 
-    @staticmethod
-    def get():
-        if Configuration._instance is None:
-            Configuration._instance = DevConfig()
+    message_service = MessageService()
 
-        return Configuration._instance
-
-    config_path_section_name = 'config path'
+    # path
     utility_section_name = 'utility'
-    application_section_name = 'application'
+    main_window_section_name = 'main_window'
 
     # const paths
-    config_path = 'configs\\ahk_manager.config'
-    repo_config_path = 'configs\\repository.config'
+    config_path = os.getcwd() + '\\configs\\ahk_manager.config'
+    library_config_path = os.getcwd() + '\\configs\\library.config'
+    profile_config_path = os.getcwd() + '\\configs\\profile.config'
 
     # utility
-    enable_save = True
-    enable_logging = False
-    log_level = 0
-    enable_debugging = True
-    file_types = ['.ahk']
-    ahk_executable = 'C:\\Program Files\\AutoHotkey\\AutoHotkey.exe'
+    utility = {
+        'enable_save': True,
+        'enable_logging': False,
+        'log_level': 2,
+        'enable_debugging': True,
+        'file_types': ['.ahk'],
+        'ahk_executable': 'C:\\Program Files\\AutoHotkey\\AutoHotkey.exe'
+    }
 
-    # application
-    title_main_window = 'AHK Manager'
+    # main_window
+    main_window = {
+        'name': 'AHK Manager',
+        'width': 1000,
+        'height': 800
+    }
 
-    @MethodBoundaryLogger(_logger)
-    def save(self):
-        if not self.enable_save:
+    # add_script_window
+    add_script_dialog = {
+        'name': 'Add script to profile',
+        'width': 1000,
+        'height': 800
+    }
+
+    # region public methods
+
+    def save(self, profile_repository, library_reopsitory):
+        if not self.utility['enable_save']:
             # this should not happen in released version, so do not add warning message
-            self._logger.info('Saving is not enabled')
+            self.logger.info('Saving is not enabled')
             return
 
-        config = ConfigParser()
+        self._save_general_configs()
+        self._save_repository(profile_repository, self.profile_config_path)
+        self._save_repository(library_reopsitory, self.library_config_path)
 
-        # path configs
-        config.add_section(self.config_path_section_name)
-        config.set(self.config_path_section_name,
-                   'config_path', self.config_path)
-        config.set(self.config_path_section_name,
-                   'repo_config_path', self.repo_config_path)
-
-        # utility configs
-        config.add_section(self.utility_section_name)
-        config.set(self.utility_section_name,
-                   'enable_save', self.enable_save)
-        config.set(self.utility_section_name,
-                   'enable_logging', self.enable_logging)
-        config.set(self.utility_section_name,
-                   'file_types', self.file_types)
-        config.set(self.utility_section_name,
-                   'ahk_executable', self.ahk_executable)
-
-        # application configs
-        config.add_section(self.application_section_name)
-        config.set(self.utility_section_name,
-                   'title_main_window', self.title_main_window)
-
-        if not self._make_file_dirs(self.config_path):
-            GlobalVariable.error_messages.append(
-                'Could not save configuration to path: {path}'.format(path=self.config_path))
-            self._logger.error('Could not save configuration >>> Path: {path}'.format(path=self.config_path))
-            return
-
-        try:
-            with open(self.config_path, 'w') as outfile:
-                config.write(outfile)
-        except OSError as error:
-            GlobalVariable.error_messages.append('Could not write to file: {path}'.format(path=self.config_path))
-            self._logger.error('Could not write to file >>> Path: {path} | Error: {error}'.format(
-                path=self.config_path, error=error))
-
-    @MethodBoundaryLogger(_logger)
     def load(self):
-        if not self.enable_save:
-            self._logger.info('Load is not enabled')
+        if not self.utility['enable_save']:
+            self.logger.info('Load is not enabled')
             return
 
         # if config file is not found
         if not os.path.exists(self.config_path):
-            self._logger.info('Configuration does not exists')
-            self.save()
+            self.logger.info('Configuration does not exists')
+            self._save_general_configs()
             return
 
         config = ConfigParser()
@@ -99,84 +74,138 @@ class Configuration(object):
         try:
             config.read(self.config_path)
         except OSError as error:
-            GlobalVariable.error_messages.append('Could not read file: {path}'.format(path=self.config_path))
-            self._logger.error('Could not read file >>> Path: {path} | Error: {error}'.format(
+            self.message_service.add(
+                Message(MessageType.ERROR, 'Could not read file: {}'.format(self.config_path)))
+            self.logger.error('Could not read file >>> Path: {path} | Error: {error}'.format(
                 path=self.config_path, error=error))
             return
 
-        # path configs
-        self.config_path = config.get(
-            self.config_path_section_name, 'config_path')
-        self.repo_config_path = config.get(
-            self.config_path_section_name, 'repo_config_path')
+        try:
+            # utility configs
+            for (key, value) in config.items(self.utility_section_name):
+                if isinstance(self.utility[key], list):
+                    self.utility[key] = []
+                    # remove the bracket
+                    value = value[1:-1]
+                    for item in value.split(','):
+                        item = self._find_between(item, "'", "'")
+                        self.utility[key].append(item)
+                    continue
+                elif isinstance(self.utility[key], bool):
+                    self.utility[key] = value == 'True'
+                else:
+                    self.utility[key] = type(self.utility[key])(value)
+
+            # main window
+            for (key, value) in config.items(self.main_window_section_name):
+                self.main_window[key] = type(self.main_window[key])(value)
+
+        except (NoSectionError, KeyError) as error:
+            self.message_service.add(
+                Message(MessageType.ERROR, 'Could not find section: {}'.format(error)))
+            self.logger.error('Could not find section >>> {}'.format(error))
+            # if error, then override the saved config to ensure no error next time
+            self._save_general_configs()
+
+    def load_profiles(self):
+        return self._load_repository(self.profile_config_path)
+
+    def load_libraries(self):
+        return self._load_repository(self.library_config_path)
+
+    # endregion public methods
+
+    # region private methods
+
+    def _save_general_configs(self):
+        config = ConfigParser()
 
         # utility configs
-        self.enable_save = config.get(
-            self.utility_section_name, 'enable_save')
-        self.enable_logging = config.get(
-            self.utility_section_name, 'enable_logging')
-        self.file_types = config.get(
-            self.utility_section_name, 'file_types')
-        self.ahk_executable = config.get(
-            self.utility_section_name, 'ahk_executable')
+        section = self.utility_section_name
+        config.add_section(section)
+        for (key, value) in self.utility.items():
+            config.set(section, str(key), str(value))
 
-        # application
-        self.title_main_window = config.get(
-            self.application_section_name, 'title_main_window')
+        # main window settings
+        section = self.main_window_section_name
+        config.add_section(section)
+        for (key, value) in self.main_window.items():
+            config.set(section, str(key), str(value))
 
-    @MethodBoundaryLogger(_logger)
-    def save_repository(self, repo_manager):
-        if not self.enable_save:
-            self._logger.info('Save is not enabled')
-            return
-
-        if not self._make_file_dirs(self.repo_config_path):
-            GlobalVariable.error_messages.append('Could not save repository')
-            self._logger.error('Could not make directory >>> {path}'.format(path=self.repo_config_path))
+        if not self._make_dirs(self.config_path):
+            self.message_service.add(
+                Message(MessageType.ERROR, 'Could not save configuration to path: {}'.format(self.config_path)))
+            self.logger.error('Could not save configuration >>> {}'.format(repr(self)))
             return
 
         try:
-            with open(self.repo_config_path, 'w') as outfile:
-                outfile.write(json.dumps(repo_manager.to_json(), sort_keys=True, indent=4))
+            with open(self.config_path, 'w') as outfile:
+                config.write(outfile)
         except OSError as error:
-            GlobalVariable.error_messages.append('Could not write file: {path}'.format(path=self.repo_config_path))
-            self._logger.error('Could not write file >>> Path: {path} | Error: {error}'.format(
-                path=self.repo_config_path, error=error))
+            self.message_service.add(
+                Message(MessageType.ERROR, 'Could not write to file: {}'.format(self.config_path)))
+            self.logger.error('Could not write to file >>> Path: {path} | Error: {error}'.format(
+                path=self.config_path, error=error))
 
-    @MethodBoundaryLogger(_logger)
-    def load_repository(self):
-        if not self.enable_save:
+    def _save_repository(self, repository, path: str):
+        if not self._make_dirs(path):
+            self.message_service.add(Message(MessageType.ERROR, 'Could not save repository'))
+            self.logger.error('Could not make directory >>> {path}'.format(path=path))
+            return
+
+        try:
+            with open(path, 'w') as outfile:
+                outfile.write(json.dumps(repository.to_json(), sort_keys=True, indent=4))
+        except OSError as error:
+            self.message_service.add(
+                Message(MessageType.ERROR, 'Could not write file: {path}'.format(path=path)))
+            self.logger.error('Could not write file >>> Path: {path} | Error: {error}'.format(
+                path=path, error=error))
+
+    def _load_repository(self, path: str)-> str:
+        if not self.utility['enable_save']:
             return None
 
-        if not os.path.exists(self.repo_config_path):
-            self._logger.info('Repository does not exists')
+        if not os.path.exists(path):
+            self.logger.info('Repository does not exists')
             return None
 
         try:
-            with open(self.repo_config_path, 'r') as infile:
+            with open(path, 'r') as infile:
                 return json.load(infile)
         except OSError as error:
-            GlobalVariable.error_messages.append('Unable to read file: {path}'.format(path=self.config_path))
-            self._logger.error(
-                'Unable to read file >>> Path: {path} | Error: {error}'.format(path=self.config_path, error=error))
+            self.message_service.add(
+                Message(MessageType.ERROR, 'Could not read file: {path}'.format(path=self.config_path)))
+            self.logger.error(
+                'Could not read file >>> Path: {path} | Error: {error}'.format(path=self.config_path, error=error))
             return None
 
-    # ------------------------------------------------------------------ #
-    # helper methods
-    # ------------------------------------------------------------------ #
-    @MethodBoundaryLogger(_logger)
-    def _make_file_dirs(self, path):
+    @staticmethod
+    def _find_between(in_str, first: str, last: str)->str:
+        try:
+            start = in_str.index(first) + len(first)
+            end = in_str.index(last, start)
+            return in_str[start:end]
+        except ValueError:
+            return ""
+
+    @staticmethod
+    def _make_dirs(path: str) -> bool:
         # create file and all folder required
-        if not os.path.exists(path):
+        if not os.path.exists(path) and not os.path.exists(os.path.dirname(path)):
             try:
                 os.makedirs(os.path.dirname(path))
             except OSError as error:
-                GlobalVariable.error_messages.append('Unable to make directory for file: {path}'.format(path=path))
-                self._logger.error(
-                    'Unable to make directory >>> Path: {path} | Error: {error}'.format(path=path, error=error))
+                Configuration.message_service.add(
+                    Message(MessageType.ERROR, 'Could not make directory for file: {}'.format(path)))
+                Configuration.logger.error(
+                    'Could not make directory for file >>> Path: {path} | Error: {error}'.format(path=path,
+                                                                                                 error=error))
                 return False
 
         return True
+
+    # endregion private methods
 
 
 class DevConfig(Configuration):

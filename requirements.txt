@@ -1,1 +1,7 @@
-PyQt5
+pip
+pylint
+autopep8
+rope
+pyinstaller
+
+pyqt5

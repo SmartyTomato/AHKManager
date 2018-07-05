@@ -1,29 +1,44 @@
-class State:
+class State(object):
 
     def __init__(self):
-        self.lock = False
-        self.hide = False
-        self.exclude = False
-        self.startup = False
+        self.lock: bool = False
+        self.startup: bool = False
+        self.running: bool = False
 
-        self.running = False
+    # region to string
 
     def to_json(self):
         out = {}
         out['lock'] = self.lock
-        out['hide'] = self.hide
-        out['exclude'] = self.exclude
         out['startup'] = self.startup
 
         return out
 
     @staticmethod
-    def from_json(jstr):
-        status = State()
+    def from_json(json_str):
+        state = State()
 
-        status.lock = jstr['lock']
-        status.hide = jstr['hide']
-        status.exclude = jstr['exclude']
-        status.startup = jstr['startup']
+        state.lock = json_str['lock']
+        state.startup = json_str['startup']
 
-        return status
+        return state
+
+    def __str__(self):
+        out = []
+        out.append('State:')
+        out.append('\t Running: {}'.format(str(self.running)))
+        out.append('\t Lock: {}'.format(str(self.lock)))
+        out.append('\t Startup: {}'.format(str(self.startup)))
+
+        return '\n'.join(out)
+
+    def __repr__(self):
+        out = 'State('
+        out += 'running={}, '.format(self.running)
+        out += 'lock={}, '.format(self.lock)
+        out += 'startup={}'.format(self.startup)
+        out += ')'
+
+        return out
+
+    # endregion to string

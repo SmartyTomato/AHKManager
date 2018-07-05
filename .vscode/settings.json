@@ -14,8 +14,12 @@
         "--disable=E0611",
         "--disable=C0301",
         "--disable=C0111",
+        "--disable=C0103",
         "--disable=W0703",
         "--disable=R0903",
+        "--disable=R1705",
+        "--disable=C0326",
+        "--disable=R0201",
     ],
     "python.venvFolders": [
         "${workspaceFolder}\\venv",

@@ -1,6 +1,10 @@
-# from core.model.global_variable import GlobalVariable
-# from ui.console import *
-# from ui.application import Application
-# Application()
+import sys
+import traceback
 
-from core.model.library import *
+from app.application import Application
+
+try:
+    Application()
+except Exception as error:
+    print("Unexpected error:", sys.exc_info()[0])
+    print(traceback.format_exc())
