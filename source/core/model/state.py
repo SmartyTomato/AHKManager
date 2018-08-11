@@ -1,4 +1,4 @@
-class State(object):
+class State():
 
     def __init__(self):
         self.lock: bool = False

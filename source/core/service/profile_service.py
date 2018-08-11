@@ -1,21 +1,19 @@
 from typing import List
+from typing import Tuple
 
 from core.manager.profile_manager import ProfileManager
 from core.manager.script_manager import ScriptManager
+from core.model.action_result import ActionResult
+from core.model.error_messages import ErrorMessages
 from core.model.profile import Profile
-from core.model.script import Script
 from core.model.profile_repository import ProfileRepository
+from core.model.script import Script
 from core.model.singleton import Singleton
 from core.service.library_service import LibraryService
-from core.service.message_service import MessageService
-from core.utility.logger import Logger
-from core.utility.message import Message, MessageType
 
 
 class ProfileService(Singleton):
-    logger = Logger('ProfileService')
 
-    message_service: MessageService = MessageService()
     library_service: LibraryService = LibraryService()
     profile_manager: ProfileManager = ProfileManager()
     script_manager: ScriptManager = ScriptManager()
@@ -25,43 +23,77 @@ class ProfileService(Singleton):
 
     # region add
 
-    def add(self, name: str = '') -> Profile:
+    def add(self, name: str = '') -> Tuple[ActionResult, Profile]:
+        """
+        Add profile into repository
+            name (str, optional): Defaults to ''.
+                profile name, will auto generated
+                when not provided
+
+        Returns:
+            Tuple[ActionResult, Profile]:
+                ActionResult: return error when profile
+                    name already exists
+        """
+
+        result = ActionResult()
+
+        # check whether profile already exists
         profile = self.repository.find(name)
         if profile:
-            self.message_service.add(
-                Message(MessageType.ERROR, 'Profile name already exists: {}'.format(name)))
-            self.logger.error('Profile name already exists >>> {}'.format(repr(profile)))
-            return None
+            result.add_error(
+                ErrorMessages.profile_name_already_exists.format(name))
+            return result, None
 
+        # auto generate next available name
         if not name:
-            name = self.get_next_profile_name()
+            name = self._get_next_profile_name()
 
-        profile = self.profile_manager.init_profile(name)
-        if not profile:
-            self.message_service.add(
-                Message(MessageType.ERROR, 'Could not add profile: {}'.format(name)))
-            self.logger.error('Could not add profile >>> {}'.format(repr(name)))
-            return None
+        # initialize profile
+        temp_result, profile = self.profile_manager.init_profile(name)
+        result.merge(temp_result)
+        if not temp_result.success() or not profile:
+            return temp_result, profile
 
-        return self.repository.add(profile)
+        self.repository.add(profile)
+        return result, profile
 
-    def add_script(self, name: str, script_id: str):
-        profile = self._profile_exists(name)
-        if not profile:
-            return False
+    def add_script(self, profile_id: str, script_id: str) \
+            -> Tuple[ActionResult, Profile]:
+        """
+        Add script into profile
 
-        script = self.find_script(script_id)
-        if script:
-            self.message_service.add(
-                Message(MessageType.WARNING, 'Profile already contains script: {}'.format(script.identifier())))
-            self.logger.warning('Profile already contains script >>> Script: {}'.format(repr(script)))
-            return False
+        Args:
+            profile_name (str): profile name
+            script_id (str): script path
 
+        Returns:
+            Tuple[ActionResult, Profile]:
+                ActionResult: return error when profile
+                    or script not found
+        """
+
+        result = ActionResult()
+
+        # check whether profile exists
+        temp_result, profile = self._check_profile_exists(profile_id)
+        if not temp_result.success() or not profile:
+            return result, None
+
+        # find profile
+        profile = self.find(profile_id)
+        if profile.has_script(script_id):
+            result.add_warning(
+                ErrorMessages.profile_already_contains_script
+                .format(script_id))
+            return result, profile
+
+        # find script
         script = self.library_service.find_script(script_id)
         if not script:
-            self.message_service.add(
-                Message(MessageType.ERROR, 'Could not find script in the repository: {}'.format(script_id)))
-            self.logger.error('Could not find script in the repository >>> {}'.format(script_id))
+            result.add_error(
+                ErrorMessages.could_not_find_script.format(script_id))
+            return result, None
 
         return self.profile_manager.add_script(profile, script)
 
@@ -70,45 +102,86 @@ class ProfileService(Singleton):
     # region find
 
     def find(self, identifier: str) -> Profile:
-        profile = self.repository.find(identifier)
+        """
+        Find profile
+
+        Args:
+            identifier (str): profile name
+
+        Returns:
+            Profile: profile object or None
+        """
+
+        return self.repository.find(identifier)
+
+    def find_script(self, identifier: str) -> Script:
+        """
+        Find script, the script must exists in at least one profile
+
+        Args:
+            identifier (str): script path
+
+        Returns:
+            Script: return None if script not found or
+                no profile contains profile
+        """
+
+        profile = self.find_profiles_contains_script(identifier)
         if not profile:
-            self.logger.info('Could not find profile >>> {}'.format(identifier))
             return None
 
-        return profile
+        return self.library_service.find_script(identifier)
 
-    def find_script(self, identifier: str) ->Script:
-        profile = self.find_profile_contains_script(identifier)
-        if not profile:
-            return None
+    def find_profiles_contains_script(self, identifier: str) -> List[Profile]:
+        """
+        Find profiles that contains the script
 
-        script = self.library_service.find_script(identifier)
-        if not script:
-            return None
+        Args:
+            identifier (str): script path
 
-        return script
+        Returns:
+            List[Profile]: list of profiles
+        """
 
-    def find_profile_contains_script(self, script_id: str)->Profile:
-        for profile in self.repository.profile_list:
-            if profile.has_script(script_id):
-                return profile
+        return list(filter(lambda x: x.has_script(identifier),
+                           self.repository.profile_list))
 
-        self.message_service.add(
-            Message(MessageType.ERROR, 'Could not find profile contains script: {}'.format(script_id)))
-        self.logger.error('Could not find profile contains script >>> {}'.format(script_id))
-        return None
+    def find_running_profiles_contains_script(self, identifier: str) \
+            -> List[Profile]:
+        """
+        Find current running profiles that contains script ID
 
-    def find_running_profile_contains_script(self, identifier: str)->List[Profile]:
-        return list(filter(lambda x: x.has_script(identifier) and x.is_running(), self.repository.profile_list))
+        Args:
+            identifier (str): script path
 
-    def get_profile_scripts(self, identifier)->List[Script]:
+        Returns:
+            List[Profile]: list of profiles
+        """
+
+        return list(filter(lambda x: x.is_running()
+                           and x.has_script(identifier),
+                           self.repository.profile_list))
+
+    def get_profile_scripts(self, identifier: str) -> List[Script]:
+        """
+        Get script in the given profile
+
+        Args:
+            identifier (str): profile name
+
+        Returns:
+            List[Script]: list of scripts
+        """
+
         scripts = []
         profile = self.find(identifier)
         if not profile:
             return []
 
         for script_id in profile.script_id_list:
-            scripts.append(self.library_service.find_script(script_id))
+            script = self.library_service.find_script(script_id)
+            if script:
+                scripts.append(script)
 
         return scripts
 
@@ -116,74 +189,227 @@ class ProfileService(Singleton):
 
     # region remove
 
-    def remove(self, identifier):
-        profile = self._profile_exists(identifier)
-        if not profile:
-            return
+    def remove(self, identifier: str) -> ActionResult:
+        """
+        Remove profile
+        Profile will be removed from the repository even when script cannot
+        be stopped
+
+        Args:
+            identifier (str): profile name
+
+        Returns:
+            ActionResult: return error if profile not
+                found
+                return warning if script cannot be
+                stopped
+        """
+
+        result = ActionResult()
+
+        temp_result, profile = self._check_profile_exists(identifier)
+        if not temp_result.success() or not profile:
+            temp_result.ignore_error()
+            return temp_result, None
 
         # can be removed if not running
         if not profile.is_running():
             self.repository.remove(profile)
-            return
+            return result
 
         # trying to stop script before remove
         for profile in self.repository.profile_list:
-            for script_id in profile.script_id_list:
-                self.remove_script(script_id)
+            i = 0
+            while i < len(profile.script_id_list):
+                script_id = profile.script_id_list[i]
+
+                temp_result = self.remove_script_from_profile(
+                    profile.identifier(), script_id)
+                result.merge(temp_result)
+
+                if temp_result.success():
+                    i -= 1
+
+                i += 1
 
         self.repository.remove(profile)
+        result.ignore_error()
+        return result
 
-    def remove_script(self, identifier: str):
-        script = self.find_script(identifier)
-        if not script:
-            return
+    def remove_script_from_profile(self, profile_id: str, script_id: str) \
+            -> ActionResult:
+        """
+        Remove script from profile
 
+        Args:
+            profile_id (str): profile name
+            script_id (str): script path
+
+        Returns:
+            ActionResult: return error when profile
+                or script not found
+        """
+
+        result = ActionResult()
+
+        temp_result, profile = self._check_profile_exists(profile_id)
+        if not temp_result.success() or not profile:
+            return temp_result
+
+        if script_id not in profile.script_id_list:
+            result.add_warning(
+                ErrorMessages.script_not_in_profile
+                .format(profile=profile.identifier(), script=script_id))
+            return result
+
+        # try to stop script if no one else if running this script
         # get all profiles and libraries currently running contains script
-        profiles = self.find_running_profile_contains_script(script.identifier())
-        library = self.library_service.find_library_contains_script(script.identifier())
+        profiles = self.find_running_profiles_contains_script(script_id)
+        library = self.library_service.find_library_contains_script(script_id)
 
         # check to see anything is running other than this script
-        if len(profiles) == 1 and not library:
-            self.script_manager.stop(script)
+        if len(profiles) <= 1 and not (library and library.is_running()):
+            temp_result, _ = self.library_service.stop_script(
+                script_id)
+            result.merge(temp_result)
+
+        # script will be removed even has error
+        profile.remove(script_id)
+        result.ignore_error()
+        return result
+
+    def remove_script(self, identifier: str) -> ActionResult:
+        """
+        Remove ID from all profiles.
+        If path ID is library, remove all script in that library
+
+        Args:
+            identifier (str): script path or library path
+
+        Returns:
+            ActionResult: return warning only
+        """
+
+        result = ActionResult()
+
+        # if identifier is a library, delete all script belongs to that library
+        library = self.library_service.find(identifier)
+        if library:
+            for script in library.script_list:
+                profiles = self.find_profiles_contains_script(
+                    script.identifier())
+
+                if profiles:
+                    for profile in profiles:
+                        profile.remove(script.identifier())
+        else:
+            profiles = self.find_profiles_contains_script(identifier)
+            if profiles:
+                for profile in profiles:
+                    profile.remove(identifier)
+
+        result.ignore_error()
+        return result
+
+    # endregion remove
+
+    # region command
+
+    def start(self, identifier: str) -> Tuple[ActionResult, Profile]:
+        """
+        Start profile
+
+        Args:
+            identifier (str): profile name
+
+        Returns:
+            Tuple[ActionResult, Profile]:
+                ActionResult: return error if profile
+                    not found
+        """
+
+        temp_result, profile = self._check_profile_exists(identifier)
+        if not temp_result.success() or not profile:
+            return temp_result, None
+
+        return self.profile_manager.start(profile)
+
+    def stop(self, identifier: str) -> Tuple[ActionResult, Profile]:
+        """
+        Stop profile
+
+        Args:
+            identifier (str): profile name
+
+        Returns:
+            Tuple[ActionResult, Profile]:
+                ActionResult: return error if profile
+                    not found
+        """
+
+        temp_result, profile = self._check_profile_exists(identifier)
+        if not temp_result.success() or not profile:
+            return temp_result, None
+
+        return self.profile_manager.stop(profile)
+
+    def stop_all(self) -> ActionResult:
+        """
+        Stop all script in repository
+
+        Returns:
+            ActionResult: only return warning
+        """
+
+        result = ActionResult()
 
         for profile in self.repository.profile_list:
-            if profile.has_script(identifier):
-                profile.remove(identifier)
+            temp_result, profile = self.profile_manager.stop(profile)
+            result.merge(temp_result)
 
-        # endregion remove
+        result.ignore_error()
+        return result
 
-        # region command
+    def restart(self, identifier: str) -> ActionResult:
+        """
+        Restart profile with the given ID
 
-    def start(self, name: str):
-        profile = self._profile_exists(name)
-        if not profile:
-            return
+        Args:
+            identifier (str): profile name
 
-        self.profile_manager.start(profile)
+        Returns:
+            ActionResult: return error when profile
+                not found
+        """
 
-    def stop(self, name: str):
-        profile = self._profile_exists(name)
-        if not profile:
-            return
+        temp_result, profile = self._check_profile_exists(identifier)
+        if not temp_result.success() or not profile:
+            return temp_result
 
-        self.profile_manager.stop(profile)
+        return self.profile_manager.restart(profile)
 
-    def restart(self, name: str):
-        profile = self._profile_exists(name)
-        if not profile:
-            return
+    def refresh(self) -> Tuple[ActionResult, ProfileRepository]:
+        """
+        Refresh profile repository, remove script which not found
 
-        self.profile_manager.restart(profile)
+        Returns:
+            Tuple[ActionResult, ProfileRepository]:
+        """
 
-    def refresh(self):
+        result = ActionResult()
+
         for profile in self.repository.profile_list:
-            self.profile_manager.refresh(profile)
+            temp_result, profile = self.profile_manager.refresh(profile)
+            result.merge(temp_result)
+
+        result.ignore_error()
+        return result, self.repository
 
     # endregion command
 
     # region public methods
 
-    def get_next_profile_name(self) -> str:
+    def _get_next_profile_name(self) -> str:
         name = 'profile'
         if not self.repository.find(name):
             return name
@@ -191,20 +417,24 @@ class ProfileService(Singleton):
         i = 0
         while True:
             i += 1
-            if not self.repository.find(name + str(i)):
+            name = name + str(i)
+            if not self.repository.find(name):
                 return name
 
     # endregion public methods
 
     # region private methods
 
-    def _profile_exists(self, name: str) -> Profile:
-        profile = self.repository.find(name)
-        if not profile:
-            self.message_service.add(Message(MessageType.ERROR, 'Could not find profile: {}'.format(name)))
-            self.logger.error('Could not find profile >>> {}'.format(name))
-            return None
+    def _check_profile_exists(self, identifier: str) \
+            -> Tuple[ActionResult, Profile]:
+        result = ActionResult()
 
-        return profile
+        profile = self.find(identifier)
+        if not profile:
+            result.add_error(
+                ErrorMessages.could_not_find_profile.format(identifier))
+            return result, None
+
+        return result, profile
 
     # endregion private methods

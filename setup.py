@@ -11,5 +11,5 @@ setup(
     author='Tommy Zhao',
     author_email='smartytomato@hotmail.com',
     description='AutoHotKey manager',
-    long_description=readme, install_requires=['PyQt5']
+    long_description=readme, install_requires=['PyQt5'],
 )

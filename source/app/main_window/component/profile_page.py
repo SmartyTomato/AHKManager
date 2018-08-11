@@ -1,6 +1,6 @@
 from app.main_window.component.profile_list_widget import ProfileListWidget
 from app.main_window.component.profile_table_widget import ProfileTableWidget
-from app.main_window.component.shared import get_search_box
+from app.main_window.component.shared_component import get_search_box
 from app.main_window.component.tab_page import TabPage
 
 
@@ -8,6 +8,8 @@ class ProfilePage(TabPage):
 
     def __init__(self, parent):
         TabPage.__init__(self, parent)
+
+        self.widget_list = []
 
         # profile list widget
         profile_list_widget = ProfileListWidget(self)
@@ -24,3 +26,10 @@ class ProfilePage(TabPage):
         # set relative size
         self.layout().setColumnStretch(0, 10)
         self.layout().setColumnStretch(1, 20)
+
+        self.widget_list.append(profile_list_widget)
+        self.widget_list.append(script_list_widget)
+
+    def refresh(self):
+        for widget in self.widget_list:
+            widget.refresh()

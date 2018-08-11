@@ -4,25 +4,53 @@ from core.model.library import Library
 from core.model.script import Script
 
 
-class LibraryRepository(object):
+class LibraryRepository():
+    """
+    Library repository is a library container.
+    Stores a list of libraries
+    """
 
     def __init__(self):
         self.library_list: List[Library] = []
 
-   # region public methods
+    # region public methods
 
     def add(self, library: Library):
+        """
+        Add library into the repository
+
+        Args:
+            library (Library): library object
+        """
+
         if self._is_instance(library):
             self.library_list.append(library)
 
-    def find(self, identifier: str) ->Library:
-        for library in self.library_list:
-            if library.has_id(identifier):
-                return library
+    def find(self, identifier: str) -> Library:
+        """
+        Find the library has the given id
 
-        return None
+        Args:
+            identifier (str): Library identifier (path)
+
+        Returns:
+            Library: library object or None
+        """
+
+        return next(
+            (x for x in self.library_list if x.has_id(identifier)), None)
 
     def find_script(self, identifier: str) -> Script:
+        """
+        Find script has given id
+
+        Args:
+            identifier (str): Script path
+
+        Returns:
+            Script: script object or None
+        """
+
         for library in self.library_list:
             script = library.find(identifier)
             if script:
@@ -30,18 +58,26 @@ class LibraryRepository(object):
 
         return None
 
-    def remove_script(self, script: Script):
-        for library in self.library_list:
-            if library.find(script.identifier()):
-                library.remove(script)
-                return
-
     def remove(self, instance: Library):
-        if self._is_instance(instance) and instance in self.library_list:
+        """
+        Remove library from the repository
+
+        Args:
+            instance (Library): library instance
+        """
+
+        if instance in self.library_list:
             self.library_list.remove(instance)
 
-    def get_all_scripts(self)->List[Script]:
-        scripts = []
+    def get_all_scripts(self) -> List[Script]:
+        """
+        Get all scripts from all libraries
+
+        Returns:
+            List[Script]: list of scripts
+        """
+
+        scripts: List[Script] = []
         for library in self.library_list:
             scripts.extend(library.script_list)
 
@@ -49,14 +85,11 @@ class LibraryRepository(object):
 
     # endregion public methods
 
-  # region private methods
+    # region private methods
 
     @staticmethod
     def _is_instance(instance) -> bool:
-        if instance and isinstance(instance, Library):
-            return True
-        else:
-            return False
+        return bool(instance and isinstance(instance, Library))
 
     # endregion private methods
 

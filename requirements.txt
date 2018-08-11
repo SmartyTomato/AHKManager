@@ -3,5 +3,7 @@ pylint
 autopep8
 rope
 pyinstaller
+mypy
+flake8
 
 pyqt5
