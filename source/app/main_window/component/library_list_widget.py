@@ -3,9 +3,8 @@ from typing import List
 from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QFileDialog, QMenu
 
-from app.main_window.component.list_widget_item import \
-    ListWidgetItem
 from app.main_window.component.list_widget import ListWidget
+from app.main_window.component.list_widget_item import ListWidgetItem
 
 
 class LibraryListWidget(ListWidget):
@@ -26,8 +25,8 @@ class LibraryListWidget(ListWidget):
 
     # region method implementations
 
-    def get_containers(self)->[]:
-        return self.library_service.repository.library_list
+    def get_containers(self) -> List:
+        return self.app_service.get_library_list()
 
     def open_menu(self, position: QPoint):
         menu = QMenu('I want to...', self)
@@ -36,12 +35,20 @@ class LibraryListWidget(ListWidget):
         remove_text = 'Remove'
         start_text = 'Start'
         stop_text = 'Stop'
+        open_in_explorer_text = 'Open in Explorer'
 
-        menu.addAction(add_text)
-        menu.addAction(remove_text)
-        menu.addSeparator()
-        menu.addAction(start_text)
-        menu.addAction(stop_text)
+        item_selected = self.selectedItems()
+
+        if item_selected:
+            menu.addAction(start_text)
+            menu.addAction(stop_text)
+            menu.addSeparator()
+            menu.addAction(remove_text)
+            menu.addSeparator()
+            menu.addAction(open_in_explorer_text)
+        else:
+            menu.addAction(add_text)
+
         selected_option = menu.exec(self.mapToGlobal(position))
 
         if not selected_option:
@@ -54,6 +61,8 @@ class LibraryListWidget(ListWidget):
             self._remove(self.selectedItems())
         elif text == start_text:
             self._start(self.selectedItems())
+        elif text == open_in_explorer_text:
+            self._open_in_explorer(self.selectedItems())
         elif text == stop_text:
             self._stop(self.selectedItems())
 
@@ -82,7 +91,9 @@ class LibraryListWidget(ListWidget):
             return
 
         for item in items:
-            self.library_service.remove(item.identifier)
+            script_id = item.identifier
+            self.profile_service.remove_script(script_id)
+            self.library_service.remove(script_id)
 
         self.refresh()
 
@@ -94,6 +105,13 @@ class LibraryListWidget(ListWidget):
             self.library_service.start(item.identifier)
 
         self.refresh()
+
+    def _open_in_explorer(self, items: List[ListWidgetItem]):
+        if not items:
+            return
+
+        for item in items:
+            self.process_manager.open_explorer(item.identifier)
 
     def _stop(self, items: List[ListWidgetItem]):
         if not items:

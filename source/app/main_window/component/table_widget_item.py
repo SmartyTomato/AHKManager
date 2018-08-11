@@ -1,11 +1,12 @@
 import PyQt5
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QTableWidgetItem, QWidget, QHBoxLayout, QCheckBox
+from PyQt5.QtWidgets import QCheckBox, QHBoxLayout, QTableWidgetItem, QWidget
 
 
 class TableWidgetItem(QTableWidgetItem):
 
-    def __init__(self, script_id: str, text: str='', is_running: bool=False):
+    def __init__(self, script_id: str,
+                 text: str='', is_running: bool=False) -> None:
         QTableWidgetItem.__init__(self)
 
         self.script_id = script_id
@@ -15,8 +16,10 @@ class TableWidgetItem(QTableWidgetItem):
 
 
 class CheckBoxCellWidget(QWidget):
-    def __init__(self, is_checked: bool=False):
+    def __init__(self, script_id: str, is_checked: bool=False) -> None:
         QWidget.__init__(self)
+
+        self.script_id = script_id
 
         layout = QHBoxLayout()
         self.setLayout(layout)

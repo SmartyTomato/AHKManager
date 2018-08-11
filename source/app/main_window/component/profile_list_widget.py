@@ -4,8 +4,7 @@ from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QInputDialog, QMenu
 
 from app.main_window.component.list_widget import ListWidget
-from app.main_window.component.list_widget_item import \
-    ListWidgetItem
+from app.main_window.component.list_widget_item import ListWidgetItem
 
 
 class ProfileListWidget(ListWidget):
@@ -26,8 +25,8 @@ class ProfileListWidget(ListWidget):
 
     # region method implementations
 
-    def get_containers(self)->[]:
-        return self.profile_service.repository.profile_list
+    def get_containers(self) -> List:
+        return self.app_service.get_profile_list()
 
     def open_menu(self, position: QPoint):
         menu = QMenu('I want to...', self)
@@ -37,11 +36,16 @@ class ProfileListWidget(ListWidget):
         start_text = 'Start'
         stop_text = 'Stop'
 
-        menu.addAction(add_text)
-        menu.addAction(remove_text)
-        menu.addSeparator()
-        menu.addAction(start_text)
-        menu.addAction(stop_text)
+        item_selected = self.selectedItems()
+
+        if item_selected:
+            menu.addAction(start_text)
+            menu.addAction(stop_text)
+            menu.addSeparator()
+            menu.addAction(remove_text)
+        else:
+            menu.addAction(add_text)
+
         selected_option = menu.exec(self.mapToGlobal(position))
 
         if not selected_option:
@@ -66,7 +70,6 @@ class ProfileListWidget(ListWidget):
 
         if ok and name:
             self.profile_service.add(name)
-            self.app_service.update_lists()
             self.refresh()
 
     def _remove(self, items: List[ListWidgetItem]):
@@ -76,7 +79,6 @@ class ProfileListWidget(ListWidget):
         for item in items:
             self.profile_service.remove(item.identifier)
 
-        self.app_service.update_lists()
         self.refresh()
 
     def _start(self, items: List[ListWidgetItem]):
@@ -86,7 +88,6 @@ class ProfileListWidget(ListWidget):
         for item in items:
             self.profile_service.start(item.identifier)
 
-        self.app_service.update_lists()
         self.refresh()
 
     def _stop(self, items: List[ListWidgetItem]):
@@ -96,7 +97,6 @@ class ProfileListWidget(ListWidget):
         for item in items:
             self.profile_service.stop(item.identifier)
 
-        self.app_service.update_lists()
         self.refresh()
 
     # endregion private methods

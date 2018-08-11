@@ -1,10 +1,13 @@
 from typing import List
 
 from core.model.profile import Profile
-from core.model.script import Script
 
 
-class ProfileRepository(object):
+class ProfileRepository():
+    """
+    Profile repository is a profile container.
+    Stores a list of profiles
+    """
 
     def __init__(self):
         self.profile_list: List[Profile] = []
@@ -12,32 +15,39 @@ class ProfileRepository(object):
     # region public methods
 
     def add(self, profile: Profile):
+        """
+        Add profile into repository
+
+        Args:
+            profile (Profile): profile objectobject
+        """
+
         if self._is_instance(profile):
             self.profile_list.append(profile)
 
     def find(self, identifier: str) ->Profile:
-        for profile in self.profile_list:
-            if profile.has_id(identifier):
-                return profile
+        """
+        Find profile using the identifier (name)
 
-        return None
+        Args:
+            identifier (str): profile name
 
-    def find_script(self, identifier: str) -> Script:
-        for profile in self.profile_list:
-            bl = profile.has_script(identifier)
-            if bl:
-                return identifier
+        Returns:
+            Profile: profile object or None
+        """
 
-        return None
-
-    def remove_script(self, script: Script):
-        for profile in self.profile_list:
-            if profile.find(script.identifier()):
-                profile.remove(script)
-                return
+        return next((x for x in self.profile_list
+                     if x.has_id(identifier)), None)
 
     def remove(self, instance: Profile):
-        if self._is_instance(instance) and instance in self.profile_list:
+        """
+        Remove profile
+
+        Args:
+            instance (Profile): profile instance
+        """
+
+        if instance in self.profile_list:
             self.profile_list.remove(instance)
 
     # endregion public methods
@@ -46,10 +56,7 @@ class ProfileRepository(object):
 
     @staticmethod
     def _is_instance(instance) -> bool:
-        if instance and isinstance(instance, Profile):
-            return True
-        else:
-            return False
+        return bool(instance and isinstance(instance, Profile))
 
     # endregion private methods
 

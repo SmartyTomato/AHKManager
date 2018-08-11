@@ -1,7 +1,7 @@
 from typing import List
 
+from core.model.message import Message
 from core.model.singleton import Singleton
-from core.utility.message import Message
 
 
 class MessageService(Singleton):

@@ -11,7 +11,9 @@ class TabWidget(QTabWidget):
 
         # set tab style
         self.setStyleSheet("QTabBar::tab {width: 100px; height: 30px; font-size: 16px}\
-                            QTabBar::tab:selected {color: white; background-color: rgb(0, 181, 255);}")
+                            QTabBar::tab:selected \
+                            {color: white; background-color: \
+                            rgb(0, 181, 255);}")
 
         profile_page = ProfilePage(self)
         self.addTab(profile_page, "Profile")
@@ -21,3 +23,8 @@ class TabWidget(QTabWidget):
 
         # process_page = ProcessPage(self)
         # self.addTab(process_page, "Process")
+
+        self.currentChanged.connect(self.on_selected_tab_changed)
+
+    def on_selected_tab_changed(self, index):
+        self.widget(index).refresh()

@@ -1,10 +1,13 @@
 import abc
 
+from typing import List
+
 from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtWidgets import QAbstractItemView, QListWidget
 
+from app.application.app_service import AppService
 from app.main_window.component.list_widget_item import ListWidgetItem
-from core.service.app_service import AppService
+from core.manager.process_manager import ProcessManager
 from core.service.library_service import LibraryService
 from core.service.profile_service import ProfileService
 
@@ -14,6 +17,7 @@ class ListWidget(QListWidget):
     library_service: LibraryService = LibraryService()
     profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
+    process_manager: ProcessManager = ProcessManager()
 
     def __init__(self, parent):
         QListWidget.__init__(self, parent)
@@ -33,7 +37,7 @@ class ListWidget(QListWidget):
     # region abstract methods
 
     @abc.abstractmethod
-    def get_containers(self)->[]:
+    def get_containers(self) -> List:
         raise NotImplementedError()
 
     @abc.abstractmethod
@@ -60,7 +64,6 @@ class ListWidget(QListWidget):
     # region public methods
 
     def refresh(self):
-        self.clearSelection()
         self.clear()
 
         containers = self.get_containers()
@@ -68,7 +71,10 @@ class ListWidget(QListWidget):
             return
 
         for container in containers:
-            list_widget_item = ListWidgetItem(self, container.name, container.identifier(), container.is_running())
+            list_widget_item = ListWidgetItem(self,
+                                              container.name,
+                                              container.identifier(),
+                                              container.is_running())
             self.addItem(list_widget_item)
 
     # endregion public methods

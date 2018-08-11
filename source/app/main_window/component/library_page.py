@@ -1,6 +1,6 @@
 from app.main_window.component.library_list_widget import LibraryListWidget
 from app.main_window.component.library_table_widget import LibraryTableWidget
-from app.main_window.component.shared import get_search_box
+from app.main_window.component.shared_component import get_search_box
 from app.main_window.component.tab_page import TabPage
 
 
@@ -8,6 +8,8 @@ class LibraryPage(TabPage):
 
     def __init__(self, parent):
         TabPage.__init__(self, parent)
+
+        self.widget_list = []
 
         # library list widget
         library_list_widget = LibraryListWidget(self)
@@ -24,3 +26,10 @@ class LibraryPage(TabPage):
         # set relative size
         self.layout().setColumnStretch(0, 10)
         self.layout().setColumnStretch(1, 20)
+
+        self.widget_list.append(library_list_widget)
+        self.widget_list.append(script_list_widget)
+
+    def refresh(self):
+        for widget in self.widget_list:
+            widget.refresh()

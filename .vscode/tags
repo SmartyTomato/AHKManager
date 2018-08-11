@@ -1,0 +1,476 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/a794069c/
+ActionResult	..\\source\\core\\model\\action_result.py	/^class ActionResult(object):$/;"	kind:class	line:13
+AddScriptDialogConfiguration	..\\source\\core\\model\\configuration_models.py	/^class AddScriptDialogConfiguration(object):$/;"	kind:class	line:63
+AddScriptDialogTableWidget	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^class AddScriptDialogTableWidget(TableWidget):$/;"	kind:class	line:10
+AddScriptToProfileDialog	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^class AddScriptToProfileDialog(QDialog):$/;"	kind:class	line:16
+AppModel	..\\source\\core\\model\\app_model.py	/^class AppModel(object):$/;"	kind:class	line:9
+AppService	..\\source\\core\\service\\app_service.py	/^class AppService(Singleton):$/;"	kind:class	line:7
+Application	..\\source\\app\\application.py	/^class Application(QApplication):$/;"	kind:class	line:10
+CheckBoxCellWidget	..\\source\\app\\main_window\\component\\table_widget_item.py	/^class CheckBoxCellWidget(QWidget):$/;"	kind:class	line:17
+Configuration	..\\source\\core\\utility\\configuration.py	/^class Configuration(Singleton):$/;"	kind:class	line:12
+DevConfig	..\\source\\core\\utility\\configuration.py	/^class DevConfig(Configuration):$/;"	kind:class	line:133
+ERROR	..\\source\\core\\model\\action_result.py	/^    ERROR = 2$/;"	kind:variable	line:10
+ERROR	..\\source\\core\\model\\message.py	/^    ERROR = 2$/;"	kind:variable	line:8
+ErrorMessages	..\\source\\core\\model\\error_messages.py	/^class ErrorMessages(object):$/;"	kind:class	line:1
+Library	..\\source\\core\\model\\library.py	/^class Library(object):$/;"	kind:class	line:8
+LibraryListWidget	..\\source\\app\\main_window\\component\\library_list_widget.py	/^class LibraryListWidget(ListWidget):$/;"	kind:class	line:11
+LibraryManager	..\\source\\core\\manager\\library_manager.py	/^class LibraryManager(Singleton):$/;"	kind:class	line:11
+LibraryPage	..\\source\\app\\main_window\\component\\library_page.py	/^class LibraryPage(TabPage):$/;"	kind:class	line:7
+LibraryRepository	..\\source\\core\\model\\library_repository.py	/^class LibraryRepository(object):$/;"	kind:class	line:7
+LibraryService	..\\source\\core\\service\\library_service.py	/^class LibraryService(Singleton):$/;"	kind:class	line:14
+LibraryTableWidget	..\\source\\app\\main_window\\component\\library_table_widget.py	/^class LibraryTableWidget(TableWidget):$/;"	kind:class	line:11
+ListWidget	..\\source\\app\\main_window\\component\\list_widget.py	/^class ListWidget(QListWidget):$/;"	kind:class	line:12
+ListWidgetItem	..\\source\\app\\main_window\\component\\list_widget_item.py	/^class ListWidgetItem(QListWidgetItem):$/;"	kind:class	line:5
+Log	..\\source\\core\\model\\message.py	/^    Log = 0$/;"	kind:variable	line:6
+Logger	..\\source\\core\\utility\\logger.py	/^class Logger(object):$/;"	kind:class	line:7
+MainWindow	..\\source\\app\\main_window\\main_window.py	/^class MainWindow(QMainWindow):$/;"	kind:class	line:15
+MainWindowConfiguration	..\\source\\core\\model\\configuration_models.py	/^class MainWindowConfiguration(object):$/;"	kind:class	line:35
+Message	..\\source\\core\\model\\message.py	/^class Message(object):$/;"	kind:class	line:11
+MessageService	..\\source\\core\\service\\message_service.py	/^class MessageService(Singleton):$/;"	kind:class	line:7
+MessageType	..\\source\\core\\model\\message.py	/^class MessageType(Enum):$/;"	kind:class	line:5
+ProcessManager	..\\source\\core\\manager\\process_manager.py	/^class ProcessManager(Singleton):$/;"	kind:class	line:11
+Profile	..\\source\\core\\model\\profile.py	/^class Profile(object):$/;"	kind:class	line:5
+ProfileListWidget	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^class ProfileListWidget(ListWidget):$/;"	kind:class	line:11
+ProfileManager	..\\source\\core\\manager\\profile_manager.py	/^class ProfileManager(Singleton):$/;"	kind:class	line:11
+ProfilePage	..\\source\\app\\main_window\\component\\profile_page.py	/^class ProfilePage(TabPage):$/;"	kind:class	line:7
+ProfileRepository	..\\source\\core\\model\\profile_repository.py	/^class ProfileRepository(object):$/;"	kind:class	line:7
+ProfileService	..\\source\\core\\service\\profile_service.py	/^class ProfileService(Singleton):$/;"	kind:class	line:15
+ProfileTableWidget	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^class ProfileTableWidget(TableWidget):$/;"	kind:class	line:13
+ResultCode	..\\source\\core\\model\\action_result.py	/^class ResultCode(Enum):$/;"	kind:class	line:7
+SUCCESS	..\\source\\core\\model\\action_result.py	/^    SUCCESS = 0$/;"	kind:variable	line:8
+Script	..\\source\\core\\model\\script.py	/^class Script(object):$/;"	kind:class	line:7
+ScriptManager	..\\source\\core\\manager\\script_manager.py	/^class ScriptManager(Singleton):$/;"	kind:class	line:11
+Singleton	..\\source\\core\\model\\singleton.py	/^class Singleton(object):$/;"	kind:class	line:1
+State	..\\source\\core\\model\\state.py	/^class State(object):$/;"	kind:class	line:1
+TabPage	..\\source\\app\\main_window\\component\\tab_page.py	/^class TabPage(QWidget):$/;"	kind:class	line:6
+TabWidget	..\\source\\app\\main_window\\component\\tab_widget.py	/^class TabWidget(QTabWidget):$/;"	kind:class	line:7
+TableWidget	..\\source\\app\\main_window\\component\\table_widget.py	/^class TableWidget(QTableWidget):$/;"	kind:class	line:16
+TableWidgetItem	..\\source\\app\\main_window\\component\\table_widget_item.py	/^class TableWidgetItem(QTableWidgetItem):$/;"	kind:class	line:6
+TrayIcon	..\\source\\app\\other\\tray_icon.py	/^class TrayIcon(QSystemTrayIcon):$/;"	kind:class	line:11
+Utility	..\\source\\core\\utility\\utility.py	/^class Utility(object):$/;"	kind:class	line:8
+UtilityConfiguration	..\\source\\core\\model\\configuration_models.py	/^class UtilityConfiguration(object):$/;"	kind:class	line:1
+UtilityTest	..\\source\\test\\unit_test\\utility_test.py	/^class UtilityTest(TestCase):$/;"	kind:class	line:31
+WARNING	..\\source\\core\\model\\action_result.py	/^    WARNING = 1$/;"	kind:variable	line:9
+WARNING	..\\source\\core\\model\\message.py	/^    WARNING = 1$/;"	kind:variable	line:7
+__init__	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def __init__(self, parent):$/;"	kind:member	line:25
+__init__	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^    def __init__(self, parent, scripts: List[Script]):$/;"	kind:member	line:24
+__init__	..\\source\\app\\application.py	/^    def __init__(self):$/;"	kind:member	line:14
+__init__	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:13
+__init__	..\\source\\app\\main_window\\component\\library_page.py	/^    def __init__(self, parent):$/;"	kind:member	line:9
+__init__	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:29
+__init__	..\\source\\app\\main_window\\component\\list_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:18
+__init__	..\\source\\app\\main_window\\component\\list_widget_item.py	/^    def __init__(self, parent, display_text: str, toolTip: str, is_running: bool=False):$/;"	kind:member	line:7
+__init__	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:13
+__init__	..\\source\\app\\main_window\\component\\profile_page.py	/^    def __init__(self, parent):$/;"	kind:member	line:9
+__init__	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:31
+__init__	..\\source\\app\\main_window\\component\\tab_page.py	/^    def __init__(self, parent):$/;"	kind:member	line:8
+__init__	..\\source\\app\\main_window\\component\\tab_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:9
+__init__	..\\source\\app\\main_window\\component\\table_widget.py	/^    def __init__(self, parent):$/;"	kind:member	line:38
+__init__	..\\source\\app\\main_window\\component\\table_widget_item.py	/^    def __init__(self, is_checked: bool=False):$/;"	kind:member	line:18
+__init__	..\\source\\app\\main_window\\component\\table_widget_item.py	/^    def __init__(self, script_id: str, text: str='', is_running: bool=False):$/;"	kind:member	line:8
+__init__	..\\source\\app\\main_window\\main_window.py	/^    def __init__(self):$/;"	kind:member	line:22
+__init__	..\\source\\app\\other\\tray_icon.py	/^    def __init__(self, parent=None):$/;"	kind:member	line:18
+__init__	..\\source\\core\\model\\action_result.py	/^    def __init__(self):$/;"	kind:member	line:14
+__init__	..\\source\\core\\model\\app_model.py	/^    def __init__(self):$/;"	kind:member	line:13
+__init__	..\\source\\core\\model\\configuration_models.py	/^    def __init__(self):$/;"	kind:member	line:2
+__init__	..\\source\\core\\model\\configuration_models.py	/^    def __init__(self):$/;"	kind:member	line:36
+__init__	..\\source\\core\\model\\configuration_models.py	/^    def __init__(self):$/;"	kind:member	line:64
+__init__	..\\source\\core\\model\\library.py	/^    def __init__(self, path: str):$/;"	kind:member	line:10
+__init__	..\\source\\core\\model\\library_repository.py	/^    def __init__(self):$/;"	kind:member	line:9
+__init__	..\\source\\core\\model\\message.py	/^    def __init__(self, msg_type: MessageType, message)-> str:$/;"	kind:member	line:13
+__init__	..\\source\\core\\model\\profile.py	/^    def __init__(self, name):$/;"	kind:member	line:7
+__init__	..\\source\\core\\model\\profile_repository.py	/^    def __init__(self):$/;"	kind:member	line:9
+__init__	..\\source\\core\\model\\script.py	/^    def __init__(self, path: str):$/;"	kind:member	line:9
+__init__	..\\source\\core\\model\\state.py	/^    def __init__(self):$/;"	kind:member	line:3
+__init__	..\\source\\core\\service\\app_service.py	/^    def __init__(self):$/;"	kind:member	line:12
+__init__	..\\source\\core\\service\\library_service.py	/^    def __init__(self):$/;"	kind:member	line:19
+__init__	..\\source\\core\\service\\message_service.py	/^    def __init__(self):$/;"	kind:member	line:9
+__init__	..\\source\\core\\service\\profile_service.py	/^    def __init__(self):$/;"	kind:member	line:23
+__init__	..\\source\\core\\utility\\configuration.py	/^    def __init__(self):$/;"	kind:member	line:17
+__init__	..\\source\\core\\utility\\logger.py	/^    def __init__(self, module):$/;"	kind:member	line:16
+__new__	..\\source\\core\\model\\singleton.py	/^    def __new__(cls, *args, **kwargs):$/;"	kind:member	line:4
+__repr__	..\\source\\core\\model\\library.py	/^    def __repr__(self):$/;"	kind:member	line:125
+__repr__	..\\source\\core\\model\\library_repository.py	/^    def __repr__(self):$/;"	kind:member	line:94
+__repr__	..\\source\\core\\model\\profile.py	/^    def __repr__(self):$/;"	kind:member	line:79
+__repr__	..\\source\\core\\model\\profile_repository.py	/^    def __repr__(self):$/;"	kind:member	line:84
+__repr__	..\\source\\core\\model\\script.py	/^    def __repr__(self):$/;"	kind:member	line:80
+__repr__	..\\source\\core\\model\\state.py	/^    def __repr__(self):$/;"	kind:member	line:35
+__requires__	..\\venv\\Scripts\\autopep8-script.py	/^__requires__ = 'autopep8==1.3.5'$/;"	kind:variable	line:3
+__str__	..\\source\\core\\model\\library.py	/^    def __str__(self):$/;"	kind:member	line:113
+__str__	..\\source\\core\\model\\library_repository.py	/^    def __str__(self):$/;"	kind:member	line:85
+__str__	..\\source\\core\\model\\message.py	/^    def __str__(self):$/;"	kind:member	line:17
+__str__	..\\source\\core\\model\\profile.py	/^    def __str__(self):$/;"	kind:member	line:68
+__str__	..\\source\\core\\model\\profile_repository.py	/^    def __str__(self):$/;"	kind:member	line:75
+__str__	..\\source\\core\\model\\script.py	/^    def __str__(self):$/;"	kind:member	line:71
+__str__	..\\source\\core\\model\\state.py	/^    def __str__(self):$/;"	kind:member	line:26
+_add	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def _add(self):$/;"	kind:member	line:66
+_add	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def _add(self):$/;"	kind:member	line:64
+_add	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def _add(self):$/;"	kind:member	line:84
+_find_between	..\\source\\core\\utility\\configuration.py	/^    def _find_between(in_str, first: str, last: str)->str:$/;"	kind:member	line:111
+_format_message	..\\source\\core\\utility\\logger.py	/^    def _format_message(self, level, msg):$/;"	kind:member	line:85
+_init	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def _init(self):$/;"	kind:member	line:37
+_init	..\\source\\app\\main_window\\component\\list_widget.py	/^    def _init(self):$/;"	kind:member	line:24
+_init	..\\source\\app\\main_window\\component\\table_widget.py	/^    def _init(self):$/;"	kind:member	line:44
+_init	..\\source\\app\\main_window\\main_window.py	/^    def _init(self):$/;"	kind:member	line:44
+_init_available_scripts	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def _init_available_scripts(self):$/;"	kind:member	line:153
+_instance	..\\source\\core\\model\\singleton.py	/^    _instance = None$/;"	kind:variable	line:2
+_is_instance	..\\source\\core\\model\\library_repository.py	/^    def _is_instance(instance) -> bool:$/;"	kind:member	line:55
+_is_instance	..\\source\\core\\model\\profile_repository.py	/^    def _is_instance(instance) -> bool:$/;"	kind:member	line:48
+_is_script_instance	..\\source\\core\\model\\library.py	/^    def _is_script_instance(instance: object) -> bool:$/;"	kind:member	line:76
+_load_configs	..\\source\\app\\main_window\\main_window.py	/^    def _load_configs(self):$/;"	kind:member	line:69
+_load_repository	..\\source\\core\\utility\\configuration.py	/^    def _load_repository(self, path: str)-> str:$/;"	kind:member	line:96
+_log_level	..\\source\\core\\utility\\logger.py	/^    _log_level = {$/;"	kind:variable	line:8
+_make_dirs	..\\source\\core\\utility\\configuration.py	/^    def _make_dirs(path: str) -> bool:$/;"	kind:member	line:120
+_remove	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def _remove(self, items: List[ListWidgetItem]):$/;"	kind:member	line:80
+_remove	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def _remove(self, items: List[TableWidgetItem]):$/;"	kind:member	line:75
+_remove	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def _remove(self, items: List[ListWidgetItem]):$/;"	kind:member	line:72
+_remove	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def _remove(self, items: List[TableWidgetItem]):$/;"	kind:member	line:102
+_save_general_configs	..\\source\\core\\utility\\configuration.py	/^    def _save_general_configs(self):$/;"	kind:member	line:70
+_save_repository	..\\source\\core\\utility\\configuration.py	/^    def _save_repository(self, repository, path: str):$/;"	kind:member	line:86
+_set_code	..\\source\\core\\model\\action_result.py	/^    def _set_code(self, code: ResultCode):$/;"	kind:member	line:59
+_start	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def _start(self, items: List[ListWidgetItem]):$/;"	kind:member	line:89
+_start	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def _start(self, items: List[TableWidgetItem]):$/;"	kind:member	line:86
+_start	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def _start(self, items: List[ListWidgetItem]):$/;"	kind:member	line:82
+_start	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def _start(self, items: List[TableWidgetItem]):$/;"	kind:member	line:113
+_start_script	..\\source\\core\\manager\\script_manager.py	/^    def _start_script(self, script: Script) -> bool:$/;"	kind:member	line:113
+_stop	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def _stop(self, items: List[ListWidgetItem]):$/;"	kind:member	line:98
+_stop	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def _stop(self, items: List[TableWidgetItem]):$/;"	kind:member	line:97
+_stop	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def _stop(self, items: List[ListWidgetItem]):$/;"	kind:member	line:92
+_stop	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def _stop(self, items: List[TableWidgetItem]):$/;"	kind:member	line:124
+action_result.py	..\\source\\core\\model\\action_result.py	1;"	kind:file	line:1
+add	..\\source\\core\\model\\action_result.py	/^    def add(self, code: ResultCode, message: str):$/;"	kind:member	line:19
+add	..\\source\\core\\model\\library.py	/^    def add(self, script: Script):$/;"	kind:member	line:24
+add	..\\source\\core\\model\\library_repository.py	/^    def add(self, library: Library):$/;"	kind:member	line:14
+add	..\\source\\core\\model\\profile.py	/^    def add(self, script_id: str):$/;"	kind:member	line:20
+add	..\\source\\core\\model\\profile_repository.py	/^    def add(self, profile: Profile):$/;"	kind:member	line:14
+add	..\\source\\core\\service\\library_service.py	/^    def add(self, path: str) -> ActionResult:$/;"	kind:member	line:24
+add	..\\source\\core\\service\\message_service.py	/^    def add(self, message: Message):$/;"	kind:member	line:12
+add	..\\source\\core\\service\\profile_service.py	/^    def add(self, name: str = '') -> , Profile:$/;"	kind:member	line:28
+add_button_size	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    add_button_size = QSize(50, 40)$/;"	kind:variable	line:18
+add_error	..\\source\\core\\model\\action_result.py	/^    def add_error(self, message: str):$/;"	kind:member	line:28
+add_object	..\\source\\core\\model\\action_result.py	/^    def add_object(self, obj):$/;"	kind:member	line:32
+add_script	..\\source\\core\\manager\\profile_manager.py	/^    def add_script(self, profile: Profile, script: Script):$/;"	kind:member	line:80
+add_script	..\\source\\core\\service\\profile_service.py	/^    def add_script(self, name: str, script_id: str):$/;"	kind:member	line:48
+add_script_dialog_table_widget.py	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	1;"	kind:file	line:1
+add_script_to_library_dialog.py	..\\source\\app\\add_script_dialog\\add_script_to_library_dialog.py	1;"	kind:file	line:1
+add_script_to_profile_dialog.py	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	1;"	kind:file	line:1
+add_warning	..\\source\\core\\model\\action_result.py	/^    def add_warning(self, message: str):$/;"	kind:member	line:24
+ahk_manager.py	..\\source\\ahk_manager.py	1;"	kind:file	line:1
+allow_state_change	..\\source\\core\\model\\script.py	/^    def allow_state_change(self) -> bool:$/;"	kind:member	line:34
+app_model.py	..\\source\\core\\model\\app_model.py	1;"	kind:file	line:1
+app_service	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    app_service = AppService()$/;"	kind:variable	line:22
+app_service	..\\source\\app\\application.py	/^    app_service = AppService()$/;"	kind:variable	line:12
+app_service	..\\source\\app\\main_window\\component\\list_widget.py	/^    app_service: AppService = AppService()$/;"	kind:variable	line:16
+app_service	..\\source\\app\\main_window\\component\\table_widget.py	/^    app_service: AppService = AppService()$/;"	kind:variable	line:36
+app_service	..\\source\\app\\main_window\\main_window.py	/^    app_service = AppService()$/;"	kind:variable	line:20
+app_service	..\\source\\app\\other\\tray_icon.py	/^    app_service: AppService = AppService()$/;"	kind:variable	line:16
+app_service.py	..\\source\\core\\service\\app_service.py	1;"	kind:file	line:1
+application.py	..\\source\\app\\application.py	1;"	kind:file	line:1
+autopep8-script.py	..\\venv\\Scripts\\autopep8-script.py	1;"	kind:file	line:1
+changeEvent	..\\source\\app\\main_window\\main_window.py	/^    def changeEvent(self, event):$/;"	kind:member	line:62
+closeEvent	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def closeEvent(self, event):$/;"	kind:member	line:146
+closeEvent	..\\source\\app\\main_window\\main_window.py	/^    def closeEvent(self, event):$/;"	kind:member	line:53
+column_orders	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^    column_orders = {$/;"	kind:variable	line:14
+column_orders	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    column_orders = {$/;"	kind:variable	line:15
+column_orders	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    column_orders = {$/;"	kind:variable	line:17
+column_orders	..\\source\\app\\main_window\\component\\table_widget.py	/^    column_orders = {$/;"	kind:variable	line:20
+column_widths	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^    column_widths = {$/;"	kind:variable	line:19
+column_widths	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    column_widths = {$/;"	kind:variable	line:22
+column_widths	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    column_widths = {$/;"	kind:variable	line:24
+column_widths	..\\source\\app\\main_window\\component\\table_widget.py	/^    column_widths = {$/;"	kind:variable	line:27
+columns	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^    columns = ['Name', 'Path']$/;"	kind:variable	line:12
+columns	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    columns = ['Name', 'Running', 'Locked', 'Path']$/;"	kind:variable	line:13
+columns	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    columns = ['Name', 'Running', 'Locked', 'Path']$/;"	kind:variable	line:15
+columns	..\\source\\app\\main_window\\component\\table_widget.py	/^    columns = ['Name', 'Running', 'Locked', 'Path']$/;"	kind:variable	line:18
+configuration	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    configuration = Configuration()$/;"	kind:variable	line:23
+configuration	..\\source\\app\\console.py	/^configuration = Configuration()$/;"	kind:variable	line:13
+configuration	..\\source\\app\\main_window\\main_window.py	/^    configuration = Configuration()$/;"	kind:variable	line:17
+configuration	..\\source\\app\\other\\tray_icon.py	/^    configuration = Configuration()$/;"	kind:variable	line:15
+configuration	..\\source\\core\\manager\\process_manager.py	/^    configuration = Configuration()$/;"	kind:variable	line:15
+configuration	..\\source\\core\\manager\\script_manager.py	/^    configuration = Configuration()$/;"	kind:variable	line:16
+configuration.py	..\\source\\core\\utility\\configuration.py	1;"	kind:file	line:1
+configuration_models.py	..\\source\\core\\model\\configuration_models.py	1;"	kind:file	line:1
+console.py	..\\source\\app\\console.py	1;"	kind:file	line:1
+copy_file	..\\source\\core\\utility\\utility.py	/^    def copy_file(src: str, dst: str) -> bool:$/;"	kind:member	line:150
+could_not_find_library	..\\source\\core\\model\\error_messages.py	/^    could_not_find_library = 'Could not find library: {}'$/;"	kind:variable	line:6
+could_not_find_script	..\\source\\core\\model\\error_messages.py	/^    could_not_find_script = 'Could not find script: {}'$/;"	kind:variable	line:16
+could_not_get_file_name	..\\source\\core\\model\\error_messages.py	/^    could_not_get_file_name = 'Could not get file name for path: {}'$/;"	kind:variable	line:31
+could_not_get_parent_directory	..\\source\\core\\model\\error_messages.py	/^    could_not_get_parent_directory = 'Could not get parent directory for path: {}'$/;"	kind:variable	line:33
+could_not_initialize_library	..\\source\\core\\model\\error_messages.py	/^    could_not_initialize_library = 'Could not initialize library: {}'$/;"	kind:variable	line:4
+could_not_initialize_script	..\\source\\core\\model\\error_messages.py	/^    could_not_initialize_script = 'Could not initialize script: {}'$/;"	kind:variable	line:18
+could_not_make_directory	..\\source\\core\\model\\error_messages.py	/^    could_not_make_directory = 'Could not make directory for: {}'$/;"	kind:variable	line:36
+could_not_refresh_library	..\\source\\core\\model\\error_messages.py	/^    could_not_refresh_library = 'Could not refresh library, library removed: {}'$/;"	kind:variable	line:7
+could_not_refresh_script	..\\source\\core\\model\\error_messages.py	/^    could_not_refresh_script = 'Could not refresh script, script removed: {}'$/;"	kind:variable	line:19
+could_not_remove_library	..\\source\\core\\model\\error_messages.py	/^    could_not_remove_library = 'Could not remove library: {}'$/;"	kind:variable	line:8
+could_not_remove_library_script_can_not_be_removed	..\\source\\core\\model\\error_messages.py	/^    could_not_remove_library_script_can_not_be_removed = 'Could not remove library, some script /;"	kind:variable	line:10
+could_not_remove_script	..\\source\\core\\model\\error_messages.py	/^    could_not_remove_script = 'Could not remove script: {}'$/;"	kind:variable	line:17
+critical	..\\source\\core\\utility\\logger.py	/^    def critical(self, msg):$/;"	kind:member	line:72
+directory_is_empty	..\\source\\core\\model\\error_messages.py	/^    directory_is_empty = 'Directory is empty: {}'$/;"	kind:variable	line:26
+error	..\\source\\core\\utility\\logger.py	/^    def error(self, msg):$/;"	kind:member	line:59
+error_messages.py	..\\source\\core\\model\\error_messages.py	1;"	kind:file	line:1
+exec_events	..\\source\\core\\service\\app_service.py	/^    def exec_events(self, events):$/;"	kind:member	line:53
+exists	..\\source\\core\\model\\library.py	/^    def exists(self) -> bool:$/;"	kind:member	line:65
+exists	..\\source\\core\\model\\script.py	/^    def exists(self) -> bool:$/;"	kind:member	line:31
+file_has_no_extension	..\\source\\core\\model\\error_messages.py	/^    file_has_no_extension = 'File does not have file extension: {}'$/;"	kind:variable	line:32
+file_types	..\\source\\core\\utility\\configuration.py	/^    file_types = ['.ahk', '.txt']$/;"	kind:variable	line:134
+find	..\\source\\core\\model\\library.py	/^    def find(self, identifier: str) -> Script:$/;"	kind:member	line:32
+find	..\\source\\core\\model\\library_repository.py	/^    def find(self, identifier: str) ->Library:$/;"	kind:member	line:18
+find	..\\source\\core\\model\\profile_repository.py	/^    def find(self, identifier: str) ->Profile:$/;"	kind:member	line:18
+find	..\\source\\core\\service\\library_service.py	/^    def find(self, identifier: str,)->Library:$/;"	kind:member	line:77
+find	..\\source\\core\\service\\profile_service.py	/^    def find(self, identifier: str, throwError:str) -> Profile:$/;"	kind:member	line:72
+find_library_contains_script	..\\source\\core\\service\\library_service.py	/^    def find_library_contains_script(self, identifier: str)->List[Library]:$/;"	kind:member	line:84
+find_profile_contains_script	..\\source\\core\\service\\profile_service.py	/^    def find_profile_contains_script(self, script_id: str)->Profile:$/;"	kind:member	line:91
+find_running_profile_contains_script	..\\source\\core\\service\\profile_service.py	/^    def find_running_profile_contains_script(self, identifier: str)->List[Profile]:$/;"	kind:member	line:101
+find_running_scripts	..\\source\\core\\model\\library.py	/^    def find_running_scripts(self) -> List[Script]:$/;"	kind:member	line:44
+find_script	..\\source\\core\\model\\library_repository.py	/^    def find_script(self, identifier: str) -> Script:$/;"	kind:member	line:25
+find_script	..\\source\\core\\model\\profile_repository.py	/^    def find_script(self, identifier: str) -> Script:$/;"	kind:member	line:25
+find_script	..\\source\\core\\service\\library_service.py	/^    def find_script(self, identifier: str)->Script:$/;"	kind:member	line:81
+find_script	..\\source\\core\\service\\profile_service.py	/^    def find_script(self, identifier: str) ->Script:$/;"	kind:member	line:80
+first_object	..\\source\\core\\model\\action_result.py	/^    def first_object(self):$/;"	kind:member	line:47
+force_start	..\\source\\core\\manager\\script_manager.py	/^    def force_start(self, script: Script):$/;"	kind:member	line:93
+format_path	..\\source\\core\\utility\\utility.py	/^    def format_path(path: str) -> str:$/;"	kind:member	line:98
+from_json	..\\source\\core\\model\\configuration_models.py	/^    def from_json(json_str):$/;"	kind:member	line:23
+from_json	..\\source\\core\\model\\configuration_models.py	/^    def from_json(json_str):$/;"	kind:member	line:53
+from_json	..\\source\\core\\model\\configuration_models.py	/^    def from_json(json_str):$/;"	kind:member	line:79
+from_json	..\\source\\core\\model\\library.py	/^    def from_json(json_str):$/;"	kind:member	line:102
+from_json	..\\source\\core\\model\\library_repository.py	/^    def from_json(json_str):$/;"	kind:member	line:77
+from_json	..\\source\\core\\model\\profile.py	/^    def from_json(json_str):$/;"	kind:member	line:58
+from_json	..\\source\\core\\model\\profile_repository.py	/^    def from_json(json_str):$/;"	kind:member	line:67
+from_json	..\\source\\core\\model\\script.py	/^    def from_json(json_str):$/;"	kind:member	line:63
+from_json	..\\source\\core\\model\\state.py	/^    def from_json(json_str):$/;"	kind:member	line:18
+gaming	..\\source\\app\\console.py	/^gaming = profile_service.find('gaming')$/;"	kind:variable	line:26
+get_all_scripts	..\\source\\core\\model\\library_repository.py	/^    def get_all_scripts(self)->List[Script]:$/;"	kind:member	line:43
+get_all_scripts	..\\source\\core\\service\\library_service.py	/^    def get_all_scripts(self)->List[Script]:$/;"	kind:member	line:206
+get_containers	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def get_containers(self)->[]:$/;"	kind:member	line:29
+get_containers	..\\source\\app\\main_window\\component\\list_widget.py	/^    def get_containers(self)->[]:$/;"	kind:member	line:36
+get_containers	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def get_containers(self)->[]:$/;"	kind:member	line:29
+get_directories	..\\source\\core\\utility\\utility.py	/^    def get_directories(dir_path: str) -> List[str]:$/;"	kind:member	line:45
+get_file_extension	..\\source\\core\\utility\\utility.py	/^    def get_file_extension(path: str) -> str:$/;"	kind:member	line:27
+get_file_name	..\\source\\core\\utility\\utility.py	/^    def get_file_name(path: str) -> str:$/;"	kind:member	line:11
+get_file_name_no_extension	..\\source\\core\\utility\\utility.py	/^    def get_file_name_no_extension(path: str) -> str:$/;"	kind:member	line:18
+get_files_in_directory	..\\source\\core\\utility\\utility.py	/^    def get_files_in_directory(dir_path: str) -> List[str]:$/;"	kind:member	line:65
+get_next_profile_name	..\\source\\core\\service\\profile_service.py	/^    def get_next_profile_name(self) -> str:$/;"	kind:member	line:190
+get_parent_directory	..\\source\\core\\utility\\utility.py	/^    def get_parent_directory(path: str) -> str:$/;"	kind:member	line:38
+get_profile_scripts	..\\source\\core\\service\\profile_service.py	/^    def get_profile_scripts(self, identifier)->List[Script]:$/;"	kind:member	line:104
+get_scripts	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^    def get_scripts(self)->List[Script]:$/;"	kind:member	line:28
+get_scripts	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def get_scripts(self)->List[Script]:$/;"	kind:member	line:44
+get_scripts	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def get_scripts(self)->List[Script]:$/;"	kind:member	line:46
+get_scripts	..\\source\\app\\main_window\\component\\table_widget.py	/^    def get_scripts(self)->List[Script]:$/;"	kind:member	line:65
+get_search_box	..\\source\\app\\main_window\\component\\shared.py	/^def get_search_box(parent=None) -> QHBoxLayout:$/;"	kind:function	line:4
+get_selected_scripts	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def get_selected_scripts(self)->List[Script]:$/;"	kind:member	line:93
+has_id	..\\source\\core\\model\\library.py	/^    def has_id(self, identifier: str) -> bool:$/;"	kind:member	line:56
+has_id	..\\source\\core\\model\\profile.py	/^    def has_id(self, identifier: str) -> bool:$/;"	kind:member	line:30
+has_id	..\\source\\core\\model\\script.py	/^    def has_id(self, identifier: str)->bool:$/;"	kind:member	line:28
+has_message	..\\source\\core\\model\\action_result.py	/^    def has_message(self):$/;"	kind:member	line:53
+has_object	..\\source\\core\\model\\action_result.py	/^    def has_object(self):$/;"	kind:member	line:50
+has_script	..\\source\\core\\model\\library.py	/^    def has_script(self, script: Script) -> bool:$/;"	kind:member	line:53
+has_script	..\\source\\core\\model\\profile.py	/^    def has_script(self, identifier: str)->bool:$/;"	kind:member	line:27
+identifier	..\\source\\core\\model\\library.py	/^    def identifier(self) -> str:$/;"	kind:member	line:59
+identifier	..\\source\\core\\model\\profile.py	/^    def identifier(self) -> str:$/;"	kind:member	line:33
+identifier	..\\source\\core\\model\\script.py	/^    def identifier(self)->str:$/;"	kind:member	line:25
+ignore_error	..\\source\\core\\model\\action_result.py	/^    def ignore_error(self):$/;"	kind:member	line:43
+info	..\\source\\core\\utility\\logger.py	/^    def info(self, msg):$/;"	kind:member	line:33
+init_library	..\\source\\core\\manager\\library_manager.py	/^    def init_library(self, path: str) -> ActionResult:$/;"	kind:member	line:15
+init_profile	..\\source\\core\\manager\\profile_manager.py	/^    def init_profile(self, name: str) -> Profile:$/;"	kind:member	line:18
+init_script	..\\source\\core\\manager\\script_manager.py	/^    def init_script(self, path: str) -> ActionResult:$/;"	kind:member	line:18
+is_dir	..\\source\\core\\utility\\utility.py	/^    def is_dir(path: str) -> bool:$/;"	kind:member	line:84
+is_file	..\\source\\core\\utility\\utility.py	/^    def is_file(path: str) -> bool:$/;"	kind:member	line:106
+is_locked	..\\source\\core\\model\\script.py	/^    def is_locked(self):$/;"	kind:member	line:37
+is_running	..\\source\\core\\model\\library.py	/^    def is_running(self) -> bool:$/;"	kind:member	line:62
+is_running	..\\source\\core\\model\\profile.py	/^    def is_running(self) -> bool:$/;"	kind:member	line:36
+is_running	..\\source\\core\\model\\script.py	/^    def is_running(self):$/;"	kind:member	line:46
+is_script_file	..\\source\\core\\manager\\script_manager.py	/^    def is_script_file(path: str) -> bool:$/;"	kind:member	line:132
+isdir	..\\source\\test\\unit_test\\utility_test.py	/^isdir = {$/;"	kind:variable	line:11
+isfile	..\\source\\test\\unit_test\\utility_test.py	/^isfile = {$/;"	kind:variable	line:14
+join_path	..\\source\\core\\utility\\utility.py	/^    def join_path(p_1: str, p_2: str) -> str:$/;"	kind:member	line:118
+library.py	..\\source\\core\\model\\library.py	1;"	kind:file	line:1
+library_already_exists	..\\source\\core\\model\\error_messages.py	/^    library_already_exists = 'Library already exists, refresh library: {}'$/;"	kind:variable	line:5
+library_list_widget.py	..\\source\\app\\main_window\\component\\library_list_widget.py	1;"	kind:file	line:1
+library_manager	..\\source\\core\\service\\library_service.py	/^    library_manager: LibraryManager = LibraryManager()$/;"	kind:variable	line:16
+library_manager.py	..\\source\\core\\manager\\library_manager.py	1;"	kind:file	line:1
+library_page.py	..\\source\\app\\main_window\\component\\library_page.py	1;"	kind:file	line:1
+library_path_not_exists	..\\source\\core\\model\\error_messages.py	/^    library_path_not_exists = 'Library path does not exists: {}'$/;"	kind:variable	line:9
+library_repository.py	..\\source\\core\\model\\library_repository.py	1;"	kind:file	line:1
+library_service	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    library_service = LibraryService()$/;"	kind:variable	line:21
+library_service	..\\source\\app\\console.py	/^library_service = LibraryService()$/;"	kind:variable	line:10
+library_service	..\\source\\app\\main_window\\component\\list_widget.py	/^    library_service: LibraryService = LibraryService()$/;"	kind:variable	line:14
+library_service	..\\source\\app\\main_window\\component\\table_widget.py	/^    library_service: LibraryService = LibraryService()$/;"	kind:variable	line:34
+library_service	..\\source\\app\\main_window\\main_window.py	/^    library_service = LibraryService()$/;"	kind:variable	line:18
+library_service	..\\source\\app\\other\\tray_icon.py	/^    library_service: LibraryService = LibraryService()$/;"	kind:variable	line:13
+library_service	..\\source\\core\\manager\\profile_manager.py	/^    library_service: LibraryService = LibraryService()$/;"	kind:variable	line:14
+library_service	..\\source\\core\\model\\app_model.py	/^    library_service = LibraryService()$/;"	kind:variable	line:11
+library_service	..\\source\\core\\service\\app_service.py	/^    library_service: LibraryService = LibraryService()$/;"	kind:variable	line:9
+library_service	..\\source\\core\\service\\profile_service.py	/^    library_service: LibraryService = LibraryService()$/;"	kind:variable	line:19
+library_service.py	..\\source\\core\\service\\library_service.py	1;"	kind:file	line:1
+library_table_widget.py	..\\source\\app\\main_window\\component\\library_table_widget.py	1;"	kind:file	line:1
+list_widget.py	..\\source\\app\\main_window\\component\\list_widget.py	1;"	kind:file	line:1
+list_widget_item.py	..\\source\\app\\main_window\\component\\list_widget_item.py	1;"	kind:file	line:1
+listdir	..\\source\\test\\unit_test\\utility_test.py	/^listdir = {'Z:\\OneDrive\\Sync\\Scripts\\AutoHotKey': ['A', 'B', 'C.txt'], 'Z:\\OneDrive\\Sync\\/;"	kind:variable	line:9
+load	..\\source\\core\\utility\\configuration.py	/^    def load(self):$/;"	kind:member	line:39
+load_libraries	..\\source\\core\\utility\\configuration.py	/^    def load_libraries(self):$/;"	kind:member	line:63
+load_profiles	..\\source\\core\\utility\\configuration.py	/^    def load_profiles(self):$/;"	kind:member	line:60
+lock	..\\source\\core\\model\\script.py	/^    def lock(self):$/;"	kind:member	line:40
+log	..\\source\\core\\utility\\logger.py	/^    def log(self, msg):$/;"	kind:member	line:20
+logger	..\\source\\core\\manager\\process_manager.py	/^    logger = Logger('ProcessManager')$/;"	kind:variable	line:12
+logger	..\\source\\core\\manager\\profile_manager.py	/^    logger = Logger('ProfileManager')$/;"	kind:variable	line:12
+logger	..\\source\\core\\manager\\script_manager.py	/^    logger = Logger('ScriptManager')$/;"	kind:variable	line:12
+logger	..\\source\\core\\service\\profile_service.py	/^    logger = Logger('ProfileService')$/;"	kind:variable	line:16
+logger	..\\source\\core\\utility\\configuration.py	/^    logger = Logger('Configuration')$/;"	kind:variable	line:13
+logger.py	..\\source\\core\\utility\\logger.py	1;"	kind:file	line:1
+main_window.py	..\\source\\app\\main_window\\main_window.py	1;"	kind:file	line:1
+make_dirs	..\\source\\core\\utility\\utility.py	/^    def make_dirs(path: str) -> bool:$/;"	kind:member	line:122
+may_contains_script	..\\source\\core\\model\\library.py	/^    def may_contains_script(self, identifier: str) -> bool:$/;"	kind:member	line:68
+merge	..\\source\\core\\model\\action_result.py	/^    def merge(self, result):$/;"	kind:member	line:35
+message.py	..\\source\\core\\model\\message.py	1;"	kind:file	line:1
+message_service	..\\source\\app\\console.py	/^message_service = MessageService()$/;"	kind:variable	line:11
+message_service	..\\source\\core\\manager\\process_manager.py	/^    message_service = MessageService()$/;"	kind:variable	line:14
+message_service	..\\source\\core\\manager\\profile_manager.py	/^    message_service: MessageService = MessageService()$/;"	kind:variable	line:16
+message_service	..\\source\\core\\manager\\script_manager.py	/^    message_service = MessageService()$/;"	kind:variable	line:14
+message_service	..\\source\\core\\service\\profile_service.py	/^    message_service: MessageService = MessageService()$/;"	kind:variable	line:18
+message_service	..\\source\\core\\utility\\configuration.py	/^    message_service = MessageService()$/;"	kind:variable	line:15
+message_service.py	..\\source\\core\\service\\message_service.py	1;"	kind:file	line:1
+ok_button_size	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    ok_button_size = QSize(100, 60)$/;"	kind:variable	line:19
+on_activated	..\\source\\app\\other\\tray_icon.py	/^    def on_activated(self, reason):$/;"	kind:member	line:48
+on_add_button_clicked	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def on_add_button_clicked(self):$/;"	kind:member	line:104
+on_cancel_button_clicked	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def on_cancel_button_clicked(self):$/;"	kind:member	line:101
+on_exit_triggered	..\\source\\app\\other\\tray_icon.py	/^    def on_exit_triggered(self):$/;"	kind:member	line:56
+on_library_selected	..\\source\\core\\service\\app_service.py	/^    def on_library_selected(self, identifier: str):$/;"	kind:member	line:42
+on_ok_button_clicked	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def on_ok_button_clicked(self):$/;"	kind:member	line:98
+on_profile_selected	..\\source\\core\\service\\app_service.py	/^    def on_profile_selected(self, identifier: str):$/;"	kind:member	line:31
+on_remove_button_clicked	..\\source\\app\\add_script_dialog\\add_script_to_profile_dialog.py	/^    def on_remove_button_clicked(self):$/;"	kind:member	line:125
+on_selected_library_changed	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def on_selected_library_changed(self):$/;"	kind:member	line:37
+on_selected_profile_changed	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def on_selected_profile_changed(self):$/;"	kind:member	line:39
+on_selected_tab_changed	..\\source\\app\\main_window\\component\\tab_widget.py	/^    def on_selected_tab_changed(self, index):$/;"	kind:member	line:28
+on_selection_changed	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def on_selection_changed(self):$/;"	kind:member	line:18
+on_selection_changed	..\\source\\app\\main_window\\component\\list_widget.py	/^    def on_selection_changed(self):$/;"	kind:member	line:48
+on_selection_changed	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def on_selection_changed(self):$/;"	kind:member	line:18
+on_stop_all_triggered	..\\source\\app\\other\\tray_icon.py	/^    def on_stop_all_triggered(self):$/;"	kind:member	line:59
+open_menu	..\\source\\app\\add_script_dialog\\component\\add_script_dialog_table_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:31
+open_menu	..\\source\\app\\main_window\\component\\library_list_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:32
+open_menu	..\\source\\app\\main_window\\component\\library_table_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:47
+open_menu	..\\source\\app\\main_window\\component\\list_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:40
+open_menu	..\\source\\app\\main_window\\component\\profile_list_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:32
+open_menu	..\\source\\app\\main_window\\component\\profile_table_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:49
+open_menu	..\\source\\app\\main_window\\component\\table_widget.py	/^    def open_menu(self, position: QPoint):$/;"	kind:member	line:70
+os_isdir	..\\source\\test\\unit_test\\utility_test.py	/^def os_isdir(arg):$/;"	kind:function	line:23
+os_isfile	..\\source\\test\\unit_test\\utility_test.py	/^def os_isfile(arg):$/;"	kind:function	line:27
+os_listdir	..\\source\\test\\unit_test\\utility_test.py	/^def os_listdir(arg):$/;"	kind:function	line:19
+path	..\\source\\app\\console.py	/^path = os.getcwd() + '\\\\test_data\\\\AutoHotKey'$/;"	kind:variable	line:8
+path_exists	..\\source\\core\\utility\\utility.py	/^    def path_exists(path: str) -> bool:$/;"	kind:member	line:102
+path_is_not_directory_path	..\\source\\core\\model\\error_messages.py	/^    path_is_not_directory_path = 'Path is not a valid directory path: {}'$/;"	kind:variable	line:25
+path_is_not_file_path	..\\source\\core\\model\\error_messages.py	/^    path_is_not_file_path = 'Path is not a valid file path: {}'$/;"	kind:variable	line:35
+path_is_not_script_file	..\\source\\core\\model\\error_messages.py	/^    path_is_not_script_file = 'Path is not a script file: {}'$/;"	kind:variable	line:27
+path_not_exists	..\\source\\core\\model\\error_messages.py	/^    path_not_exists = 'Path does not exists: {}'$/;"	kind:variable	line:34
+process_manager	..\\source\\core\\manager\\script_manager.py	/^    process_manager = ProcessManager()$/;"	kind:variable	line:15
+process_manager.py	..\\source\\core\\manager\\process_manager.py	1;"	kind:file	line:1
+profile.py	..\\source\\core\\model\\profile.py	1;"	kind:file	line:1
+profile_list_widget.py	..\\source\\app\\main_window\\component\\profile_list_widget.py	1;"	kind:file	line:1
+profile_manager	..\\source\\core\\service\\profile_service.py	/^    profile_manager: ProfileManager = ProfileManager()$/;"	kind:variable	line:20
+profile_manager.py	..\\source\\core\\manager\\profile_manager.py	1;"	kind:file	line:1
+profile_page.py	..\\source\\app\\main_window\\component\\profile_page.py	1;"	kind:file	line:1
+profile_repository.py	..\\source\\core\\model\\profile_repository.py	1;"	kind:file	line:1
+profile_service	..\\source\\app\\console.py	/^profile_service = ProfileService()$/;"	kind:variable	line:12
+profile_service	..\\source\\app\\main_window\\component\\list_widget.py	/^    profile_service: ProfileService = ProfileService()$/;"	kind:variable	line:15
+profile_service	..\\source\\app\\main_window\\component\\table_widget.py	/^    profile_service: ProfileService = ProfileService()$/;"	kind:variable	line:35
+profile_service	..\\source\\app\\main_window\\main_window.py	/^    profile_service = ProfileService()$/;"	kind:variable	line:19
+profile_service	..\\source\\core\\service\\app_service.py	/^    profile_service: ProfileService = ProfileService()$/;"	kind:variable	line:10
+profile_service.py	..\\source\\core\\service\\profile_service.py	1;"	kind:file	line:1
+profile_servicel	..\\source\\app\\other\\tray_icon.py	/^    profile_servicel: ProfileService = ProfileService()$/;"	kind:variable	line:14
+profile_table_widget.py	..\\source\\app\\main_window\\component\\profile_table_widget.py	1;"	kind:file	line:1
+programming	..\\source\\app\\console.py	/^programming = profile_service.find('programming')$/;"	kind:variable	line:27
+readme	..\\setup.py	/^readme = open('README.md').read()$/;"	kind:variable	line:3
+refresh	..\\source\\app\\main_window\\component\\library_page.py	/^    def refresh(self):$/;"	kind:member	line:33
+refresh	..\\source\\app\\main_window\\component\\list_widget.py	/^    def refresh(self):$/;"	kind:member	line:62
+refresh	..\\source\\app\\main_window\\component\\profile_page.py	/^    def refresh(self):$/;"	kind:member	line:33
+refresh	..\\source\\app\\main_window\\component\\tab_page.py	/^    def refresh(self):$/;"	kind:member	line:14
+refresh	..\\source\\app\\main_window\\component\\table_widget.py	/^    def refresh(self):$/;"	kind:member	line:75
+refresh	..\\source\\core\\manager\\library_manager.py	/^    def refresh(self, library: Library) -> ActionResult:$/;"	kind:member	line:55
+refresh	..\\source\\core\\manager\\profile_manager.py	/^    def refresh(self, profile: Profile):$/;"	kind:member	line:59
+refresh	..\\source\\core\\manager\\script_manager.py	/^    def refresh(self, script: Script) -> ActionResult():$/;"	kind:member	line:42
+refresh	..\\source\\core\\service\\library_service.py	/^    def refresh(self)->ActionResult:$/;"	kind:member	line:190
+refresh	..\\source\\core\\service\\profile_service.py	/^    def refresh(self):$/;"	kind:member	line:182
+remove	..\\source\\core\\manager\\library_manager.py	/^    def remove(self, library: Library) -> ActionResult:$/;"	kind:member	line:78
+remove	..\\source\\core\\manager\\script_manager.py	/^    def remove(self, script: Script) -> ActionResult:$/;"	kind:member	line:32
+remove	..\\source\\core\\model\\library.py	/^    def remove(self, script: Script):$/;"	kind:member	line:28
+remove	..\\source\\core\\model\\library_repository.py	/^    def remove(self, instance: Library):$/;"	kind:member	line:39
+remove	..\\source\\core\\model\\profile.py	/^    def remove(self,script_id:str):$/;"	kind:member	line:23
+remove	..\\source\\core\\model\\profile_repository.py	/^    def remove(self, instance: Profile):$/;"	kind:member	line:39
+remove	..\\source\\core\\service\\library_service.py	/^    def remove(self, identifier: str)->ActionResult:$/;"	kind:member	line:91
+remove	..\\source\\core\\service\\profile_service.py	/^    def remove(self, identifier):$/;"	kind:member	line:119
+remove_dir	..\\source\\core\\utility\\utility.py	/^    def remove_dir(path: str) -> bool:$/;"	kind:member	line:142
+remove_file	..\\source\\core\\utility\\utility.py	/^    def remove_file(path: str) -> bool:$/;"	kind:member	line:134
+remove_script	..\\source\\core\\model\\library_repository.py	/^    def remove_script(self, script: Script):$/;"	kind:member	line:33
+remove_script	..\\source\\core\\model\\profile_repository.py	/^    def remove_script(self, script: Script):$/;"	kind:member	line:33
+remove_script	..\\source\\core\\service\\library_service.py	/^    def remove_script(self, identifier: str)->ActionResult:$/;"	kind:member	line:109
+remove_script	..\\source\\core\\service\\profile_service.py	/^    def remove_script(self, identifier: str):$/;"	kind:member	line:136
+restart	..\\source\\core\\manager\\profile_manager.py	/^    def restart(self, profile: Profile):$/;"	kind:member	line:47
+restart	..\\source\\core\\manager\\script_manager.py	/^    def restart(self, script: Script):$/;"	kind:member	line:99
+restart	..\\source\\core\\service\\profile_service.py	/^    def restart(self, identifier: str):$/;"	kind:member	line:175
+save	..\\source\\core\\utility\\configuration.py	/^    def save(self, profile_repository, library_reopsitory):$/;"	kind:member	line:29
+script	..\\source\\app\\console.py	/^script = library_service.find_script($/;"	kind:variable	line:21
+script.py	..\\source\\core\\model\\script.py	1;"	kind:file	line:1
+script2	..\\source\\app\\console.py	/^script2 = library_service.find_script(os.getcwd() + '\\\\test_data\\\\AutoHotKey\\\\Common\\\\Se/;"	kind:variable	line:23
+script_manager	..\\source\\core\\manager\\library_manager.py	/^    script_manager = ScriptManager()$/;"	kind:variable	line:13
+script_manager	..\\source\\core\\manager\\profile_manager.py	/^    script_manager = ScriptManager()$/;"	kind:variable	line:15
+script_manager	..\\source\\core\\service\\library_service.py	/^    script_manager: ScriptManager = ScriptManager()$/;"	kind:variable	line:17
+script_manager	..\\source\\core\\service\\profile_service.py	/^    script_manager: ScriptManager = ScriptManager()$/;"	kind:variable	line:21
+script_manager.py	..\\source\\core\\manager\\script_manager.py	1;"	kind:file	line:1
+set_code	..\\source\\core\\model\\action_result.py	/^    def set_code(self, code: ResultCode):$/;"	kind:member	line:56
+setup.py	..\\setup.py	1;"	kind:file	line:1
+shared.py	..\\source\\app\\main_window\\component\\shared.py	1;"	kind:file	line:1
+show_triggered	..\\source\\app\\other\\tray_icon.py	/^    def show_triggered(self):$/;"	kind:member	line:52
+singleton.py	..\\source\\core\\model\\singleton.py	1;"	kind:file	line:1
+start	..\\source\\core\\manager\\library_manager.py	/^    def start(self, library: Library)->ActionResult:$/;"	kind:member	line:99
+start	..\\source\\core\\manager\\process_manager.py	/^    def start(path: str) -> Popen:$/;"	kind:member	line:18
+start	..\\source\\core\\manager\\profile_manager.py	/^    def start(self, profile: Profile):$/;"	kind:member	line:23
+start	..\\source\\core\\manager\\script_manager.py	/^    def start(self, script: Script):$/;"	kind:member	line:54
+start	..\\source\\core\\model\\library.py	/^    def start(self):$/;"	kind:member	line:18
+start	..\\source\\core\\model\\profile.py	/^    def start(self):$/;"	kind:member	line:14
+start	..\\source\\core\\model\\script.py	/^    def start(self, process):$/;"	kind:member	line:17
+start	..\\source\\core\\service\\library_service.py	/^    def start(self, identifier: str)->ActionResult:$/;"	kind:member	line:131
+start	..\\source\\core\\service\\profile_service.py	/^    def start(self, identifier: str):$/;"	kind:member	line:157
+start_script	..\\source\\core\\service\\library_service.py	/^    def start_script(self, identifier: str)->ActionResult:$/;"	kind:member	line:141
+startup	..\\source\\core\\model\\script.py	/^    def startup(self):$/;"	kind:member	line:43
+state.py	..\\source\\core\\model\\state.py	1;"	kind:file	line:1
+stop	..\\source\\core\\manager\\library_manager.py	/^    def stop(self, library: Library)->ActionResult:$/;"	kind:member	line:110
+stop	..\\source\\core\\manager\\profile_manager.py	/^    def stop(self, profile: Profile):$/;"	kind:member	line:35
+stop	..\\source\\core\\manager\\script_manager.py	/^    def stop(self, script: Script) -> bool:$/;"	kind:member	line:73
+stop	..\\source\\core\\model\\library.py	/^    def stop(self):$/;"	kind:member	line:21
+stop	..\\source\\core\\model\\profile.py	/^    def stop(self):$/;"	kind:member	line:17
+stop	..\\source\\core\\model\\script.py	/^    def stop(self):$/;"	kind:member	line:21
+stop	..\\source\\core\\service\\library_service.py	/^    def stop(self, identifier: str)->ActionResult:$/;"	kind:member	line:151
+stop	..\\source\\core\\service\\profile_service.py	/^    def stop(self, identifier: str):$/;"	kind:member	line:164
+stop_all	..\\source\\core\\service\\library_service.py	/^    def stop_all(self)->ActionResult:$/;"	kind:member	line:171
+stop_all	..\\source\\core\\service\\profile_service.py	/^    def stop_all(self):$/;"	kind:member	line:171
+stop_script	..\\source\\core\\service\\library_service.py	/^    def stop_script(self, identifier: str)->ActionResult:$/;"	kind:member	line:161
+success	..\\source\\core\\model\\action_result.py	/^    def success(self):$/;"	kind:member	line:40
+tab_page.py	..\\source\\app\\main_window\\component\\tab_page.py	1;"	kind:file	line:1
+tab_widget.py	..\\source\\app\\main_window\\component\\tab_widget.py	1;"	kind:file	line:1
+table_widget.py	..\\source\\app\\main_window\\component\\table_widget.py	1;"	kind:file	line:1
+table_widget_item.py	..\\source\\app\\main_window\\component\\table_widget_item.py	1;"	kind:file	line:1
+test_get_directories	..\\source\\test\\unit_test\\utility_test.py	/^    def test_get_directories(self, listdir, isdir):$/;"	kind:member	line:55
+test_get_file_name	..\\source\\test\\unit_test\\utility_test.py	/^    def test_get_file_name(self):$/;"	kind:member	line:33
+test_get_files_in_dir	..\\source\\test\\unit_test\\utility_test.py	/^    def test_get_files_in_dir(self, listdir, isfile):$/;"	kind:member	line:62
+test_scan_directory	..\\source\\test\\unit_test\\utility_test.py	/^    def test_scan_directory(self, listdir, isdir):$/;"	kind:member	line:43
+to_json	..\\source\\core\\model\\configuration_models.py	/^    def to_json(self):$/;"	kind:member	line:10
+to_json	..\\source\\core\\model\\configuration_models.py	/^    def to_json(self):$/;"	kind:member	line:42
+to_json	..\\source\\core\\model\\configuration_models.py	/^    def to_json(self):$/;"	kind:member	line:69
+to_json	..\\source\\core\\model\\library.py	/^    def to_json(self):$/;"	kind:member	line:86
+to_json	..\\source\\core\\model\\library_repository.py	/^    def to_json(self):$/;"	kind:member	line:65
+to_json	..\\source\\core\\model\\profile.py	/^    def to_json(self):$/;"	kind:member	line:43
+to_json	..\\source\\core\\model\\profile_repository.py	/^    def to_json(self):$/;"	kind:member	line:58
+to_json	..\\source\\core\\model\\script.py	/^    def to_json(self):$/;"	kind:member	line:53
+to_json	..\\source\\core\\model\\state.py	/^    def to_json(self):$/;"	kind:member	line:10
+tray_icon.py	..\\source\\app\\other\\tray_icon.py	1;"	kind:file	line:1
+update_library_list	..\\source\\core\\service\\app_service.py	/^    def update_library_list(self):$/;"	kind:member	line:21
+update_lists	..\\source\\core\\service\\app_service.py	/^    def update_lists(self):$/;"	kind:member	line:17
+update_profile_list	..\\source\\core\\service\\app_service.py	/^    def update_profile_list(self):$/;"	kind:member	line:26
+utility.py	..\\source\\core\\utility\\utility.py	1;"	kind:file	line:1
+utility_test.py	..\\source\\test\\unit_test\\utility_test.py	1;"	kind:file	line:1
+warning	..\\source\\core\\utility\\logger.py	/^    def warning(self, msg):$/;"	kind:member	line:46

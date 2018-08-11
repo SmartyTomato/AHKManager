@@ -20,7 +20,8 @@ profile_service.add('gaming')
 library_service.refresh()
 script = library_service.find_script(
     os.getcwd() + '\\test_data\\AutoHotKey\\Startup\\Duplicate Line.ahk')
-script2 = library_service.find_script(os.getcwd() + '\\test_data\\AutoHotKey\\Common\\Select Line.ahk')
+script2 = library_service.find_script(
+    os.getcwd() + '\\test_data\\AutoHotKey\\Common\\Select Line.ahk')
 profile_service.add_script('programming', script)
 profile_service.add_script('gaming', script2)
 gaming = profile_service.find('gaming')

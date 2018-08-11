@@ -1,8 +1,19 @@
 from typing import List
+
 from core.model.state import State
 
 
-class Profile(object):
+class Profile():
+    """
+    Profile is a script container, stores a list of script IDs.
+
+    Profile stores script ID only, not script object.
+    If script id needed use ProfileService,
+    search in library repository using the script id
+    The script ids can be used to search script in the library.
+
+    Profile uses name as ID, which uniquely exists in the system
+    """
 
     def __init__(self, name):
         self.name: str = name
@@ -12,28 +23,88 @@ class Profile(object):
     # region public methods
 
     def start(self):
+        """
+        Set profile running state to true
+        """
+
         self.state.running = True
 
     def stop(self):
+        """
+        Set profile running state to false
+        """
+
         self.state.running = False
 
     def add(self, script_id: str):
+        """
+        Add script into profile
+
+        Args:
+            script_id (str): script id
+        """
+
         self.script_id_list.append(script_id)
 
-    def remove(self,script_id:str):
+    def remove(self, script_id: str):
+        """
+        Remove script from the profile
+
+        Args:
+            script_id (str):
+        """
+
         if script_id in self.script_id_list:
             self.script_id_list.remove(script_id)
 
-    def has_script(self, identifier: str)->bool:
-        return identifier in self.script_id_list
+    def has_script(self, identifier: str) -> bool:
+        """
+        Check whether profile contains script
+
+        Args:
+            identifier (str): script id
+
+        Returns:
+            bool: return true script id found
+        """
+
+        if identifier in self.script_id_list:
+            return True
+
+        return False
 
     def has_id(self, identifier: str) -> bool:
+        """
+        Check if profile has given ID (name)
+
+        Args:
+            identifier (str): profile name
+
+        Returns:
+            bool: return true if profile name is
+                the same as the given ID
+        """
+
         return identifier == self.identifier()
 
     def identifier(self) -> str:
+        """
+        Get profile ID
+
+        Returns:
+            str: profile name
+        """
+
         return self.name
 
     def is_running(self) -> bool:
+        """
+        Get profile current running state
+
+        Returns:
+            bool: return true when profile is running
+        """
+
         return self.state.running
 
     # endregion public methods

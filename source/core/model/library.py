@@ -5,9 +5,15 @@ from core.model.state import State
 from core.utility.utility import Utility
 
 
-class Library(object):
+class Library():
+    """
+    Library is a script container,
+    which directly map to the file system (directory/folder)
 
-    def __init__(self, path: str):
+    Library uses directory path as ID, which uniquely exists in the system
+    """
+
+    def __init__(self, path: str) -> None:
         self.state: State = State()
         self.name: str = Utility.get_file_name_no_extension(path)
         self.path: str = Utility.format_path(path)
@@ -16,57 +22,149 @@ class Library(object):
     # region public methods
 
     def start(self):
+        """
+        Set library running state to True
+        """
+
         self.state.running = True
 
     def stop(self):
+        """
+        Set library running state to False
+        """
+
         self.state.running = False
 
     def add(self, script: Script):
+        """
+        Add script into the library
+
+        Args:
+            script (Script): script object
+        """
+
         if self._is_script_instance(script):
             self.script_list.append(script)
 
     def remove(self, script: Script):
-        if self. _is_script_instance(script) and script in self.script_list:
+        """
+        Remove script from the library
+
+        Args:
+            script (Script): script object
+        """
+
+        if script in self.script_list:
             self.script_list.remove(script)
 
     def find(self, identifier: str) -> Script:
-        # below statement will benefit when large amount script in the library
+        """
+        Find the script using given identifier (path)
+
+        Args:
+            identifier (str): script identifier (path)
+
+        Returns:
+            Script: script object
+        """
+
+        # below statement will benefit when large amount script
         if not self.may_contains_script(identifier):
             return None
 
         # loop to find the script
-        for script in self.script_list:
-            if script.has_id(identifier):
-                return script
-
-        return None
+        return next(
+            (x for x in self.script_list if x.has_id(identifier)), None)
 
     def find_running_scripts(self) -> List[Script]:
-        scripts = []
+        """
+        Find all running scripts
+
+        Returns:
+            List[Script]: list of scripts
+        """
+
+        return list(filter(lambda x: x.is_running(), self.script_list))
+
+    def has_script(self, identifier: str) -> bool:
+        """
+        Check whether library contains script
+
+        Args:
+            identifier (str): script ID
+
+        Returns:
+            bool: return true when script in the library
+        """
 
         for script in self.script_list:
-            if script.is_running():
-                scripts.append(script)
+            if script.has_id(identifier):
+                return True
 
-        return scripts
-
-    def has_script(self, script: Script) -> bool:
-        return script in self.script_list
+        return False
 
     def has_id(self, identifier: str) -> bool:
+        """
+        Check whether library has given identifier (path)
+
+        Args:
+            identifier (str): library id (path)
+
+        Returns:
+            bool: return true when id matches
+        """
+
         return identifier == self.identifier()
 
     def identifier(self) -> str:
+        """
+        Get library identifier (path)
+
+        Returns:
+            str: library path
+        """
+
         return self.path
 
     def is_running(self) -> bool:
+        """
+        Whether library is running
+
+        Returns:
+            bool: return true when library is running.
+                This does not check each script is
+                running or not
+        """
+
         return self.state.running
 
     def exists(self) -> bool:
-        return Utility.path_exists(self.path)
+        """
+        Check whether library path is valid
+        and path is an exists directory
+
+        Returns:
+            bool: return true if library path is
+                valid and exists
+        """
+
+        return Utility.is_dir(self.path)
 
     def may_contains_script(self, identifier: str) -> bool:
-        return self.path == Utility.format_path(Utility.get_parent_directory(identifier))
+        """
+        Check whether library may contains script
+        by comparing script's parent directory to library path
+
+        Args:
+            identifier (str): script identifier (path)
+
+        Returns:
+            bool: return true when library path matches
+                script's parent directory
+        """
+
+        return self.path == Utility.format_path(
+            Utility.get_parent_directory(identifier))
 
     # endregion public methods
 
@@ -74,10 +172,7 @@ class Library(object):
 
     @staticmethod
     def _is_script_instance(instance: object) -> bool:
-        if instance and isinstance(instance, Script):
-            return True
-        else:
-            return False
+        return bool(instance and isinstance(instance, Script))
 
     # endregion private methods
 

@@ -1,27 +1,68 @@
+from typing import Tuple
+from typing import Optional
+
 import subprocess
 from subprocess import Popen
 
+from core.model.action_result import ActionResult
+from core.model.error_messages import ErrorMessages
 from core.model.singleton import Singleton
-from core.service.message_service import MessageService
 from core.utility.configuration import Configuration
-from core.utility.logger import Logger
-from core.utility.message import Message, MessageType
 
 
 class ProcessManager(Singleton):
-    logger = Logger('ProcessManager')
 
-    message_service = MessageService()
     configuration = Configuration()
 
     @staticmethod
-    def start(path: str) -> Popen:
-        ahk_path = ProcessManager.configuration.utility['ahk_executable']
-        if not ahk_path:
-            ProcessManager.message_service.add(
-                Message(MessageType.ERROR, 'AutoHotKey path is not valid: {}'.format(ahk_path)))
-            ProcessManager.logger.error(
-                Message(MessageType.ERROR, 'AutoHotKey path is not valid >>> {}'.format(ahk_path)))
-            return None
+    def start(path: str) -> Tuple[ActionResult, Optional[Popen]]:
+        """
+        Open file path using ahk executable path
 
-        return subprocess.Popen([ahk_path, path], shell=False)
+        Args:
+            path (str): file path
+
+        Returns:
+            Tuple[ActionResult,  Optional[Popen]]:
+                ActionResult: return error
+                    if failed to start script
+                 Optional[Popen]: launched ahk process
+        """
+
+        result = ActionResult()
+
+        ahk_path = ProcessManager.configuration.utility.ahk_executable
+        if not ahk_path:
+            result.add_error(
+                ErrorMessages.autohotkey_path_is_not_valid.format(ahk_path))
+            return result, None
+
+        try:
+            process = subprocess.Popen([ahk_path, path], shell=False)
+            return result, process
+        except Exception:
+            result.add_error(
+                ErrorMessages.could_not_start_script.format(path))
+            return result, None
+
+    @staticmethod
+    def open_explorer(path: str) -> ActionResult:
+        """
+        Open path in file explorer for windows only
+
+        Args:
+            path (str): file path
+
+        Returns:
+            ActionResult: return error
+                if for some reason failed to open path
+        """
+
+        result = ActionResult()
+
+        try:
+            subprocess.Popen('explorer /select,{}'.format(path))
+        except Exception:
+            result.add_error(ErrorMessages.could_not_open_path.format(path))
+
+        return result
