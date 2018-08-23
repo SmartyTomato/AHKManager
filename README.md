@@ -1,5 +1,5 @@
 # AHKManager
-[logo]: https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/logo.png "Logo"
+![Logo](https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/logo.png "Logo")
 This application is a script manager for AutoHotKey. Simple start, stop pause all script on the fly.
 
 # Features
