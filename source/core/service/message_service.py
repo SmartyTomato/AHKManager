@@ -4,7 +4,7 @@ from core.model.message import Message
 from core.model.singleton import Singleton
 
 
-class MessageService(Singleton):
+class MessageService(metaclass=Singleton):
 
     def __init__(self):
         self.messages: List[Message] = []

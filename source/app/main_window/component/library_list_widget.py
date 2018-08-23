@@ -84,7 +84,8 @@ class LibraryListWidget(ListWidget):
             for filename in filenames:
                 self.library_service.add(filename)
 
-        self.refresh()
+            self.app_service.save_configuration()
+            self.app_service.refresh()
 
     def _remove(self, items: List[ListWidgetItem]):
         if not items:
@@ -95,7 +96,8 @@ class LibraryListWidget(ListWidget):
             self.profile_service.remove_script(script_id)
             self.library_service.remove(script_id)
 
-        self.refresh()
+        self.app_service.save_configuration()
+        self.app_service.refresh()
 
     def _start(self, items: List[ListWidgetItem]):
         if not items:
@@ -104,7 +106,7 @@ class LibraryListWidget(ListWidget):
         for item in items:
             self.library_service.start(item.identifier)
 
-        self.refresh()
+        self.app_service.refresh()
 
     def _open_in_explorer(self, items: List[ListWidgetItem]):
         if not items:
@@ -120,6 +122,6 @@ class LibraryListWidget(ListWidget):
         for item in items:
             self.library_service.stop(item.identifier)
 
-        self.refresh()
+        self.app_service.refresh()
 
     # endregion private methods

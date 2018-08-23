@@ -12,7 +12,7 @@ from core.model.singleton import Singleton
 from core.service.library_service import LibraryService
 
 
-class ProfileService(Singleton):
+class ProfileService(metaclass=Singleton):
 
     library_service: LibraryService = LibraryService()
     profile_manager: ProfileManager = ProfileManager()

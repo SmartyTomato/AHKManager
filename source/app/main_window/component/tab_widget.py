@@ -28,3 +28,8 @@ class TabWidget(QTabWidget):
 
     def on_selected_tab_changed(self, index):
         self.widget(index).refresh()
+
+    def refresh(self):
+        for i in range(0, self.count()):
+            widget = self.widget(i)
+            widget.refresh()

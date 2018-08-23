@@ -9,7 +9,7 @@ from core.utility.configuration import Configuration
 from core.utility.utility import Utility
 
 
-class ScriptManager(Singleton):
+class ScriptManager(metaclass=Singleton):
 
     process_manager = ProcessManager()
     configuration = Configuration()
@@ -200,7 +200,7 @@ class ScriptManager(Singleton):
 
         temp_result, process = self.process_manager.start(script.path)
 
-        if not temp_result.success():
+        if not temp_result.success() or not process:
             return temp_result, script
 
         script.start(process)
@@ -229,7 +229,8 @@ class ScriptManager(Singleton):
 
     #     # if file not exists, it success anyway
     #     if not script.exists():
-    #         self.logger.info('Script does not exists >>> {}'.format(repr(script)))
+    #         self.logger.info('Script does not exists >>> {}'.format( \
+    # repr(script)))
     #         return True
 
     #     # try to delete file

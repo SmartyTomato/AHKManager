@@ -91,6 +91,7 @@ class LibraryTableWidget(TableWidget):
             self.profile_service.remove_script(script_id)
             self.library_service.remove_script(script_id)
 
+        self.app_service.save_configuration()
         self.refresh()
 
     def _start(self, items: List[TableWidgetItem]):
@@ -103,14 +104,6 @@ class LibraryTableWidget(TableWidget):
 
         self.refresh()
 
-    def _open_in_explorer(self, items: List[TableWidgetItem]):
-        if not items:
-            return
-
-        for i in range(0, len(items), len(self.columns)):
-            script_id = items[i].script_id
-            self.process_manager.open_explorer(script_id)
-
     def _stop(self, items: List[TableWidgetItem]):
         if not items:
             return
@@ -120,5 +113,13 @@ class LibraryTableWidget(TableWidget):
             self.library_service.stop_script(script_id)
 
         self.refresh()
+
+    def _open_in_explorer(self, items: List[TableWidgetItem]):
+        if not items:
+            return
+
+        for i in range(0, len(items), len(self.columns)):
+            script_id = items[i].script_id
+            self.process_manager.open_explorer(script_id)
 
     # endregion private methods

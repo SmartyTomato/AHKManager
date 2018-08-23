@@ -9,7 +9,7 @@ from core.model.singleton import Singleton
 from core.service.library_service import LibraryService
 
 
-class ProfileManager(Singleton):
+class ProfileManager(metaclass=Singleton):
 
     library_service: LibraryService = LibraryService()
     script_manager: ScriptManager = ScriptManager()
@@ -152,7 +152,7 @@ class ProfileManager(Singleton):
         profile.add(script.identifier())
 
         if profile.is_running():
-            temp_result = self.library_service.start_script(
+            temp_result, script = self.library_service.start_script(
                 script.identifier())
             result.merge(temp_result)
 

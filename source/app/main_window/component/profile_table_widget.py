@@ -108,6 +108,7 @@ class ProfileTableWidget(TableWidget):
                 self.profile_service.add_script(profile_id,
                                                 script.identifier())
 
+            self.app_service.save_configuration()
             self.refresh()
 
     def _remove(self, items: List[TableWidgetItem]):
@@ -121,6 +122,7 @@ class ProfileTableWidget(TableWidget):
             self.profile_service.remove_script_from_profile(
                 profile_id, script_id)
 
+        self.app_service.save_configuration()
         self.refresh()
 
     def _start(self, items: List[TableWidgetItem]):

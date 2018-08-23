@@ -32,8 +32,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
         # initialize tab widget
-        tab_widget = TabWidget(self)
-        vertical_layout.addWidget(tab_widget)
+        self.tab_widget = TabWidget(self)
+        vertical_layout.addWidget(self.tab_widget)
 
         # add tray icon
         self.tray_icon = TrayIcon(self)
@@ -57,8 +57,7 @@ class MainWindow(QMainWindow):
         # Save configuration when window is closed
         self.configuration.main_window.width = self.width()
         self.configuration.main_window.height = self.height()
-        self.configuration.save(self.profile_service.repository,
-                                self.library_service.repository)
+        self.app_service.save_configuration()
         self.close()
 
     def changeEvent(self, event):
@@ -67,6 +66,13 @@ class MainWindow(QMainWindow):
                 self.setVisible(False)
 
     # endregion events
+
+    # region public methods
+
+    def refresh(self):
+        self.tab_widget.refresh()
+
+    # endregion public methods
 
     # region private methods
 

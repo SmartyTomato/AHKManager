@@ -12,7 +12,7 @@ from core.model.singleton import Singleton
 from core.utility.utility import Utility
 
 
-class LibraryService(Singleton):
+class LibraryService(metaclass=Singleton):
 
     library_manager: LibraryManager = LibraryManager()
     script_manager: ScriptManager = ScriptManager()
@@ -25,6 +25,8 @@ class LibraryService(Singleton):
     def add(self, path: str) -> Tuple[ActionResult, LibraryRepository]:
         """
         Initialize and add library into repository using given path
+        If library already exists, add extra script into library.
+        Do not remove non exists script, call refresh instead
 
         Args:
             path (str): directory path
@@ -36,33 +38,33 @@ class LibraryService(Singleton):
         """
 
         result = ActionResult()
+        path = Utility.format_path(path)
 
         # check whether path is as valid directory
-        path = Utility.format_path(path)
         if not Utility.is_dir(path):
             result.add_error(
                 ErrorMessages.path_is_not_directory_path.format(path))
             return result, self.repository
 
         # add path itself to list
-        temp_result = self._check_library_not_exists(path)
-        result.merge(temp_result)
-
-        if temp_result.success():
+        library = self.find(path)
+        if not library:
             temp_result, library = self.library_manager.init_library(path)
             result.merge(temp_result)
 
             if temp_result.success() and library:
                 self.repository.add(library)
+        else:
+            # Library already in the repository, refresh library
+            self.library_manager.reload(library)
 
         # initialize all sub directories
         directories = Utility.get_directories(path)
 
         for directory in directories:
-            temp_result = self._check_library_not_exists(directory)
-            result.merge(temp_result)
+            library = self.find(directory)
 
-            if temp_result.success():
+            if not library:
                 # create library object
                 temp_result, library = \
                     self.library_manager.init_library(directory)
@@ -70,6 +72,9 @@ class LibraryService(Singleton):
 
                 if temp_result.success() and library:
                     self.repository.add(library)
+            else:
+                # Library already in the repository, refresh library
+                self.library_manager.reload(library)
 
         # ignore errors, initialize library only return warning,
         # as some library may success
@@ -355,22 +360,6 @@ class LibraryService(Singleton):
                 ErrorMessages.could_not_find_library.format(identifier))
 
         return result, library
-
-    def _check_library_not_exists(self, identifier) -> ActionResult:
-        result = ActionResult()
-
-        library = self.find(identifier)
-        if library:
-            result.add_error(
-                ErrorMessages.library_already_exists
-                .format(library.identifier()))
-
-            temp_result, library = self.library_manager.refresh(library)
-            result.merge(temp_result)
-            return result
-
-        result.ignore_error()
-        return result
 
     def _check_script_exists(self, identifier: str) \
             -> Tuple[ActionResult, Script]:

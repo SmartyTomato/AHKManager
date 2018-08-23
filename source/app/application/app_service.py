@@ -5,14 +5,16 @@ from core.model.singleton import Singleton
 from core.model.library import Library
 from core.model.profile import Profile
 from core.model.script import Script
+from core.utility.configuration import Configuration
 from core.service.library_service import LibraryService
 from core.service.profile_service import ProfileService
 
 
-class AppService(Singleton):
+class AppService(metaclass=Singleton):
 
     library_service: LibraryService = LibraryService()
     profile_service: ProfileService = ProfileService()
+    configuration: Configuration = Configuration()
 
     def __init__(self):
         self.app_model: AppModel = AppModel()
@@ -40,6 +42,13 @@ class AppService(Singleton):
 
         return self.profile_service.get_profile_scripts(
             self.app_model.selected_profile_id)
+
+    def refresh(self):
+        self.app_model.main_window.refresh()
+
+    def save_configuration(self):
+        self.configuration.save(self.profile_service.repository,
+                                self.library_service.repository)
 
     # endregion public methods
 
