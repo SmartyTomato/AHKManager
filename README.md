@@ -22,7 +22,6 @@ This application is a script manager for AutoHotKey. Simple start, stop pause al
 
 # Release
 Please goto release folder to get the [latest releases](https://github.com/SmartyTomato/AHKManager/tree/master/releases)
-Note: download "resources" folder in the releases folder as well
 
 # Tips
 - Add library again to see the new script that not exists in the library
