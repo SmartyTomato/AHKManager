@@ -60,3 +60,5 @@ class TrayIcon(QSystemTrayIcon):
     def on_stop_all_triggered(self):
         self.profile_service.stop_all()
         self.library_service.stop_all()
+
+        self.app_service.app_model.main_window.refresh()

@@ -8,9 +8,10 @@ from core.model.action_result import ActionResult
 from core.model.error_messages import ErrorMessages
 from core.model.singleton import Singleton
 from core.utility.configuration import Configuration
+from core.utility.utility import Utility
 
 
-class ProcessManager(Singleton):
+class ProcessManager(metaclass=Singleton):
 
     configuration = Configuration()
 
@@ -30,6 +31,11 @@ class ProcessManager(Singleton):
         """
 
         result = ActionResult()
+
+        if not Utility.is_file(path):
+            result.add_error(
+                ErrorMessages.script_path_not_valid.format(path))
+            return result, None
 
         ahk_path = ProcessManager.configuration.utility.ahk_executable
         if not ahk_path:

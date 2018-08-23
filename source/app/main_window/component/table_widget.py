@@ -48,6 +48,7 @@ class TableWidget(QTableWidget):
 
         self.setColumnCount(len(self.columns))
         self.setWordWrap(False)
+        self.setAutoScroll(False)
 
         for column in self.columns:
             self.setHorizontalHeaderItem(
@@ -57,7 +58,7 @@ class TableWidget(QTableWidget):
 
         self.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
         self.horizontalHeader().setSectionResizeMode(
-            len(self.columns) - 1, QHeaderView.ResizeToContents)
+            len(self.columns) - 1, QHeaderView.Stretch)
         self.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
 
         # context menu

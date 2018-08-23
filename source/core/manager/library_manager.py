@@ -8,7 +8,7 @@ from core.model.singleton import Singleton
 from core.utility.utility import Utility
 
 
-class LibraryManager(Singleton):
+class LibraryManager(metaclass=Singleton):
 
     script_manager = ScriptManager()
 
@@ -24,9 +24,9 @@ class LibraryManager(Singleton):
                 when path is not directory
         """
         result = ActionResult()
+        path = Utility.format_path(path)
 
         # check whether path is a valid directory
-        path = Utility.format_path(path)
         if not Utility.is_dir(path):
             result.add_error(
                 ErrorMessages.path_is_not_directory_path.format(path))
@@ -54,7 +54,8 @@ class LibraryManager(Singleton):
 
     # region public methods
 
-    def refresh(self, library: Library) -> Tuple[ActionResult, Library]:
+    def refresh(self, library: Library) \
+            -> Tuple[ActionResult, Library]:
         """
         Refresh library, remove not found scripts
 
@@ -84,6 +85,44 @@ class LibraryManager(Singleton):
 
             if not temp_result.success() or not script:
                 library.remove(script)
+
+        result.ignore_error()
+        return result, library
+
+    def reload(self, library: Library)-> Tuple[ActionResult, Library]:
+        """
+        Reload all script from disk, add extra script into list
+
+        Args:
+            library (Library): library object
+
+        Returns:
+            Tuple[ActionResult, Library]:
+                ActionResult: return error when library path not exists
+        """
+        result = ActionResult()
+        # check whether path is a valid directory
+        if not library.exists():
+            result.add_error(
+                ErrorMessages.library_path_not_exists.format(library.path))
+            return result, None
+
+        files = Utility.get_files_in_directory(library.path)
+        if not files:
+            # ignore the directory do not have any file
+            return result, None
+
+        for file in files:
+            script = library.find(file)
+
+            if not script:
+                # initialize script file
+                temp_result, script = self.script_manager.init_script(file)
+                result.merge(temp_result)
+
+                # only add script to the list when no error returned.
+                if temp_result.success() and script:
+                    library.add(script)
 
         result.ignore_error()
         return result, library
@@ -146,7 +185,7 @@ class LibraryManager(Singleton):
             temp_result, script = self.script_manager.start(script)
             result.merge(temp_result)
 
-        library.start()
+        library.staart()
         return result, library
 
     def stop(self, library: Library) -> Tuple[ActionResult, Library]:

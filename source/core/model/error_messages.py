@@ -2,7 +2,6 @@ class ErrorMessages():
 
     # region library
 
-    library_already_exists = 'Library already exists, refresh library: {}'
     could_not_find_library = 'Could not find library: {}'
     could_not_remove_library = 'Could not remove library: {}'
     library_path_not_exists = 'Library path does not exists: {}'
@@ -24,6 +23,7 @@ class ErrorMessages():
     could_not_stop_script = 'Could not stop script: {}'
     could_not_restart_script = 'Could not restart script: {}'
     could_not_start_script = 'Could not start script: {}'
+    script_path_not_valid = 'Script path is not valid: {}'
 
     # endregion script
 

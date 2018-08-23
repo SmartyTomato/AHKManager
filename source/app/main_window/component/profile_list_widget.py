@@ -70,7 +70,9 @@ class ProfileListWidget(ListWidget):
 
         if ok and name:
             self.profile_service.add(name)
-            self.refresh()
+
+            self.app_service.refresh()
+            self.app_service.save_configuration()
 
     def _remove(self, items: List[ListWidgetItem]):
         if not items:
@@ -79,7 +81,8 @@ class ProfileListWidget(ListWidget):
         for item in items:
             self.profile_service.remove(item.identifier)
 
-        self.refresh()
+        self.app_service.refresh()
+        self.app_service.save_configuration()
 
     def _start(self, items: List[ListWidgetItem]):
         if not items:
@@ -88,7 +91,7 @@ class ProfileListWidget(ListWidget):
         for item in items:
             self.profile_service.start(item.identifier)
 
-        self.refresh()
+        self.app_service.refresh()
 
     def _stop(self, items: List[ListWidgetItem]):
         if not items:
@@ -97,6 +100,6 @@ class ProfileListWidget(ListWidget):
         for item in items:
             self.profile_service.stop(item.identifier)
 
-        self.refresh()
+        self.app_service.refresh()
 
     # endregion private methods

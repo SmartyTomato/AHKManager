@@ -10,7 +10,7 @@ from core.service.message_service import MessageService
 from core.utility.logger import Logger
 
 
-class Configuration(Singleton):
+class Configuration(metaclass=Singleton):
     logger = Logger('Configuration')
 
     message_service = MessageService()
