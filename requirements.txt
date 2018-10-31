@@ -5,5 +5,7 @@ rope
 pyinstaller
 mypy
 flake8
-
 pyqt5
+pytest
+pytest-cov
+pytest-mock
