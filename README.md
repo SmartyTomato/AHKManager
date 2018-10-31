@@ -1,7 +1,7 @@
 # AHKManager
 This application is a script manager for AutoHotKey. Simple start, stop pause all script on the fly.
 
-<img alt="UI example 1" 
+<img alt="UI example 1"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_1.png">
 
 # Features
@@ -21,8 +21,8 @@ This application is a script manager for AutoHotKey. Simple start, stop pause al
       - Library and profile in the repository automatically saved, so you don't have to add again
 
 # Release
-Please goto release folder to get the [latest releases](https://github.com/SmartyTomato/AHKManager/releases)
-For other release check "releases" folder
+Please goto release folder to get the [latest releases](https://github.com/SmartyTomato/AHKManager/tree/master/releases)
+Note: if you use any release other than latest, please download latest release, and copy the folder "resources" to the version you are using
 
 # Tips
 - Add library again to see the new script that not exists in the library
@@ -44,25 +44,25 @@ For other release check "releases" folder
 
 # Screenshots
 ## Profile tab
-<img alt="UI example 1" 
+<img alt="UI example 1"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_1.png">
 
 ## Library tab
-<img alt="UI example 2" 
+<img alt="UI example 2"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_2.png">
 
 ## Profile management
-<img alt="UI example 3" 
+<img alt="UI example 3"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_3.png">
 
 ## Library management
-<img alt="UI example 4" 
+<img alt="UI example 4"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_4.png">
 
 ## Script management
-<img alt="UI example 5" 
+<img alt="UI example 5"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_5.png">
 
 ## Tray icon
-<img alt="UI example 6" 
+<img alt="UI example 6"
       src="https://github.com/SmartyTomato/AHKManager/blob/master/resources/images/read_me/ui_example_6.png">

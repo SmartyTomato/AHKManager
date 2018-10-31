@@ -2,7 +2,7 @@
     "python.autoComplete.addBrackets": true,
     "autoDocstring.newlineBeforeSummary": true,
     "autoDocstring.docstringFormat": "google",
-    "python.pythonPath": "${workspaceFolder}/venv/Scripts/python.exe",
+    "python.pythonPath": "venv\\Scripts\\python.exe",
     "python.autoComplete.extraPaths": [
         "${workspaceFolder}/venv/lib/site-packages",
     ],
@@ -12,6 +12,7 @@
         "--disable=W0703",
         "--disable=C0103",
         "--disable=W0640",
+        "--disable=W0108",
         "--disable=C0326",
         "--disable=R0201",
         "--disable=R0903",
@@ -19,7 +20,7 @@
     "python.venvFolders": [
         "${workspaceFolder}/venv",
     ],
-    "code-runner.cwd": "${workspaceFolder}/source",
+    "code-runner.cwd": "${workspaceFolder}/src",
     "python.workspaceSymbols.ctagsPath": "${workspaceFolder}/.vscode/ctags/ctags.exe",
     "editor.rulers": [
         79,
@@ -27,4 +28,13 @@
     "python.linting.mypyEnabled": true,
     "python.linting.flake8Enabled": true,
     "files.trimTrailingWhitespace": true,
+    "python.unitTest.unittestEnabled": true,
+    "python.unitTest.pyTestEnabled": true,
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "*test*.py"
+    ],
 }
