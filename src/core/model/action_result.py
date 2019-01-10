@@ -22,7 +22,7 @@ class ActionResult():
 
     # region public methods
 
-    def add(self, code: ResultCode, message: str=""):
+    def add(self, code: ResultCode, message: str = ""):
         """
         Add new message to the result
 
@@ -37,7 +37,7 @@ class ActionResult():
         self._set_code(code)
         self.messages.append(Message(MessageType(int(code)), message))
 
-    def add_info(self, message: str=""):
+    def add_info(self, message: str = ""):
         """
         Add new message to the result
 
@@ -114,7 +114,6 @@ class ActionResult():
                 self.messages[i].type = MessageType.WARNING
 
     def get_result_code(self) -> ResultCode:
-
         """
         Get result type code
 

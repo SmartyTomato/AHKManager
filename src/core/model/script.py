@@ -41,6 +41,16 @@ class Script():
         self.process = None
         self.state.running = False
 
+    def pause(self):
+        """
+        Set script to paused
+        """
+        self.process = None
+        self.state.paused = True
+
+    def is_paused(self):
+        return self.state.paused
+
     def identifier(self)->str:
         """
         Get script identifier
@@ -62,7 +72,8 @@ class Script():
             bool:
         """
 
-        return self.identifier() == identifier
+        _id = self.utility.format_path(identifier)
+        return self.identifier() == _id
 
     def exists(self) -> bool:
         """

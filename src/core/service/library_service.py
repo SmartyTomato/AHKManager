@@ -282,6 +282,26 @@ class LibraryService(metaclass=Singleton):
         result.ignore_error()
         return result
 
+    def pause_all(self) -> ActionResult:
+        """
+        Pause all script in the repository
+
+        Returns:
+            ActionResult: return only warning messages even when failed
+        """
+
+        result = ActionResult()
+
+        for library in self.repository.library_list:
+            temp_result, library = self.library_manager.pause(library)
+            result.merge(temp_result)
+
+        result.ignore_error()
+        return result
+
+    def resume_all(self) -> ActionResult:
+        pass
+
     # endregion command
 
     # region public methods

@@ -198,6 +198,41 @@ class ScriptManager(metaclass=Singleton):
 
         return self._start_script(script)
 
+    def pause(self, script: Script) -> Tuple[ActionResult, Script]:
+        """
+        Pause script
+
+        Args:
+            script (Script):
+
+        Returns:
+            Tuple[ActionResult, Script]: return error when process
+                cannot be stopped
+        """
+
+        result = ActionResult()
+
+        if not script.is_running() or not script.process:
+            return result, script
+
+        # * check whether script is locked or not exists
+        if not script.allow_state_change():
+            result.add_error(
+                ErrorMessages.could_not_stop_locked_script
+                .format(script.identifier()))
+            return result, script
+
+        # trying to kill the process
+        try:
+            script.process.kill()
+            script.pause()
+        except Exception:
+            result.add_error(
+                ErrorMessages.could_not_stop_script.format(
+                    script.identifier()))
+
+        return result, script
+
     # endregion command
 
     def _start_script(self, script: Script) -> Tuple[ActionResult, Script]:

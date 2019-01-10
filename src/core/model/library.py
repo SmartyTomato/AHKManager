@@ -36,6 +36,13 @@ class Library():
 
         self.state.running = False
 
+    def pause(self):
+        """
+        Set library to paused state
+        """
+
+        self.state.paused = True
+
     def add(self, script: Script):
         """
         Add script into the library
@@ -114,7 +121,8 @@ class Library():
             bool: return true when id matches
         """
 
-        return identifier == self.identifier()
+        _id = self.utility.format_path(identifier)
+        return self.identifier() == _id
 
     def identifier(self) -> str:
         """

@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
 
-from src.core.utility.utility import Utility
+from core.utility.utility import Utility
 
 
 class UtilityTest:
@@ -52,3 +52,6 @@ class UtilityTest:
         result = utility.get_file_extension(file_path)
 
         assert expected_result == result
+
+if __name__ == '__main__':
+    pytest.main()

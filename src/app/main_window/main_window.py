@@ -1,3 +1,5 @@
+import sys
+
 from PyQt5.QtCore import QEvent, Qt
 from PyQt5.QtWidgets import QAction, QMainWindow, QVBoxLayout, QWidget
 
@@ -59,7 +61,8 @@ class MainWindow(QMainWindow):
         self.configuration.main_window.width = self.width()
         self.configuration.main_window.height = self.height()
         self.app_service.save_configuration()
-        self.close()
+        self.tray_icon.hide()
+        sys.exit()
 
     def changeEvent(self, event):
         if event.type() == QEvent.WindowStateChange:

@@ -37,7 +37,7 @@ class LibraryRepository():
         """
 
         return next(
-            (x for x in self.library_list if x.has_id(identifier)), None)
+            (x for x in self.library_list if x.haps_id(identifier)), None)
 
     def find_script(self, identifier: str) -> Script:
         """

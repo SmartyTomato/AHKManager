@@ -1,5 +1,5 @@
-from unittest.mock import MagicMock
 import pytest
+from unittest.mock import MagicMock
 
 from src.core.model.action_result import ActionResult
 from src.core.model.library import Library
@@ -11,6 +11,7 @@ from core.model.library_repository import LibraryRepository
 
 class LibraryServiceTest():
     test_dir = 'C:\\test'
+    test_dir_2 = 'C:\\test2'
 
     @pytest.fixture
     def target(self):
@@ -673,3 +674,46 @@ class LibraryServiceTest():
         assert result[0].identifier() == script_path
 
     # endregion get all scripts
+
+    # region pause all
+
+    def test_pause_all(self, target: LibraryService):
+        """
+        Pause all success
+        """
+
+        # * Prepare
+        library_1 = Library(self.test_dir)
+        library_1.add(Script('Test1'))
+        library_1.add(Script('Test2'))
+
+        library_2 = Library(self.test_dir_2)
+        library_2.add(Script('Test3'))
+        library_2.add(Script('Test4'))
+
+        target.repository.add(library_1)
+        target.repository.add(library_2)
+        target.library_manager.pause = MagicMock(
+            side_effect=self._pause_all_library_manager_pause)
+
+        # * Key
+
+        # * Act
+        result = target.pause_all()
+
+        # * Assert
+        assert result.success()
+        assert not result.messages
+
+        for library in target.repository.library_list:
+            assert library.is_paused()
+
+    def _pause_all_library_manager_pause(self, library: Library):
+        library.pause()
+        return ActionResult(), library
+
+    # endregion pause all
+
+
+if __name__ == '__main__':
+    pytest.main()

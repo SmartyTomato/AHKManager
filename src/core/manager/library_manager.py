@@ -50,7 +50,6 @@ class LibraryManager(metaclass=Singleton):
             if temp_result.success() and script:
                 library.add(script)
 
-        result.ignore_error()
         return result, library
 
     # region public methods
@@ -87,7 +86,6 @@ class LibraryManager(metaclass=Singleton):
             if not temp_result.success() or not script:
                 library.remove(script)
 
-        result.ignore_error()
         return result
 
     def reload(self, library: Library)-> Tuple[ActionResult, Library]:
@@ -125,7 +123,6 @@ class LibraryManager(metaclass=Singleton):
                 if temp_result.success() and script:
                     library.add(script)
 
-        result.ignore_error()
         return result, library
 
     def remove(self, library: Library) -> ActionResult:
@@ -209,6 +206,16 @@ class LibraryManager(metaclass=Singleton):
             result.merge(temp_result)
 
         library.stop()
+        return result, library
+
+    def pause(self, library: Library) -> Tuple[ActionResult, Library]:
+        result = ActionResult()
+
+        for script in library.script_list:
+            temp_result, script = self.script_manager.pause(script)
+            result.merge(temp_result)
+
+        library.pause()
         return result, library
 
     # endregion command

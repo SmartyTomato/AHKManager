@@ -21,6 +21,7 @@ class Application(QApplication):
         self.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
         self.setWindowIcon(
             QtGui.QIcon(self.configuration.main_window.icon_path))
+        self.setQuitOnLastWindowClosed(False)
 
         self.windows = []
         # create main window
