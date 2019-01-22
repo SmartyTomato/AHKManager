@@ -5,26 +5,24 @@ from core.model.configuration_models import (AddScriptDialogConfiguration,
                                              MainWindowConfiguration,
                                              SettingsDialogConfiguration,
                                              UtilityConfiguration)
-from core.model.singleton import Singleton
 from core.service.message_service import MessageService
 from core.utility.logger import Logger
 
 
-class Configuration(metaclass=Singleton):
+class Configuration:
     logger = Logger('Configuration')
 
     message_service = MessageService()
 
-    def __init__(self):
-        # configuration paths
-        self.config_path = os.getcwd() + '\\configs\\ahk_manager.config'
-        self.library_config_path = os.getcwd() + '\\configs\\library.config'
-        self.profile_config_path = os.getcwd() + '\\configs\\profile.config'
+    config_path = os.getcwd() + '\\configs\\ahk_manager.config'
+    library_config_path = os.getcwd() + '\\configs\\library.config'
+    profile_config_path = os.getcwd() + '\\configs\\profile.config'
 
-        self.utility = UtilityConfiguration()
-        self.main_window = MainWindowConfiguration()
-        self.add_script_dialog = AddScriptDialogConfiguration()
-        self.settings_dialog = SettingsDialogConfiguration()
+    # configuration paths
+    utility = UtilityConfiguration()
+    main_window = MainWindowConfiguration()
+    add_script_dialog = AddScriptDialogConfiguration()
+    settings_dialog = SettingsDialogConfiguration()
 
     # region public methods
 
@@ -184,3 +182,6 @@ class Configuration(metaclass=Singleton):
         return True
 
     # endregion private methods
+
+
+configuration = Configuration()

@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QMenu
 
 from core.model.script import Script
 from core.model.action_result import ActionResult
+from core.service.library_service import library_service
 
 from app.main_window.component.error_dialog import ErrorDialog
 from app.add_script_dialog.add_script_to_profile_dialog import \
@@ -137,7 +138,7 @@ class ProfileTableWidget(TableWidget):
         result = ActionResult()
         for i in range(0, len(items), len(self.columns)):
             script_id = items[i].script_id
-            temp_result, _ = self.library_service.start_script(script_id)
+            temp_result, _ = library_service.start_script(script_id)
             result.merge(temp_result)
 
         self._post_process(result)
@@ -149,7 +150,7 @@ class ProfileTableWidget(TableWidget):
         result = ActionResult()
         for i in range(0, len(items), len(self.columns)):
             script_id = items[i].script_id
-            temp_result, _ = self.library_service.stop_script(script_id)
+            temp_result, _ = library_service.stop_script(script_id)
             result.merge(temp_result)
 
         self._post_process(result)

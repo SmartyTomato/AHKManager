@@ -73,7 +73,7 @@ class ProfileListWidget(ListWidget):
 
         result = ActionResult()
         if ok and name:
-            temp_result = self.profile_service.add(name)
+            temp_result, _ = self.profile_service.add(name)
             result.merge(temp_result)
 
         self._post_process(result)

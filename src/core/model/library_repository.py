@@ -82,6 +82,14 @@ class LibraryRepository():
 
         return scripts
 
+    def clear(self):
+        """
+        Clear repository
+        """
+
+        self.library_list = []
+
+
     # endregion public methods
 
     # region to string

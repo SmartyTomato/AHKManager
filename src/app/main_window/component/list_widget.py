@@ -8,13 +8,11 @@ from PyQt5.QtWidgets import QAbstractItemView, QListWidget
 from app.application.app_service import AppService
 from app.main_window.component.list_widget_item import ListWidgetItem
 from core.manager.process_manager import ProcessManager
-from core.service.library_service import LibraryService
 from core.service.profile_service import ProfileService
 
 
 class ListWidget(QListWidget):
 
-    library_service: LibraryService = LibraryService()
     profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
     process_manager: ProcessManager = ProcessManager()
@@ -54,7 +52,7 @@ class ListWidget(QListWidget):
         # if not selected_item:
         #     return None
 
-        # library = self.library_service.find(selected_item.identifier)
+        # library = library_service.find(selected_item.identifier)
 
         # self.app_service.app_model.selected_library = library
         raise NotImplementedError()
@@ -74,7 +72,8 @@ class ListWidget(QListWidget):
             list_widget_item = ListWidgetItem(self,
                                               container.name,
                                               container.identifier(),
-                                              container.is_running())
+                                              container.is_running(),
+                                              container.is_paused())
             self.addItem(list_widget_item)
 
     # endregion public methods

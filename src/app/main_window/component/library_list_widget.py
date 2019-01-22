@@ -7,6 +7,7 @@ from app.main_window.component.list_widget import ListWidget
 from app.main_window.component.error_dialog import ErrorDialog
 from app.main_window.component.list_widget_item import ListWidgetItem
 
+from core.service.library_service import library_service
 from core.model.action_result import ActionResult
 
 
@@ -86,7 +87,7 @@ class LibraryListWidget(ListWidget):
                 return
 
             for filename in filenames:
-                temp_result = self.library_service.add(filename)
+                temp_result = library_service.add(filename)
                 result.merge(temp_result)
 
         self._post_process(result)
@@ -101,7 +102,7 @@ class LibraryListWidget(ListWidget):
             script_id = item.identifier
             temp_result = self.profile_service.remove_script(script_id)
             result.merge(temp_result)
-            temp_result = self.library_service.remove(script_id)
+            temp_result = library_service.remove(script_id)
             result.merge(temp_result)
 
         self._post_process(result)
@@ -113,7 +114,7 @@ class LibraryListWidget(ListWidget):
         result = ActionResult()
 
         for item in items:
-            temp_result, _ = self.library_service.start(item.identifier)
+            temp_result, _ = library_service.start(item.identifier)
             result.merge(temp_result)
 
         self._post_process(result)
@@ -135,7 +136,7 @@ class LibraryListWidget(ListWidget):
 
         result = ActionResult()
         for item in items:
-            temp_result, _ = self.library_service.stop(item.identifier)
+            temp_result, _ = library_service.stop(item.identifier)
             result.merge(temp_result)
 
         self._post_process(result)

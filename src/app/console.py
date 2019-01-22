@@ -1,13 +1,12 @@
 import os
 
-from core.service.library_service import LibraryService
+from core.service.library_service import library_service
 from core.service.message_service import MessageService
 from core.service.profile_service import ProfileService
 from core.utility.configuration import Configuration
 
 path = os.getcwd() + '\\test_data\\AutoHotKey'
 
-library_service = LibraryService()
 message_service = MessageService()
 profile_service = ProfileService()
 configuration = Configuration()

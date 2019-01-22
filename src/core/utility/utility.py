@@ -3,7 +3,7 @@ from shutil import copyfile
 from typing import List
 
 
-class Utility():
+class Utility:
     def get_file_name(self, path: str) -> str:
         """
         Get file name for the given path
@@ -323,3 +323,6 @@ class Utility():
             return True
         except Exception:
             return False
+
+
+utility = Utility()

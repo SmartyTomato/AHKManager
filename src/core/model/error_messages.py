@@ -18,14 +18,14 @@ class ErrorMessages():
     could_not_find_script = 'Could not find script: {}'
     could_not_refresh_script_script_removed = \
         'Could not refresh script, script removed: {}'
-    could_not_start_locked_script_script_already_running = \
-        'Could not start locked script, but script already running: {}'
+    could_not_start_locked_script = \
+        'Could not start locked script: {}'
     could_not_stop_locked_script = 'Could not stop script, script locked: {}'
     could_not_stop_script = 'Could not stop script: {}'
     could_not_restart_script = 'Could not restart script: {}'
     could_not_start_script = 'Could not start script: {}'
     script_path_not_valid = 'Script path is not valid: {}'
-    could_not_remove_script_could_not_stop= \
+    could_not_remove_script_could_not_stop = \
         'Could not remove script, could not stop script: {}'
     # endregion script
 

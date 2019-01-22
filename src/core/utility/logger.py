@@ -2,7 +2,7 @@ import datetime
 import logging
 
 
-class Logger():
+class Logger:
     _log_level = {
         'log': 0,
         'debug': 1,
@@ -88,7 +88,6 @@ class Logger():
 
         return '{time} - {module} - {msg}'.format(
             time=datetime.datetime.now(), module=self.module, msg=msg)
-
 
 # class MethodBoundaryLogger():
 #     """

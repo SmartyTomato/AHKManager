@@ -8,16 +8,15 @@
             "name": "Python: Application",
             "type": "python",
             "request": "launch",
-            "cwd": "${workspaceRoot}/src",
-            "pythonPath": "${workspaceRoot}/venv/Scripts/python.exe",
-            "program": "${workspaceRoot}/src/ahk_manager.py",
+            "cwd": "${workspaceFolder}/src",
+            "program": "${workspaceFolder}/src/ahk_manager.py",
         },
         {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "cwd": "${workspaceRoot}/src",
+            "cwd": "${workspaceFolder}/src",
         },
     ]
 }

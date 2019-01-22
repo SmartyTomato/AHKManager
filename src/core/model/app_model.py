@@ -1,10 +1,4 @@
-from core.service.library_service import LibraryService
-
-
 class AppModel():
-
-    library_service = LibraryService()
-
     def __init__(self):
         self.application = None
         self.main_window = None

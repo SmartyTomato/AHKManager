@@ -4,6 +4,7 @@ class State():
         self.lock: bool = False
         self.startup: bool = False
         self.running: bool = False
+        self.paused: bool = False
 
     # region to string
 
@@ -29,6 +30,7 @@ class State():
         out.append('\t Running: {}'.format(str(self.running)))
         out.append('\t Lock: {}'.format(str(self.lock)))
         out.append('\t Startup: {}'.format(str(self.startup)))
+        out.append('\t Paused: {}'.format(str(self.paused)))
 
         return '\n'.join(out)
 
@@ -37,6 +39,7 @@ class State():
         out += 'running={}, '.format(self.running)
         out += 'lock={}, '.format(self.lock)
         out += 'startup={}'.format(self.startup)
+        out += 'paused={}'.format(self.paused)
         out += ')'
 
         return out
