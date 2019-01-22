@@ -37,7 +37,7 @@ class LibraryRepository():
         """
 
         return next(
-            (x for x in self.library_list if x.haps_id(identifier)), None)
+            (x for x in self.library_list if x.has_id(identifier)), None)
 
     def find_script(self, identifier: str) -> Script:
         """
@@ -81,6 +81,14 @@ class LibraryRepository():
             scripts.extend(library.script_list)
 
         return scripts
+
+    def clear(self):
+        """
+        Clear repository
+        """
+
+        self.library_list = []
+
 
     # endregion public methods
 

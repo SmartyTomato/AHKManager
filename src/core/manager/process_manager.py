@@ -6,12 +6,11 @@ from subprocess import Popen
 
 from core.model.action_result import ActionResult
 from core.model.error_messages import ErrorMessages
-from core.model.singleton import Singleton
 from core.utility.configuration import Configuration
 from core.utility.utility import Utility
 
 
-class ProcessManager(metaclass=Singleton):
+class ProcessManager:
 
     configuration = Configuration()
     utility: Utility = Utility()

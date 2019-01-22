@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QAction, QMainWindow, QVBoxLayout, QWidget
 
 from core.model.library_repository import LibraryRepository
 from core.model.profile_repository import ProfileRepository
-from core.service.library_service import LibraryService
+from core.service.library_service import library_service
 from core.service.profile_service import ProfileService
 from core.utility.configuration import Configuration
 
@@ -17,7 +17,6 @@ from app.setting_dialog.settings_dialog import SettingsDialog
 
 class MainWindow(QMainWindow):
     configuration = Configuration()
-    library_service = LibraryService()
     profile_service = ProfileService()
     app_service = AppService()
 
@@ -41,6 +40,7 @@ class MainWindow(QMainWindow):
         # add tray icon
         self.tray_icon = TrayIcon(self)
 
+        self.refresh()
         self.show()
 
     def _init(self):
@@ -55,7 +55,7 @@ class MainWindow(QMainWindow):
     # region events
 
     def closeEvent(self, event):
-        self.library_service.stop_all()
+        library_service.stop_all()
 
         # Save configuration when window is closed
         self.configuration.main_window.width = self.width()
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
         self.configuration.load()
         repo = self.configuration.load_libraries()
         if repo:
-            self.library_service.repository = LibraryRepository.from_json(repo)
+            library_service.repository = LibraryRepository.from_json(repo)
         repo = self.configuration.load_profiles()
         if repo:
             self.profile_service.repository = ProfileRepository.from_json(repo)

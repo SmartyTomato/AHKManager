@@ -4,11 +4,10 @@ from core.manager.script_manager import ScriptManager
 from core.model.action_result import ActionResult
 from core.model.error_messages import ErrorMessages
 from core.model.library import Library
-from core.model.singleton import Singleton
 from core.utility.utility import Utility
 
 
-class LibraryManager(metaclass=Singleton):
+class LibraryManager():
 
     script_manager = ScriptManager()
     utility: Utility = Utility()
@@ -127,7 +126,7 @@ class LibraryManager(metaclass=Singleton):
 
     def remove(self, library: Library) -> ActionResult:
         """
-        Remove library, tring to stop all scripts before removal
+        Remove library, trying to stop all scripts before removal
 
         Args:
             library (Library): library object
@@ -209,13 +208,46 @@ class LibraryManager(metaclass=Singleton):
         return result, library
 
     def pause(self, library: Library) -> Tuple[ActionResult, Library]:
+        """
+        Pause library and all scripts
+
+        Args:
+            library (Library):
+
+        Returns:
+            Tuple[ActionResult, Library]:
+                return error when script cannot be stopped
+        """
+
         result = ActionResult()
+        if library.is_running():
+            library.pause()
 
         for script in library.script_list:
             temp_result, script = self.script_manager.pause(script)
             result.merge(temp_result)
 
-        library.pause()
+        return result, library
+
+    def resume(self, library: Library) -> Tuple[ActionResult, Library]:
+        """
+        Resume library and all scripts
+
+        Args:
+            library (Library):
+
+        Returns:
+            Tuple[ActionResult, Library]:
+        """
+
+        result = ActionResult()
+        if library.is_paused():
+            library.resume()
+
+        for script in library.script_list:
+            temp_result, script = self.script_manager.resume(script)
+            result.merge(temp_result)
+
         return result, library
 
     # endregion command

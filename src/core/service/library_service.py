@@ -8,18 +8,16 @@ from core.model.error_messages import ErrorMessages
 from core.model.library import Library
 from core.model.library_repository import LibraryRepository
 from core.model.script import Script
-from core.model.singleton import Singleton
 from core.utility.utility import Utility
 
 
-class LibraryService(metaclass=Singleton):
+class LibraryService:
 
     library_manager: LibraryManager = LibraryManager()
     script_manager: ScriptManager = ScriptManager()
     utility: Utility = Utility()
 
-    def __init__(self):
-        self.repository: LibraryRepository = LibraryRepository()
+    repository: LibraryRepository = LibraryRepository()
 
     # region add
 
@@ -105,6 +103,7 @@ class LibraryService(metaclass=Singleton):
             Library: library or None
         """
 
+        identifier = self.utility.format_path(identifier)
         return next((x for x in self.repository.library_list
                      if x.has_script(identifier)), None)
 
@@ -167,6 +166,21 @@ class LibraryService(metaclass=Singleton):
         if result.success():
             library = self.find_library_contains_script(identifier)
             library.remove(script)
+
+        return result
+
+    def remove_all(self) -> ActionResult:
+        """
+        Remove all library and script from the library
+
+        Returns:
+            ActionResult: return error when library could not be stopped
+        """
+
+        result = self.stop_all()
+
+        if result.success():
+            self.repository.clear()
 
         return result
 
@@ -284,10 +298,10 @@ class LibraryService(metaclass=Singleton):
 
     def pause_all(self) -> ActionResult:
         """
-        Pause all script in the repository
+        Pause all libraries and scripts in the repository
 
         Returns:
-            ActionResult: return only warning messages even when failed
+            ActionResult: return warning message when script cannot stopped
         """
 
         result = ActionResult()
@@ -300,7 +314,21 @@ class LibraryService(metaclass=Singleton):
         return result
 
     def resume_all(self) -> ActionResult:
-        pass
+        """
+        Resume all libraries and scripts in the repository
+
+        Returns:
+            ActionResult: return warning message when script cannot start
+        """
+
+        result = ActionResult()
+
+        for library in self.repository.library_list:
+            temp_result, library = self.library_manager.resume(library)
+            result.merge(temp_result)
+
+        result.ignore_error()
+        return result
 
     # endregion command
 
@@ -386,44 +414,47 @@ class LibraryService(metaclass=Singleton):
 
         return result
 
-    # endregion private methods
 
-    # def delete_library(self, path: str):
-    #     library = self._library_exists(path)
-    #     if not library:
-    #         return
+library_service = LibraryService()
 
-    #     success = self.library_manager.delete(library)
-    #     if not success:
-    #         self.message_service.add(
-    #             Message(MessageType.ERROR, 'Could not delete library: {}'\
-    # .format(library.path)))
-    #         self.logger.error('Could not delete library >>> {}'.format(
-    # repr(library)))
-    #         return
+# endregion private methods
 
-    #     self.repository.remove(library)
+# def delete_library(self, path: str):
+#     library = self._library_exists(path)
+#     if not library:
+#         return
 
-    # def add_script(self, library_path: str, script_path: str) -> Script:
-    #     library = self._library_exists(library_path)
-    #     if not library:
-    #         return None
+#     success = self.library_manager.delete(library)
+#     if not success:
+#         self.message_service.add(
+#             Message(MessageType.ERROR, 'Could not delete library: {}'\
+# .format(library.path)))
+#         self.logger.error('Could not delete library >>> {}'.format(
+# repr(library)))
+#         return
 
-    #     script = self.library_manager.add_script(library, script_path)
-    #     return script
+#     self.repository.remove(library)
 
-    # def delete_script(self, path: str):
+# def add_script(self, library_path: str, script_path: str) -> Script:
+#     library = self._library_exists(library_path)
+#     if not library:
+#         return None
 
-    #     script = self.find_script(path)
+#     script = self.library_manager.add_script(library, script_path)
+#     return script
 
-    #     if script is None:
-    #         # library don't contains script
-    #         self.logger.info('Script does not exists >>> {}'.format(path))
-    #         return True
+# def delete_script(self, path: str):
 
-    #     if not self.script_manager.delete(script):
-    #         return
+#     script = self.find_script(path)
 
-    #     # only remove from the list when no error occurs
-    #     self.repository.remove_script(script.identifier())
-    #     return True
+#     if script is None:
+#         # library don't contains script
+#         self.logger.info('Script does not exists >>> {}'.format(path))
+#         return True
+
+#     if not self.script_manager.delete(script):
+#         return
+
+#     # only remove from the list when no error occurs
+#     self.repository.remove_script(script.identifier())
+#     return True

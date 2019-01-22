@@ -10,7 +10,6 @@ from app.main_window.component.table_widget_item import (CheckBoxCellWidget,
                                                          TableWidgetItem)
 from core.manager.process_manager import ProcessManager
 from core.model.script import Script
-from core.service.library_service import LibraryService
 from core.service.profile_service import ProfileService
 
 
@@ -32,7 +31,6 @@ class TableWidget(QTableWidget):
         'Path': 300,
     }
 
-    library_service: LibraryService = LibraryService()
     profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
     process_manager = ProcessManager()
@@ -94,12 +92,14 @@ class TableWidget(QTableWidget):
                     self.setItem(i, self.column_orders[column],
                                  TableWidgetItem(script.identifier(),
                                                  script.name,
-                                                 script.is_running()))
+                                                 script.is_running(),
+                                                 script.is_paused()))
                 elif column == 'Running':
                     self.setItem(i, self.column_orders[column],
                                  TableWidgetItem(script.identifier(),
                                                  '',
-                                                 script.is_running()))
+                                                 script.is_running(),
+                                                 script.is_paused()))
                     self.setCellWidget(i, self.column_orders[column],
                                        CheckBoxCellWidget(script.identifier(),
                                                           script.is_running()))
@@ -107,7 +107,8 @@ class TableWidget(QTableWidget):
                     self.setItem(i, self.column_orders[column],
                                  TableWidgetItem(script.identifier(),
                                                  '',
-                                                 script.is_locked()))
+                                                 script.is_running(),
+                                                 script.is_paused()))
                     self.setCellWidget(i, self.column_orders[column],
                                        CheckBoxCellWidget(script.identifier(),
                                                           script.is_locked()))
@@ -115,4 +116,5 @@ class TableWidget(QTableWidget):
                     self.setItem(i, self.column_orders[column],
                                  TableWidgetItem(script.identifier(),
                                                  script.path,
-                                                 script.is_running()))
+                                                 script.is_running(),
+                                                 script.is_paused()))

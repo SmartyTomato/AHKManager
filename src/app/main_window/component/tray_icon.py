@@ -4,7 +4,7 @@ from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QMenu, QSystemTrayIcon, QMessageBox
 
 from app.application.app_service import AppService
-from core.service.library_service import LibraryService
+from core.service.library_service import library_service
 from core.service.profile_service import ProfileService
 from core.utility.configuration import Configuration
 
@@ -12,7 +12,7 @@ from core.utility.configuration import Configuration
 
 button_text_show = 'Show'
 button_text_exit = 'Exit'
-button_text_stop = 'Stop all'
+button_text_stop = 'Stop'
 button_text_pause = 'Pause'
 button_text_resume = 'Resume'
 
@@ -26,7 +26,6 @@ dialog_message_resume = 'All script has been resumed'
 
 class TrayIcon(QSystemTrayIcon):
 
-    library_service: LibraryService = LibraryService()
     profile_service: ProfileService = ProfileService()
     configuration: Configuration = Configuration()
     app_service: AppService = AppService()
@@ -50,7 +49,7 @@ class TrayIcon(QSystemTrayIcon):
         resume_action.triggered.connect(self.on_resume_triggered)
 
         stop_all_action = menu.addAction(button_text_stop)
-        stop_all_action.triggered.connect(self.on_stop_all_triggered)
+        stop_all_action.triggered.connect(self.on_stop_triggered)
 
         menu.addSeparator()
 
@@ -74,19 +73,21 @@ class TrayIcon(QSystemTrayIcon):
     def on_exit_triggered(self):
         self.app_service.app_model.main_window.closeEvent(QCloseEvent())
 
-    def on_stop_all_triggered(self):
-        self.library_service.stop_all()
+    def on_stop_triggered(self):
+        library_service.stop_all()
         self.profile_service.stop_all()
 
         self._refresh_main_window()
         self._show_message_box(dialog_message_stop)
 
     def on_pause_triggered(self):
-        self.library_service.pause_all()
+        library_service.pause_all()
+        self._refresh_main_window()
         self._show_message_box(dialog_message_pause)
 
     def on_resume_triggered(self):
-        self.library_service.resume_all()
+        library_service.resume_all()
+        self._refresh_main_window()
         self._show_message_box(dialog_message_resume)
 
     # region private methods

@@ -43,6 +43,13 @@ class Library():
 
         self.state.paused = True
 
+    def is_paused(self):
+        return self.state.paused
+
+    def resume(self):
+        self.state.paused = False
+        self.start()
+
     def add(self, script: Script):
         """
         Add script into the library
@@ -144,7 +151,7 @@ class Library():
                 running or not
         """
 
-        return self.state.running
+        return self.state.running and not self.state.paused
 
     def exists(self) -> bool:
         """

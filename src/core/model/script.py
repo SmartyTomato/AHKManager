@@ -48,8 +48,11 @@ class Script():
         self.process = None
         self.state.paused = True
 
-    def is_paused(self):
+    def is_paused(self) -> bool:
         return self.state.paused
+
+    def resume(self):
+        self.state.paused = False
 
     def identifier(self)->str:
         """
@@ -129,7 +132,8 @@ class Script():
             bool:
         """
 
-        return self.state.running
+        return self.state.running and \
+            bool(self.process) and not self.state.paused
 
     # endregion public methods
 

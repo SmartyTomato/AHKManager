@@ -5,13 +5,11 @@ from core.model.action_result import ActionResult
 from core.model.error_messages import ErrorMessages
 from core.model.profile import Profile
 from core.model.script import Script
-from core.model.singleton import Singleton
-from core.service.library_service import LibraryService
+from core.service.library_service import library_service
 
 
-class ProfileManager(metaclass=Singleton):
+class ProfileManager:
 
-    library_service: LibraryService = LibraryService()
     script_manager: ScriptManager = ScriptManager()
 
     def init_profile(self, name: str) -> Tuple[ActionResult, Profile]:
@@ -45,7 +43,7 @@ class ProfileManager(metaclass=Singleton):
         result = ActionResult()
 
         for script_id in profile.script_id_list:
-            temp_result, _ = self.library_service.start_script(script_id)
+            temp_result, _ = library_service.start_script(script_id)
             result.merge(temp_result)
 
         profile.start()
@@ -66,7 +64,7 @@ class ProfileManager(metaclass=Singleton):
         result = ActionResult()
 
         for script_id in profile.script_id_list:
-            temp_result, _ = self.library_service.stop_script(script_id)
+            temp_result, _ = library_service.stop_script(script_id)
             result.merge(temp_result)
 
         profile.stop()
@@ -88,7 +86,7 @@ class ProfileManager(metaclass=Singleton):
         profile.stop()
 
         for script_id in profile.script_id_list:
-            temp_result, _ = self.library_service.restart_script(script_id)
+            temp_result, _ = library_service.restart_script(script_id)
             result.merge(temp_result)
 
         profile.start()
@@ -110,7 +108,7 @@ class ProfileManager(metaclass=Singleton):
         result = ActionResult()
 
         for script_id in profile.script_id_list:
-            script = self.library_service.find_script(script_id)
+            script = library_service.find_script(script_id)
 
             if script:
                 temp_result, script = self.script_manager.refresh(script)
@@ -152,7 +150,7 @@ class ProfileManager(metaclass=Singleton):
         profile.add(script.identifier())
 
         if profile.is_running():
-            temp_result, script = self.library_service.start_script(
+            temp_result, script = library_service.start_script(
                 script.identifier())
             result.merge(temp_result)
 

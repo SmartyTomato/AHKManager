@@ -8,7 +8,7 @@ from app.add_script_dialog.component.add_script_dialog_table_widget import \
 from app.application.app_service import AppService
 from app.main_window.component.table_widget import TableWidget
 from core.model.script import Script
-from core.service.library_service import LibraryService
+from core.service.library_service import library_service
 from core.service.profile_service import ProfileService
 from core.utility.configuration import Configuration
 
@@ -18,7 +18,6 @@ class AddScriptToProfileDialog(QDialog):
     add_button_size = QSize(50, 40)
     ok_button_size = QSize(100, 60)
 
-    library_service: LibraryService = LibraryService()
     profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
     configuration: Configuration = Configuration()
@@ -193,7 +192,7 @@ class AddScriptToProfileDialog(QDialog):
 
         self.available_scripts = []
         self.selected_scripts = []
-        scripts = self.library_service.get_all_scripts()
+        scripts = library_service.get_all_scripts()
 
         for script_id in profile.script_id_list:
             found = next((x for x in scripts if x.has_id(script_id)), None)

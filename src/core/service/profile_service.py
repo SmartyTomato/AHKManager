@@ -8,18 +8,14 @@ from core.model.error_messages import ErrorMessages
 from core.model.profile import Profile
 from core.model.profile_repository import ProfileRepository
 from core.model.script import Script
-from core.model.singleton import Singleton
-from core.service.library_service import LibraryService
+from core.service.library_service import library_service
 
 
-class ProfileService(metaclass=Singleton):
-
-    library_service: LibraryService = LibraryService()
+class ProfileService:
     profile_manager: ProfileManager = ProfileManager()
     script_manager: ScriptManager = ScriptManager()
 
-    def __init__(self):
-        self.repository: ProfileRepository = ProfileRepository()
+    repository: ProfileRepository = ProfileRepository()
 
     # region add
 
@@ -85,7 +81,7 @@ class ProfileService(metaclass=Singleton):
             return result, profile
 
         # find script
-        script = self.library_service.find_script(script_id)
+        script = library_service.find_script(script_id)
         if not script:
             result.add_error(
                 ErrorMessages.could_not_find_script.format(script_id))
@@ -126,7 +122,7 @@ class ProfileService(metaclass=Singleton):
         if not profile:
             return None
 
-        return self.library_service.find_script(identifier)
+        return library_service.find_script(identifier)
 
     def find_profiles_contains_script(self, identifier: str) -> List[Profile]:
         """
@@ -175,7 +171,7 @@ class ProfileService(metaclass=Singleton):
             return []
 
         for script_id in profile.script_id_list:
-            script = self.library_service.find_script(script_id)
+            script = library_service.find_script(script_id)
             if script:
                 scripts.append(script)
 
@@ -261,11 +257,11 @@ class ProfileService(metaclass=Singleton):
         # try to stop script if no one else if running this script
         # get all profiles and libraries currently running contains script
         profiles = self.find_running_profiles_contains_script(script_id)
-        library = self.library_service.find_library_contains_script(script_id)
+        library = library_service.find_library_contains_script(script_id)
 
         # check to see anything is running other than this script
         if len(profiles) <= 1 and not (library and library.is_running()):
-            temp_result, _ = self.library_service.stop_script(
+            temp_result, _ = library_service.stop_script(
                 script_id)
             result.merge(temp_result)
 
@@ -289,7 +285,7 @@ class ProfileService(metaclass=Singleton):
         result = ActionResult()
 
         # if identifier is a library, delete all script belongs to that library
-        library = self.library_service.find(identifier)
+        library = library_service.find(identifier)
         if library:
             for script in library.script_list:
                 profiles = self.find_profiles_contains_script(
@@ -434,3 +430,6 @@ class ProfileService(metaclass=Singleton):
         return result, profile
 
     # endregion private methods
+
+
+profile_service = ProfileService()

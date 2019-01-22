@@ -4,12 +4,11 @@ from core.manager.process_manager import ProcessManager
 from core.model.action_result import ActionResult
 from core.model.error_messages import ErrorMessages
 from core.model.script import Script
-from core.model.singleton import Singleton
 from core.utility.configuration import Configuration
 from core.utility.utility import Utility
 
 
-class ScriptManager(metaclass=Singleton):
+class ScriptManager:
 
     process_manager = ProcessManager()
     configuration = Configuration()
@@ -67,7 +66,7 @@ class ScriptManager(metaclass=Singleton):
 
     def refresh(self, script: Script) -> Tuple[ActionResult, Script]:
         """
-        Refrersh script, check whether it exists
+        Refresh script, check whether it exists
 
         Args:
             script (Script):
@@ -80,7 +79,7 @@ class ScriptManager(metaclass=Singleton):
 
         # check whether file exists
         if not script.exists():
-            result.add_warning(
+            result.add_error(
                 ErrorMessages.could_not_refresh_script_script_removed
                 .format(script.identifier()))
 
@@ -104,15 +103,13 @@ class ScriptManager(metaclass=Singleton):
         result = ActionResult()
 
         # check whether script is locked or not exists
-        if not script.allow_state_change():
-            if script.is_running():
-                result.add_warning(
-                    ErrorMessages
-                    .could_not_start_locked_script_script_already_running
-                    .format(script.identifier()))
-                return result, script
+        if not script.allow_state_change and not script.is_running():
+            result.add_error(
+                ErrorMessages.could_not_start_locked_script.format(
+                    script.identifier()))
+            return result, script
 
-        if script.process:
+        if script.is_running():
             return result, script
 
         return self._start_script(script)
@@ -130,7 +127,7 @@ class ScriptManager(metaclass=Singleton):
 
         result = ActionResult()
 
-        if not script.is_running() or not script.process:
+        if not script.is_running():
             return result, script
 
         # check whether script is locked or not exists
@@ -212,7 +209,7 @@ class ScriptManager(metaclass=Singleton):
 
         result = ActionResult()
 
-        if not script.is_running() or not script.process:
+        if not script.is_running():
             return result, script
 
         # * check whether script is locked or not exists
@@ -230,6 +227,36 @@ class ScriptManager(metaclass=Singleton):
             result.add_error(
                 ErrorMessages.could_not_stop_script.format(
                     script.identifier()))
+
+        return result, script
+
+    def resume(self, script: Script) -> Tuple[ActionResult, Script]:
+        """
+        Resume script if it is being paused
+
+        Args:
+            script (Script):
+
+        Returns:
+            Tuple[ActionResult, Script]:
+                Return error when script cannot start
+        """
+
+        if not script.is_paused():
+            return ActionResult(), script
+
+        result = ActionResult()
+
+        # check whether script is locked or not exists
+        if not script.allow_state_change():
+            result.add_error(
+                ErrorMessages.could_not_start_locked_script.format(
+                    script.identifier()))
+            return result, script
+
+        result, script = self._start_script(script)
+        if result.success():
+            script.resume()
 
         return result, script
 

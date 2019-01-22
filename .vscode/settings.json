@@ -3,9 +3,9 @@
     "autoDocstring.newlineBeforeSummary": true,
     "autoDocstring.docstringFormat": "google",
     "python.pythonPath": "venv\\Scripts\\python.exe",
-    "python.autoComplete.extraPaths": [
-        "${workspaceFolder}\\venv\\lib\\site-packages",
-    ],
+    // "python.autoComplete.extraPaths": [
+    //     "${workspaceFolder}\\venv\\lib\\site-packages",
+    // ],
     "python.linting.pylintArgs": [
         "--load-plugins",
         "--disable=E0611",

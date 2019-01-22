@@ -5,18 +5,20 @@ from PyQt5.QtWidgets import QCheckBox, QHBoxLayout, QTableWidgetItem, QWidget
 
 class TableWidgetItem(QTableWidgetItem):
 
-    def __init__(self, script_id: str,
-                 text: str='', is_running: bool=False) -> None:
+    def __init__(self, script_id: str, text: str = '',
+                 is_running: bool = False, is_paused: bool = False) -> None:
         QTableWidgetItem.__init__(self)
 
         self.script_id = script_id
         self.setText(text)
         if is_running:
             self.setForeground(PyQt5.Qt.QColor(0, 0, 255))
+        elif is_paused:
+            self.setForeground(PyQt5.Qt.QColor(255, 155, 66))
 
 
 class CheckBoxCellWidget(QWidget):
-    def __init__(self, script_id: str, is_checked: bool=False) -> None:
+    def __init__(self, script_id: str, is_checked: bool = False) -> None:
         QWidget.__init__(self)
 
         self.script_id = script_id
