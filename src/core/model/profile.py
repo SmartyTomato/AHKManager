@@ -107,6 +107,9 @@ class Profile():
 
         return self.state.running
 
+    def is_paused(self):
+        return False
+
     # endregion public methods
 
     # region string
