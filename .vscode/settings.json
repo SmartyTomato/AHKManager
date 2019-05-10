@@ -1,0 +1,40 @@
+{
+    "python.autoComplete.addBrackets": true,
+    "autoDocstring.newlineBeforeSummary": true,
+    "autoDocstring.docstringFormat": "google",
+    "python.pythonPath": "C:\\Program Files\\Python37\\python.exe",
+    // "python.autoComplete.extraPaths": [
+    //     "${workspaceFolder}\\venv\\lib\\site-packages",
+    // ],
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "--disable=E0611",
+        "--disable=C0111",
+        "--disable=W0703",
+        "--disable=C0103",
+        "--disable=W0640",
+        "--disable=W0108",
+        "--disable=C0326",
+        "--disable=R0201",
+        "--disable=R0903",
+    ],
+    "python.venvFolders": [
+        "${workspaceFolder}\\venv",
+    ],
+    "code-runner.cwd": "${workspaceFolder}\\src",
+    "python.workspaceSymbols.ctagsPath": "${workspaceFolder}\\.vscode\\ctags\\ctags.exe",
+    "editor.rulers": [
+        79,
+    ],
+    "python.linting.mypyEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "files.trimTrailingWhitespace": true,
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.pyTestEnabled": false,
+    "python.linting.pylintPath": "${workspaceFolder}\\venv\\Scripts\\pylint.exe",
+    "python.unitTest.promptToConfigure": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "cSpell.words": [
+        "pytest"
+    ],
+}
