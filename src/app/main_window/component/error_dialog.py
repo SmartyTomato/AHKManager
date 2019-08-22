@@ -3,8 +3,8 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QTableWidget, \
     QTableWidgetItem, QAbstractItemView, QHeaderView, QPushButton, QHBoxLayout
 
-from core.model.action_result import ActionResult
-from core.model.message import MessageType
+from src.core.model.action_result import ActionResult
+from src.core.model.message import MessageType
 
 
 class ErrorDialog(QDialog):

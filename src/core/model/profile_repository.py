@@ -1,6 +1,6 @@
 from typing import List
 
-from core.model.profile import Profile
+from src.core.model.profile import Profile
 
 
 class ProfileRepository():
@@ -24,7 +24,7 @@ class ProfileRepository():
 
         self.profile_list.append(profile)
 
-    def find(self, identifier: str) ->Profile:
+    def find(self, identifier: str) -> Profile:
         """
         Find profile using the identifier (name)
 

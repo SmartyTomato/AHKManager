@@ -3,8 +3,8 @@ from typing import List
 from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QAbstractItemView
 
-from app.main_window.component.table_widget import TableWidget
-from core.model.script import Script
+from src.app.main_window.component.table_widget import TableWidget
+from src.core.model.script import Script
 
 
 class AddScriptDialogTableWidget(TableWidget):

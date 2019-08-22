@@ -3,10 +3,10 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QMenu, QSystemTrayIcon, QMessageBox
 
-from app.application.app_service import AppService
-from core.service.library_service import library_service
-from core.service.profile_service import ProfileService
-from core.utility.configuration import Configuration
+from src.app.application.app_service import AppService
+from src.core.service.library_service import library_service
+from src.core.service.profile_service import profile_service
+from src.core.utility.configuration import Configuration
 
 # region constants
 
@@ -26,7 +26,6 @@ dialog_message_resume = 'All script has been resumed'
 
 class TrayIcon(QSystemTrayIcon):
 
-    profile_service: ProfileService = ProfileService()
     configuration: Configuration = Configuration()
     app_service: AppService = AppService()
 
@@ -75,7 +74,7 @@ class TrayIcon(QSystemTrayIcon):
 
     def on_stop_triggered(self):
         library_service.stop_all()
-        self.profile_service.stop_all()
+        profile_service.stop_all()
 
         self._refresh_main_window()
         self._show_message_box(dialog_message_stop)

@@ -3,21 +3,20 @@ import sys
 from PyQt5.QtCore import QEvent, Qt
 from PyQt5.QtWidgets import QAction, QMainWindow, QVBoxLayout, QWidget
 
-from core.model.library_repository import LibraryRepository
-from core.model.profile_repository import ProfileRepository
-from core.service.library_service import library_service
-from core.service.profile_service import ProfileService
-from core.utility.configuration import Configuration
+from src.core.model.library_repository import LibraryRepository
+from src.core.model.profile_repository import ProfileRepository
+from src.core.service.library_service import library_service
+from src.core.service.profile_service import profile_service
+from src.core.utility.configuration import Configuration
 
-from app.application.app_service import AppService
-from app.main_window.component.tab_widget import TabWidget
-from app.main_window.component.tray_icon import TrayIcon
-from app.setting_dialog.settings_dialog import SettingsDialog
+from src.app.application.app_service import AppService
+from src.app.main_window.component.tab_widget import TabWidget
+from src.app.main_window.component.tray_icon import TrayIcon
+from src.app.setting_dialog.settings_dialog import SettingsDialog
 
 
 class MainWindow(QMainWindow):
     configuration = Configuration()
-    profile_service = ProfileService()
     app_service = AppService()
 
     def __init__(self):
@@ -88,7 +87,7 @@ class MainWindow(QMainWindow):
             library_service.repository = LibraryRepository.from_json(repo)
         repo = self.configuration.load_profiles()
         if repo:
-            self.profile_service.repository = ProfileRepository.from_json(repo)
+            profile_service.repository = ProfileRepository.from_json(repo)
 
     def _create_menus(self):
         main_menu = self.menuBar()

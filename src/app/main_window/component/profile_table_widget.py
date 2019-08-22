@@ -3,15 +3,17 @@ from typing import List
 from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QMenu
 
-from core.model.script import Script
-from core.model.action_result import ActionResult
-from core.service.library_service import library_service
+from src.core.model.script import Script
+from src.core.model.action_result import ActionResult
+from src.core.service.library_service import library_service
+from src.core.service.profile_service import profile_service
 
-from app.main_window.component.error_dialog import ErrorDialog
-from app.add_script_dialog.add_script_to_profile_dialog import \
+
+from src.app.main_window.component.error_dialog import ErrorDialog
+from src.app.add_script_dialog.add_script_to_profile_dialog import \
     AddScriptToProfileDialog
-from app.main_window.component.table_widget import TableWidget
-from app.main_window.component.table_widget_item import TableWidgetItem
+from src.app.main_window.component.table_widget import TableWidget
+from src.app.main_window.component.table_widget_item import TableWidgetItem
 
 
 class ProfileTableWidget(TableWidget):
@@ -48,7 +50,7 @@ class ProfileTableWidget(TableWidget):
 
     # region method implementations
 
-    def get_scripts(self)->List[Script]:
+    def get_scripts(self) -> List[Script]:
         return self.app_service.get_selected_profile_scripts()
 
     def open_menu(self, position: QPoint):
@@ -110,7 +112,7 @@ class ProfileTableWidget(TableWidget):
                 return
 
             for script in scripts:
-                temp_result, _ = self.profile_service.add_script(
+                temp_result, _ = profile_service.add_script(
                     profile_id, script.identifier())
                 result.merge(temp_result)
 
@@ -125,7 +127,7 @@ class ProfileTableWidget(TableWidget):
         result = ActionResult()
         for i in range(0, len(items), len(self.columns)):
             script_id = items[i].script_id
-            temp_result = self.profile_service.remove_script_from_profile(
+            temp_result = profile_service.remove_script_from_profile(
                 profile_id, script_id)
             result.merge(temp_result)
 

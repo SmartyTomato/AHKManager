@@ -3,12 +3,12 @@ from typing import List
 from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QFileDialog, QMenu
 
-from app.main_window.component.list_widget import ListWidget
-from app.main_window.component.error_dialog import ErrorDialog
-from app.main_window.component.list_widget_item import ListWidgetItem
+from src.app.main_window.component.list_widget import ListWidget
+from src.app.main_window.component.error_dialog import ErrorDialog
+from src.app.main_window.component.list_widget_item import ListWidgetItem
 
-from core.service.library_service import library_service
-from core.model.action_result import ActionResult
+from src.core.service.library_service import library_service
+from src.core.model.action_result import ActionResult
 
 
 class LibraryListWidget(ListWidget):
@@ -100,7 +100,7 @@ class LibraryListWidget(ListWidget):
 
         for item in items:
             script_id = item.identifier
-            temp_result = self.profile_service.remove_script(script_id)
+            temp_result = profile_service.remove_script(script_id)
             result.merge(temp_result)
             temp_result = library_service.remove(script_id)
             result.merge(temp_result)

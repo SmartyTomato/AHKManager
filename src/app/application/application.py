@@ -2,9 +2,9 @@ import sys
 
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
-from app.main_window.main_window import MainWindow
-from app.application.app_service import AppService
-from core.utility.configuration import Configuration
+from src.app.main_window.main_window import MainWindow
+from src.app.application.app_service import AppService
+from src.core.utility.configuration import Configuration
 
 
 class Application(QApplication):

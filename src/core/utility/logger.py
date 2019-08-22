@@ -16,7 +16,7 @@ class Logger:
         self.logger = logging.getLogger(module)
 
     def log(self, msg):
-        from core.utility.configuration import Configuration
+        from src.core.utility.configuration import Configuration
         configuration = Configuration()
         if int(configuration.utility.log_level) > int(self._log_level['log']):
             return
@@ -29,7 +29,7 @@ class Logger:
             print(msg)
 
     def info(self, msg):
-        from core.utility.configuration import Configuration
+        from src.core.utility.configuration import Configuration
         configuration = Configuration()
         if configuration.utility.log_level > self._log_level['debug']:
             return
@@ -42,7 +42,7 @@ class Logger:
             print(msg)
 
     def warning(self, msg):
-        from core.utility.configuration import Configuration
+        from src.core.utility.configuration import Configuration
         configuration = Configuration()
         if configuration.utility.log_level > self._log_level['warning']:
             return
@@ -55,7 +55,7 @@ class Logger:
             print(msg)
 
     def error(self, msg):
-        from core.utility.configuration import Configuration
+        from src.core.utility.configuration import Configuration
         configuration = Configuration()
         if configuration.utility.log_level > self._log_level['error']:
             return
@@ -68,7 +68,7 @@ class Logger:
             print(msg)
 
     def critical(self, msg):
-        from core.utility.configuration import Configuration
+        from src.core.utility.configuration import Configuration
         configuration = Configuration()
         if configuration.utility.log_level > self._log_level['critical']:
             return

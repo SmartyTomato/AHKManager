@@ -3,10 +3,10 @@ import pytest
 from typing import Dict
 from unittest.mock import MagicMock
 
-from core.model.script import Script
-from core.model.library import Library
-from core.model.action_result import ActionResult
-from core.manager.library_manager import LibraryManager
+from src.core.model.script import Script
+from src.core.model.library import Library
+from src.core.model.action_result import ActionResult
+from src.core.manager.library_manager import LibraryManager
 
 
 class LibraryManagerTest:

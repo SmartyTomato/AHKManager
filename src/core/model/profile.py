@@ -1,6 +1,6 @@
 from typing import List
 
-from core.model.state import State
+from src.core.model.state import State
 
 
 class Profile():

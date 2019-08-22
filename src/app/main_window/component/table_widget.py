@@ -5,12 +5,12 @@ from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtWidgets import (QAbstractItemView, QHeaderView, QTableWidget,
                              QTableWidgetItem)
 
-from app.application.app_service import AppService
-from app.main_window.component.table_widget_item import (CheckBoxCellWidget,
-                                                         TableWidgetItem)
-from core.manager.process_manager import ProcessManager
-from core.model.script import Script
-from core.service.profile_service import ProfileService
+from src.app.application.app_service import AppService
+from src.app.main_window.component.table_widget_item \
+    import (CheckBoxCellWidget, TableWidgetItem)
+from src.core.manager.process_manager import ProcessManager
+from src.core.model.script import Script
+from src.core.service.profile_service import profile_service
 
 
 class TableWidget(QTableWidget):
@@ -31,7 +31,6 @@ class TableWidget(QTableWidget):
         'Path': 300,
     }
 
-    profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
     process_manager = ProcessManager()
 
@@ -66,7 +65,7 @@ class TableWidget(QTableWidget):
     # region abstract methods
 
     @abc.abstractmethod
-    def get_scripts(self) ->List[Script]:
+    def get_scripts(self) -> List[Script]:
         # return self.app_service.app_model.profile_scripts
         raise NotImplementedError()
 

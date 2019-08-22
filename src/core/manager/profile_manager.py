@@ -1,11 +1,11 @@
 from typing import Tuple
 
-from core.manager.script_manager import ScriptManager
-from core.model.action_result import ActionResult
-from core.model.error_messages import ErrorMessages
-from core.model.profile import Profile
-from core.model.script import Script
-from core.service.library_service import library_service
+from src.core.manager.script_manager import ScriptManager
+from src.core.model.action_result import ActionResult
+from src.core.model.error_messages import ErrorMessages
+from src.core.model.profile import Profile
+from src.core.model.script import Script
+from src.core.service.library_service import library_service
 
 
 class ProfileManager:

@@ -1,7 +1,7 @@
 from enum import IntEnum
 from typing import List
 
-from core.model.message import Message, MessageType
+from src.core.model.message import Message, MessageType
 
 
 class ResultCode(IntEnum):

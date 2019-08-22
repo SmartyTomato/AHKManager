@@ -2,7 +2,7 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import (QDialog, QFileDialog, QGridLayout, QHBoxLayout,
                              QLabel, QLineEdit, QPushButton, QVBoxLayout)
 
-from core.utility.configuration import Configuration
+from src.core.utility.configuration import Configuration
 
 
 class SettingsDialog(QDialog):

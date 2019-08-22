@@ -1,18 +1,17 @@
 from typing import List
 from typing import Callable
 
-from core.model.app_model import AppModel
-from core.model.library import Library
-from core.model.profile import Profile
-from core.model.script import Script
-from core.utility.configuration import Configuration
-from core.service.library_service import library_service
-from core.service.profile_service import ProfileService
+from src.core.model.app_model import AppModel
+from src.core.model.library import Library
+from src.core.model.profile import Profile
+from src.core.model.script import Script
+from src.core.utility.configuration import Configuration
+from src.core.service.library_service import library_service
+from src.core.service.profile_service import profile_service
 
 
 class AppService:
 
-    profile_service: ProfileService = ProfileService()
     configuration: Configuration = Configuration()
 
     app_model: AppModel = AppModel()
@@ -25,7 +24,7 @@ class AppService:
         return library_service.repository.library_list
 
     def get_profile_list(self) -> List[Profile]:
-        return self.profile_service.repository.profile_list
+        return profile_service.repository.profile_list
 
     def get_selected_library_scripts(self) -> List[Script]:
         if not self.app_model.selected_library_id:
@@ -38,14 +37,14 @@ class AppService:
         if not self.app_model.selected_profile_id:
             return []
 
-        return self.profile_service.get_profile_scripts(
+        return profile_service.get_profile_scripts(
             self.app_model.selected_profile_id)
 
     def refresh(self):
         self.app_model.main_window.refresh()
 
     def save_configuration(self):
-        self.configuration.save(self.profile_service.repository,
+        self.configuration.save(profile_service.repository,
                                 library_service.repository)
 
     # endregion public methods
@@ -53,7 +52,7 @@ class AppService:
     # region events
 
     def on_profile_selected(self, identifier: str):
-        profile = self.profile_service.find(identifier)
+        profile = profile_service.find(identifier)
         if not profile:
             self.app_model.selected_profile_id = None
         else:

@@ -3,14 +3,14 @@ from typing import List
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QDialog, QHBoxLayout, QPushButton, QVBoxLayout
 
-from app.add_script_dialog.component.add_script_dialog_table_widget import \
+from src.app.add_script_dialog.component.add_script_dialog_table_widget import \
     AddScriptDialogTableWidget
-from app.application.app_service import AppService
-from app.main_window.component.table_widget import TableWidget
-from core.model.script import Script
-from core.service.library_service import library_service
-from core.service.profile_service import ProfileService
-from core.utility.configuration import Configuration
+from src.app.application.app_service import AppService
+from src.app.main_window.component.table_widget import TableWidget
+from src.core.model.script import Script
+from src.core.service.library_service import library_service
+from src.core.service.profile_service import profile_service
+from src.core.utility.configuration import Configuration
 
 
 class AddScriptToProfileDialog(QDialog):
@@ -18,7 +18,6 @@ class AddScriptToProfileDialog(QDialog):
     add_button_size = QSize(50, 40)
     ok_button_size = QSize(100, 60)
 
-    profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
     configuration: Configuration = Configuration()
 
@@ -185,7 +184,7 @@ class AddScriptToProfileDialog(QDialog):
     # endregion events
 
     def _init_available_scripts(self):
-        profile = self.profile_service.find(
+        profile = profile_service.find(
             self.app_service.app_model.selected_profile_id)
         if not profile:
             return

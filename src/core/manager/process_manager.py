@@ -4,10 +4,10 @@ from typing import Optional
 import subprocess
 from subprocess import Popen
 
-from core.model.action_result import ActionResult
-from core.model.error_messages import ErrorMessages
-from core.utility.configuration import Configuration
-from core.utility.utility import Utility
+from src.core.model.action_result import ActionResult
+from src.core.model.error_messages import ErrorMessages
+from src.core.utility.configuration import Configuration
+from src.core.utility.utility import Utility
 
 
 class ProcessManager:

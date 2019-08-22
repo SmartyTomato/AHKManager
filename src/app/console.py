@@ -1,9 +1,9 @@
 import os
 
-from core.service.library_service import library_service
-from core.service.message_service import MessageService
-from core.service.profile_service import ProfileService
-from core.utility.configuration import Configuration
+from src.core.service.library_service import library_service
+from src.core.service.message_service import MessageService
+from src.core.service.profile_service import ProfileService
+from src.core.utility.configuration import Configuration
 
 path = os.getcwd() + '\\test_data\\AutoHotKey'
 

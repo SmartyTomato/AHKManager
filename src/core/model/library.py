@@ -1,8 +1,8 @@
 from typing import List
 
-from core.model.script import Script
-from core.model.state import State
-from core.utility.utility import Utility
+from src.core.model.script import Script
+from src.core.model.state import State
+from src.core.utility.utility import Utility
 
 
 class Library():

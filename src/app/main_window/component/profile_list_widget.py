@@ -3,11 +3,12 @@ from typing import List
 from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QInputDialog, QMenu
 
-from core.model.action_result import ActionResult
+from src.core.model.action_result import ActionResult
 
-from app.main_window.component.list_widget import ListWidget
-from app.main_window.component.list_widget_item import ListWidgetItem
-from app.main_window.component.error_dialog import ErrorDialog
+from src.app.main_window.component.list_widget import ListWidget
+from src.app.main_window.component.list_widget_item import ListWidgetItem
+from src.app.main_window.component.error_dialog import ErrorDialog
+from src.core.service.profile_service import profile_service
 
 
 class ProfileListWidget(ListWidget):
@@ -73,7 +74,7 @@ class ProfileListWidget(ListWidget):
 
         result = ActionResult()
         if ok and name:
-            temp_result, _ = self.profile_service.add(name)
+            temp_result, _ = profile_service.add(name)
             result.merge(temp_result)
 
         self._post_process(result)
@@ -84,7 +85,7 @@ class ProfileListWidget(ListWidget):
 
         result = ActionResult()
         for item in items:
-            temp_result = self.profile_service.remove(item.identifier)
+            temp_result = profile_service.remove(item.identifier)
             result.merge(temp_result)
 
         self._post_process(result)
@@ -95,7 +96,7 @@ class ProfileListWidget(ListWidget):
 
         result = ActionResult()
         for item in items:
-            temp_result, _ = self.profile_service.start(item.identifier)
+            temp_result, _ = profile_service.start(item.identifier)
             result.merge(temp_result)
 
         self._post_process(result)
@@ -106,7 +107,7 @@ class ProfileListWidget(ListWidget):
 
         result = ActionResult()
         for item in items:
-            temp_result, _ = self.profile_service.stop(item.identifier)
+            temp_result, _ = profile_service.stop(item.identifier)
             result.merge(temp_result)
 
         self._post_process(result)

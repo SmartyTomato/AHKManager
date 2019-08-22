@@ -2,7 +2,7 @@ import abc
 
 from PyQt5.QtWidgets import QGridLayout, QWidget
 
-from app.application.app_service import AppService
+from src.app.application.app_service import AppService
 
 
 class TabPage(QWidget):

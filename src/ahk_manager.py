@@ -1,7 +1,7 @@
 import sys
 import traceback
 
-from app.application.application import Application
+from src.app.application.application import Application
 
 
 def main():

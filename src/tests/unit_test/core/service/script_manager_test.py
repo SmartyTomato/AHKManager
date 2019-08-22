@@ -2,9 +2,9 @@ import pytest
 
 from unittest.mock import MagicMock
 
-from core.model.script import Script
-from core.model.action_result import ActionResult
-from core.manager.script_manager import ScriptManager
+from src.core.model.script import Script
+from src.core.model.action_result import ActionResult
+from src.core.manager.script_manager import ScriptManager
 
 
 class ScriptProcessMock:

@@ -4,11 +4,11 @@ from typing import List
 from typing import Dict
 from unittest.mock import MagicMock
 
-from core.model.action_result import ActionResult
-from core.model.library import Library
-from core.model.script import Script
-from core.model.message import MessageType
-from core.service.library_service import LibraryService
+from src.core.model.action_result import ActionResult
+from src.core.model.library import Library
+from src.core.model.script import Script
+from src.core.model.message import MessageType
+from src.core.service.library_service import LibraryService
 
 
 class LibraryServiceTest():

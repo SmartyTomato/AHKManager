@@ -1,10 +1,10 @@
 from typing import Tuple
 
-from core.manager.script_manager import ScriptManager
-from core.model.action_result import ActionResult
-from core.model.error_messages import ErrorMessages
-from core.model.library import Library
-from core.utility.utility import Utility
+from src.core.manager.script_manager import ScriptManager
+from src.core.model.action_result import ActionResult
+from src.core.model.error_messages import ErrorMessages
+from src.core.model.library import Library
+from src.core.utility.utility import Utility
 
 
 class LibraryManager():

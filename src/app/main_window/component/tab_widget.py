@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QTabWidget
 
-from app.main_window.component.library_page import LibraryPage
-from app.main_window.component.profile_page import ProfilePage
+from src.app.main_window.component.library_page import LibraryPage
+from src.app.main_window.component.profile_page import ProfilePage
 
 
 class TabWidget(QTabWidget):

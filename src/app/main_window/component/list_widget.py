@@ -5,15 +5,13 @@ from typing import List
 from PyQt5.QtCore import QPoint, Qt
 from PyQt5.QtWidgets import QAbstractItemView, QListWidget
 
-from app.application.app_service import AppService
-from app.main_window.component.list_widget_item import ListWidgetItem
-from core.manager.process_manager import ProcessManager
-from core.service.profile_service import ProfileService
+from src.app.application.app_service import AppService
+from src.app.main_window.component.list_widget_item import ListWidgetItem
+from src.core.manager.process_manager import ProcessManager
 
 
 class ListWidget(QListWidget):
 
-    profile_service: ProfileService = ProfileService()
     app_service: AppService = AppService()
     process_manager: ProcessManager = ProcessManager()
 
@@ -73,7 +71,7 @@ class ListWidget(QListWidget):
                                               container.name,
                                               container.identifier(),
                                               container.is_running(),
-                                              container.is_paused())
+                                              container.is_running())
             self.addItem(list_widget_item)
 
     # endregion public methods

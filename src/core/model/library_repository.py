@@ -1,7 +1,7 @@
 from typing import List
 
-from core.model.library import Library
-from core.model.script import Script
+from src.core.model.library import Library
+from src.core.model.script import Script
 
 
 class LibraryRepository():

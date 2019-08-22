@@ -1,11 +1,11 @@
 from typing import Tuple
 
-from core.manager.process_manager import ProcessManager
-from core.model.action_result import ActionResult
-from core.model.error_messages import ErrorMessages
-from core.model.script import Script
-from core.utility.configuration import Configuration
-from core.utility.utility import Utility
+from src.core.manager.process_manager import ProcessManager
+from src.core.model.action_result import ActionResult
+from src.core.model.error_messages import ErrorMessages
+from src.core.model.script import Script
+from src.core.utility.configuration import Configuration
+from src.core.utility.utility import Utility
 
 
 class ScriptManager:

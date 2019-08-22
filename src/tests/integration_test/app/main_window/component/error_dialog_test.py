@@ -5,7 +5,7 @@
 # from PyQt5.QtWidgets import QApplication
 
 # from app.main_window.component.error_dialog import ErrorDialog
-# from core.model.action_result import ActionResult
+# from src.core.model.action_result import ActionResult
 
 
 # class ErrorDialogTest(TestCase):

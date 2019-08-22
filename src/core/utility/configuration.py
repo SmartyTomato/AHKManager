@@ -1,12 +1,12 @@
 import json
 import os
 
-from core.model.configuration_models import (AddScriptDialogConfiguration,
+from src.core.model.configuration_models import (AddScriptDialogConfiguration,
                                              MainWindowConfiguration,
                                              SettingsDialogConfiguration,
                                              UtilityConfiguration)
-from core.service.message_service import MessageService
-from core.utility.logger import Logger
+from src.core.service.message_service import MessageService
+from src.core.utility.logger import Logger
 
 
 class Configuration:

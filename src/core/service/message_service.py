@@ -1,6 +1,6 @@
 from typing import List
 
-from core.model.message import Message
+from src.core.model.message import Message
 
 
 class MessageService:

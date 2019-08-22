@@ -2,8 +2,8 @@ from typing import Optional
 
 from subprocess import Popen
 
-from core.model.state import State
-from core.utility.utility import Utility
+from src.core.model.state import State
+from src.core.utility.utility import Utility
 
 
 class Script():
