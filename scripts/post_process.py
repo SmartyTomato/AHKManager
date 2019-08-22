@@ -7,7 +7,7 @@ from typing import List
 sys_param = {
     # Post process
     'dist_path': '../dist/AHK Manager',
-    'required_files': ['../src/resources',
+    'required_files': ['../resources',
                        '../README.md'],
 
     'search_path': ['../dist/AHK Manager',
