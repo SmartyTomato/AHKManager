@@ -8,6 +8,7 @@ from src.app.main_window.component.error_dialog import ErrorDialog
 from src.app.main_window.component.list_widget_item import ListWidgetItem
 
 from src.core.service.library_service import library_service
+from src.core.service.profile_service import profile_service
 from src.core.model.action_result import ActionResult
 
 
